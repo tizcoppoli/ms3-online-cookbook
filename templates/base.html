@@ -21,9 +21,9 @@
 
 	<header>
         <!-- top navbar -->
-		<nav class="nav-extended">
+		<nav class="nav-extended cyan darken-1">
 			<div class="nav-wrapper">
-				<a href="{{ url_for('get_recipes') }}" class="brand-logo">Roucola Online Cookbook</a>
+				<a href="{{ url_for('get_recipes') }}" class="brand-logo">Roucola - Online Cookbook</a>
 				<a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
 				<ul class="right hide-on-med-and-down">
 					<li><a href="{{ url_for('get_recipes') }}">Home</a></li>
@@ -58,7 +58,13 @@
                 <li><a href="{{ url_for('register') }}">Register</a></li>
             {% endif %}
 		</ul>
-	</header>
+    </header>
+    
+    <div class="parallax-container">
+	    <div class="parallax">
+            <img src="https://placeimg.com/900/480/any?t=1615385211098" alt="family-meal" style="transform: translate3d(-50%, 503.558px, 0px); opacity: 1;">
+        </div>
+	</div>
 
     <section>
         <!-- flash messages -->
@@ -76,9 +82,10 @@
     <main class="container">
         {% block content %}
         {% endblock %}
-    </main>
+    </main>    
 
-    <footer class="page-footer">
+    <!-- footer -->
+    <footer class="page-footer cyan darken-1">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
