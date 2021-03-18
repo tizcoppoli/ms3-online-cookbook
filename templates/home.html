@@ -1,8 +1,17 @@
   
 {% extends "base.html" %}
-{% block content %}
 
-    <h3 class="light-blue-text text-darken-4 center-align">All Recipes</h3>
+{% block callout %}
+    <div class="parallax-container">
+	    <div class="parallax">
+            <img src="static/images/callout.png" alt="family-meal" style="transform: translate3d(-50%, 503.558px, 0px); opacity: 1;">
+        </div>
+	</div>
+{% endblock %}
+
+{% block content %}
+    
+    <h3 class="light-blue-text text-darken-4 center-align">Home Page</h3>
 
     <div class="row card-panel grey lighten-5">
         <form action="{{ url_for('search') }}" method="post" class="col s12">
@@ -29,25 +38,25 @@
             <div class="row">
                 {% for recipe in recipes %}
                     <div class="col s12 m7 l4">
-                        <div class="card small hoverable">
+                        <div class="card medium hoverable">
                             <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
                                 <div class="card-image">
                                     <img src="{{ recipe.recipe_img }}">
-                                    <span class="card-title"></span>
+                                    <span class="card-title">{{ recipe.recipe_name }}</span>
                                 </div>
-                                <div class="card-content center-align">
-                                    <h5 class="recipe-name">
-                                        {{ recipe.recipe_name }}
-                                    </h5>
+                                <div class="card-content">
+                                    <p>
+                                        {{ recipe.recipe_description }}
+                                    </p>
                                     <p><em>by: {{ recipe.created_by }}</em></p>
                                 </div>
-                                <!-- <div class="card-action">
-                                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">Try now</a>
+                                <div class="card-action">
+                                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">This is a link</a>
                                     {% if session.user|lower == recipe.created_by|lower %}
                                         <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn-small green accent-4">Done</a>
                                         <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small light-blue lighten-1">Edit</a>                                    
                                     {% endif %}
-                                </div> -->
+                                </div>
                             </a>
                         </div>                
                     </div>
@@ -56,38 +65,6 @@
         
     {% else %}
         <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
-    {% endif %}
-    
-    {% if recipes|length > 0 %}
-    <ul class="collapsible">
-        {% for recipe in recipes %}
-        <li>
-            <div class="collapsible-header white-text cyan darken-1 text-shadow">
-                <div class="col s3">
-                    <i class="fas fa-caret-down"></i>
-                    {% if session.user|lower == recipe.created_by|lower %}
-                        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn-small green accent-4">Done</a>
-                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small light-blue lighten-1">Edit</a>
-                    {% endif %}
-                </div>
-                <div class="col s9">
-                    <strong>{{ recipe.recipe_name }}</strong> : {{ recipe.due_date }}
-                    {% if recipe.is_urgent == "on" %}
-                        <i class="fas fa-exclamation-circle light-blue-text text-lighten-2 tooltipped"
-                            data-position="right" data-tooltip="URGENT!"></i>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="collapsible-body">
-                <strong>{{ recipe.category_name }}</strong>
-                <p>{{ recipe.recipe_description }}</p>
-                <p><em>by: {{ recipe.created_by }}</em></p>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-        <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
-    {% endif %}
+    {% endif %}    
 
 {% endblock %}

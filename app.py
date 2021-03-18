@@ -19,6 +19,11 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
+@app.route("/home")
+def home():
+    return render_template("home.html")
+
+
 @app.route("/get_recipes")
 def get_recipes():
     recipes = list(mongo.db.recipes.find())
@@ -130,13 +135,21 @@ def add_recipe():
 def edit_recipe(recipe_id):
     if request.method == "POST":
         is_urgent = "on" if request.form.get("is_urgent") else "off"
+        ingredient_list = request.form.get("ingredient_list").splitlines()
+        recipe_steps = request.form.get("recipe_steps").splitlines()
         submit = {
             "category_name": request.form.get("category_name"),
             "recipe_name": request.form.get("recipe_name"),
             "recipe_description": request.form.get("recipe_description"),
             "is_urgent": is_urgent,
             "due_date": request.form.get("due_date"),
-            "created_by": session["user"]
+            "created_by": session["user"],
+            "ingredient_list": ingredient_list,
+            "recipe_steps": recipe_steps,
+            "recipe_img": request.form.get("recipe_img"),
+            "preparation_time": request.form.get("preparation_time"),
+            "servings": request.form.get("servings"),
+            "difficulty": request.form.get("difficulty")
         }
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
         flash("Recipe Successfully Updated")
@@ -144,6 +157,13 @@ def edit_recipe(recipe_id):
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("edit_recipe.html", recipe=recipe, categories=categories)
+
+
+@app.route("/view_recipe/<recipe_id>", methods=["GET", "POST"])
+def view_recipe(recipe_id):    
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template("view_recipe.html", recipe=recipe, categories=categories)
 
 
 @app.route("/delete_recipe/<recipe_id>")

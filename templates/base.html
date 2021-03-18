@@ -6,9 +6,11 @@
     <!-- Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
         integrity="sha512-xA6Hp6oezhjd6LiLZynuukm80f8BoZ3OpcEYaqKoCV3HKQDrYjDE1Gu8ocxgxoXmwmSzM4iqPvCsOkQNiu41GA==" crossorigin="anonymous" type="text/css">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Pattaya&display=swap" rel="stylesheet">
     <!-- Materialize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
     <!-- Custom CSS -->
@@ -21,23 +23,41 @@
 
 	<header>
         <!-- top navbar -->
-		<nav class="nav-extended cyan darken-1">
+        <ul id="dropdown-user" class="dropdown-content">
+            <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+            <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li>
+            <li class="divider"></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+        </ul>
+        <ul id="dropdown-admin" class="dropdown-content">
+            <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+            <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li>
+            <li><a href="{{ url_for('get_categories') }}">Manage Categories</a></li>
+            <li class="divider"></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+        </ul>
+		<nav class="nav-extended orange darken-3">
 			<div class="nav-wrapper">
-				<a href="{{ url_for('get_recipes') }}" class="brand-logo">Roucola - Online Cookbook</a>
+				<a href="{{ url_for('home') }}" class="brand-logo">
+                    <i class="fas fa-cookie-bite"></i>Roucola</a>
 				<a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
 				<ul class="right hide-on-med-and-down">
-					<li><a href="{{ url_for('get_recipes') }}">Home</a></li>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
                     {% if session.user %}
                         <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
                         <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li>
                         {% if session.user|lower == "admin"|lower %}
-                            <li><a href="{{ url_for('get_categories') }}">Manage Categories</a></li>
-                        {% endif %}
-                        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                            <li><a class="dropdown-trigger" href="#!" data-target="dropdown-admin">
+                                
+                                Admin<i class="material-icons right">arrow_drop_down</i></a></li>
+                        {% else %}
+                            <li><a class="dropdown-trigger" href="#!" data-target="dropdown-user">User<i class="material-icons right">arrow_drop_down</i></a></li>
+                        {% endif %}                        
                     {% else %}
-                        <li><a href="{{ url_for('login') }}">Log In</a></li>
-                        <li><a href="{{ url_for('register') }}">Register</a></li>
-                    {% endif %}
+                        <li><a href="{{ url_for('login') }}">Sign In</a></li>
+                        <li><a href="{{ url_for('register') }}">Sign Up</a></li>
+                    {% endif %}                    
 				</ul>
 			</div>
 		</nav>
@@ -60,11 +80,8 @@
 		</ul>
     </header>
     
-    <div class="parallax-container">
-	    <div class="parallax">
-            <img src="https://placeimg.com/900/480/any?t=1615385211098" alt="family-meal" style="transform: translate3d(-50%, 503.558px, 0px); opacity: 1;">
-        </div>
-	</div>
+    {% block callout %}
+    {% endblock %}
 
     <section>
         <!-- flash messages -->
@@ -85,7 +102,7 @@
     </main>    
 
     <!-- footer -->
-    <footer class="page-footer cyan darken-1">
+    <!-- <footer class="page-footer cyan darken-1">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
@@ -107,6 +124,67 @@
             <div class="container">
                 © 2021 Copyright Roucola
                 <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+        </div>
+    </footer> -->
+
+    <footer class="page-footer orange darken-3">
+        <div class="row container">
+            <div class="col s12 m6 mb1">
+                <h5 class="white-text">Newsletter Sign-up</h5>
+                <p class="grey-text text-lighten-4 mv-half text-newsletter">Enter your email address to recieve out weekly newsletter</p>    
+                <form id="form_contact" onsubmit="return sendMail(this);">
+                    <input type="email" name="emailaddress" id="emailaddress" placeholder="email" required="">
+                    <label for="emailaddress" class="valign-wrapper active">
+                        <button id="submit" tabindex="0" aria-label="submit" type="submit" class="focus-outline">
+                            <i class="far fa-paper-plane large-icon"></i>
+                        </button>
+                    </label>
+                </form>
+            </div>
+            <!--Icon info: Servings,Calories,Vegetarian,Vegan-->
+            <div class="col s12 m3 mb1">
+                <h5 class="white-text">Key Guide</h5>
+                    <div class="all-icons">
+                    <!--Time-->
+                    <div class="flex mt-half">
+                        <i class="fas fa-clock mr-half"></i><span class="icon-text">Prep Time</span>
+                    </div>
+                    <!--Serves-->
+                    <div class="flex mt-half">
+                        <img class="mr-half" src="../static/img/icons/servings-white.png" alt="Servings"><span class="icon-text">Servings</span>
+                    </div>
+                    <!--Calories-->
+                    <div class="flex mt-half">
+                        <img class="mr-half" src="../static/img/icons/calories-white.png" alt="Calories"><span class="icon-text">Calories</span>
+                    </div>
+                    <!--Vegetarian-->
+                    <div class="flex mt-half">
+                        <img class="mr-half" src="../static/img/icons/vegetarian-white.png" alt="Vegetarian"><span class="icon-text">Vegetarian</span>
+                    </div>
+                    <!--Vegan-->
+                    <div class="flex mt-half">
+                        <img class="mr-half" src="../static/img/icons/vegan-white.png" alt="Vegan"><span class="icon-text">Vegan</span> 
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3 mb1">
+                <h5 class="white-text hide-on-small-only">Social Links</h5>
+                <ul class="social-links">
+                    <li>
+                        <a rel="noopener" target="_blank" href="https://www.linkedin.com/in/sean-mcmahon-profile/" title="LinkedIn">
+                            <i aria-label="linkedin" class="fab fa-linkedin-in"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a rel="noopener" target="_blank" href="https://github.com/Sean-Mc-Mahon" title="Github">
+                            <i aria-label="github" class="fab fa-github"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p>
+                    © 2020 Copyright: Roucola
+                </p>                     
             </div>
         </div>
     </footer>

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3 class="light-blue-text text-darken-4 center-align">{{ recipe.recipe_name }}</h3>
+    <h4 class="light-blue-text text-darken-4 center-align">Created by: {{ recipe.created_by }}</h4>
+
+    <div class="row card-panel feature-panel">
+        <div class="col s8 no-padding">
+            <img class="recipe-img materialboxed" src="{{ recipe.recipe_img }}" alt="recipe_image">
+        </div>
+        <div class="col s4">
+            <h4 class="center-align">Features:</h4>
+            <ul>
+                <li><i class="fas fa-clock feature-icon"></i>Preparation Time: NO DATA</li>
+                <li><i class="fas fa-users feature-icon"></i>Serves: NO DATA</li>
+                <li><i class="fas fa-utensils feature-icon"></i>Difficulty: NO DATA</li>
+            </ul>
+            <div class="like-box center-align">
+                <a class="waves-effect waves-light btn btn-like"><i class="material-icons left">favorite</i>Likes!</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s4 card-panel ingredient-panel">
+            <h3>Ingredient List:</h3>
+            <!-- <form>
+                {% for ingredient in recipe.ingredient_list %}
+                    <p>
+                        <label>
+                            <input type="checkbox" />
+                            <span>{{ ingredient }}</span>
+                        </label>
+                    </p>                    
+                {% endfor %}
+                </form> -->
+                <ul class="ingredient-list">
+                {% for ingredient in recipe.ingredient_list %}
+                    <li>{{ ingredient }}</li>
+                {% endfor %}
+                </ul>
+        </div>
+        <div class="col s8" id="recipe-steps">
+            <h3>Recipe Steps:</h3>
+            <ol>
+                {% for step in recipe.recipe_steps %}
+                    <li>{{ step }}</li><br>
+                {% endfor %}
+            </ol>  
+        </div>
+    </div>
+
+    {% if session.user|lower == recipe.created_by|lower %}
+        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn-small green accent-4">Done</a>
+        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small light-blue lighten-1">Edit</a>                                    
+    {% endif %}
+
+{% endblock %}

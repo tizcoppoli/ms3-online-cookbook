@@ -3,7 +3,7 @@ body {
 }
 
 h1, h2, h3, .brand-logo {
-    font-family: "Pacifico", sans-serif;
+    font-family: "Pattaya", sans-serif;
 }
 
 
@@ -19,3 +19,111 @@ h1, h2, h3, .brand-logo {
     margin: 5px;
     line-height: 42px;
 }
+
+.nav-wrapper {
+    margin: 0 1rem;
+}
+
+.recipe-img {
+    width: 100%;
+    height: 400px;    
+    object-fit: cover;    
+}
+
+li::marker {
+    font-size: 1.5rem;
+}
+
+.ingredient-list:not(.browser-default) {
+    padding-left: 40px;
+}
+
+.ingredient-list:not(.browser-default) > li {
+    margin-bottom: 5px;
+    line-height: 1.5;
+    list-style-type: disc;
+}
+
+.user-image {
+    height: 56px;
+}
+
+.feature-panel {
+    height: 400px;
+    padding: 0;
+    margin-bottom: 80px;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.feature-icon {    
+    font-size: 2rem;
+    margin: 0 1rem;   
+    
+}
+
+.like-box {
+    margin: 0 auto;
+    padding-top: 100px;
+}
+
+.ingredient-panel {
+    color: white;
+    background-color: #ef6c00;
+}
+
+#recipe-steps {
+    padding-left: 100px;
+}
+
+/* da rinominare */
+
+#form_contact {
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#emailaddress {
+    padding: 0rem;
+    margin: 0 0 1rem 1rem;
+}
+#submit {
+    padding: 0 1rem;
+    background-color: white;
+    border: none;
+    color: #37474F;
+    border: none;
+}
+
+.large-icon {
+    font-size: 1.5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Pattaya', sans-serif;
+}
+
+.mv-half {
+    margin: 0.5rem 0;
+}
+
+.fab {
+    font-size: 2rem;
+    margin: 0 1rem;
+    color: white;
+    font-weight: 400;
+}
+
+.row .col {
+    float: left;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 .75rem;
+    min-height: 1px;
+}
+
+/* fine da rinominare */

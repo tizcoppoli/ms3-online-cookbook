@@ -4,6 +4,8 @@ $(document).ready(function () {
     $(".tooltipped").tooltip();
     $("select").formSelect();
     $('.parallax').parallax();
+    $('.materialboxed').materialbox();
+    $(".dropdown-trigger").dropdown({ hover: false });
     $(".datepicker").datepicker({
         format: "dd mmmm, yyyy",
         yearRange: 3,
