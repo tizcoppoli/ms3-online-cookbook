@@ -9,15 +9,16 @@
                 <div class="nav-wrapper">
                     <div class="col s12">
                         <a href="{{ url_for('home') }}" class="breadcrumb">Home</a>
-                        <a href="{{ url_for('get_recipes') }}" class="breadcrumb">Recipes</a>                        
+                        <a href="{{ url_for('get_recipes') }}" class="breadcrumb">Recipes</a>
+                        <a href="{{ url_for('category', category=category) }}" class="breadcrumb">{{ category }}</a>
                     </div>
                 </div>
             </nav>
             
             <div class="col s6">
-                <h3 class="recipe-title">All Recipes</h3>
+                <h3 class="recipe-title">{{ category }}</h3>
                 <hr class="title-underline">
-                <span class="recipe-subtitle">Browse our categories!</span>
+                <span class="recipe-subtitle">Browse our selection of recipes</span>
             </div>
 
             <form action="{{ url_for('search') }}" method="post" class="col s6">
@@ -35,16 +36,6 @@
                     </div>
                 </div>
             </form>
-
-            <div class="col s12">
-                {% for category in categories %}
-                    <a href="{{ url_for('category', category=category.category_name) }}">
-                        <div class="chip hoverable">
-                            {{ category.category_name}}                
-                        </div>
-                    </a>
-                {% endfor %}
-            </div>
 
         </div>        
     </div>    

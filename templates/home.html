@@ -2,69 +2,207 @@
 {% extends "base.html" %}
 
 {% block callout %}
-    <div class="parallax-container">
-	    <div class="parallax">
-            <img src="static/images/callout.png" alt="family-meal" style="transform: translate3d(-50%, 503.558px, 0px); opacity: 1;">
+    
+    <div class="container-fluid callout-wrapper">
+        <div class="row callout">
+            <div class="col s8">
+                <div class="carousel carousel-slider center">
+                    <div class="carousel-fixed-item center">
+                        <a class="btn waves-effect" id="carousel-button">Check the Recipe</a>
+                    </div>
+                    {% for recipe in recipes %}
+                        {% if loop.index < 5 %}
+                            <div class="carousel-item" href="{{ url_for('view_recipe', recipe_id=recipe._id) }}" style="background-image: url({{ recipe.recipe_img }});">
+                                <div class="callout-overlay"></div>
+                                <h3 class="carousel-text-heading white-text">{{ recipe.recipe_name }}</h3>
+                                <p class="carousel-text-paragraph white-text">{{ recipe.category_name }}</p>                                                           
+                            </div>
+                        {% else %}
+                            {{ break }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col s4">
+                <a href="{{ url_for('get_recipes') }}">
+                    <div class="col s12 callout-up hoverable">
+                        <div class="overlay"></div>
+                        <h4 class="white-text callout-text">Drinks</h4>
+                    </div>
+                </a>
+                <a href="{{ url_for('get_recipes') }}">
+                    <div class="col s12 callout-bottom hoverable">
+                        <div class="overlay"></div>
+                        <h4 class="white-text callout-text">Recipes</h4>                    
+                    </div>
+                </a>
+            </div>
         </div>
-	</div>
+    </div>
+
 {% endblock %}
 
 {% block content %}
-    
-    <h3 class="light-blue-text text-darken-4 center-align">Home Page</h3>
 
-    <div class="row card-panel grey lighten-5">
-        <form action="{{ url_for('search') }}" method="post" class="col s12">
-            <div class="row valign-wrapper center-align">
-                <div class="input-field col s12 m8">
-                    <i class="fas fa-search prefix light-blue-text text-darken-4"></i>
-                    <input type="text" name="query" id="query" minlength="3" class="validate" required>
-                    <label for="query">Search Recipes</label>
+    <!-- register section -->
+    <div class="container-fluid register-section">
+        <div class="row">
+            <div class="col s6 book-cover-section">
+                <img class="ramen-home-image circle" src="/static/images/callout-1.png" alt="book">                                
+            </div>
+            <div class="col s6 book-description-section">                
+                
+                    <h4 class="book-heading">We Love Your Ideas! <br>Register to Upload your Recipe!</h4>
+                    <p>
+                        There’s something special about noodles. It seems like as long people have been cooking, we’ve been finding something tasty to put alongside noodles. Today, nearly every culture on the planet has some version of noodles, whether it’s for pasta, soup, or something else.
+                    </p>
+                    <a class="btn" href="{{ url_for('register') }}">Sign Up!</a>
+                                
+            </div>
+        </div>
+    </div>
+    <!-- /register section -->
+
+    <!-- search bar -->
+    <!-- <div class="container">
+        <div class="row">
+            <form action="{{ url_for('search') }}" method="post" class="col s12">
+                <div class="row valign-wrapper center-align">
+                    <div class="input-field col s12 m8">
+                        <i class="fas fa-search prefix light-blue-text text-darken-4"></i>
+                        <input type="text" name="query" id="query" minlength="3" class="validate" required>
+                        <label for="query">Search Recipes</label>
+                    </div>
+                    <div class="col s12 m4">
+                        <a href="{{ url_for('get_recipes') }}" class="red btn text-shadow">Reset</a>
+                        <button type="submit" class="light-blue darken-1 btn text-shadow">
+                            <i class="fas fa-search left"></i> Search
+                        </button>
+                    </div>
                 </div>
-                <div class="col s12 m4">
-                    <a href="{{ url_for('get_recipes') }}" class="red btn text-shadow">Reset</a>
-                    <button type="submit" class="light-blue darken-1 btn text-shadow">
-                        <i class="fas fa-search left"></i> Search
-                    </button>
+            </form>
+        </div>
+    </div> -->
+    <!-- search bar -->
+
+    <!-- categories -->
+    {% for category in categories %}
+        {% if category.category_name == "Shio Ramen" or category.category_name == "Shoyu Ramen" %}
+            <div class="container title-section">
+                <div class="row">            
+                    <div class="col s12">
+                        <h3 class="recipe-title">{{ category.category_name }}</h3>
+                        <hr class="title-underline">                        
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col s10">
+                        <span class="recipe-subtitle">{{ category.category_description}}</span>
+                    </div>
+                    <div class="col s2">
+                        <a class="btn btn-more" href="{{ url_for('category', category=category.category_name) }}">More</a>                        
+                    </div>
                 </div>
             </div>
-        </form>
+            {% if recipes|length > 0 %}
+                {% set cnt = namespace (cnt_index = 0) %}
+                <div class="container">
+                    <div class="row">
+                        {% for recipe in recipes %}
+                            {% if cnt.cnt_index < 3 %}
+                                {% if recipe.category_name == category.category_name  %}
+                                    <div class="col s12 m7 l4">
+                                        <div class="card medium hoverable">
+                                            <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
+                                                <div class="card-image">
+                                                    <img src="{{ recipe.recipe_img }}">
+                                                    <span class="card-title"></span>
+                                                </div>
+                                                <div class="card-content center-align">
+                                                    <h5 class="recipe-name">
+                                                        {{ recipe.recipe_name }}
+                                                    </h5>                                                                     
+                                                    <div class="chip">
+                                                        {{ recipe.difficulty }}                
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>                
+                                    </div>                            
+                                    {% set cnt.cnt_index = cnt.cnt_index + 1|int %}                            
+                                {% endif %}
+                            {% endif  %}
+                        {% endfor %}
+                    </div>
+                </div>        
+            {% else %}
+                <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    <!-- /categories -->
+
+    <!-- book -->
+    <div class="container-fluid book-section">
+        <div class="row">
+            <div class="col s6 book-cover-section">
+                <img class="book-image" src="/static/images/drink.png" alt="book">                                
+            </div>
+            <div class="col s6 book-description-section white-text">                
+                
+                    <h4 class="book-heading white-text">Love Our Recipes? <br>Checkout our Book!</h4>
+                    <p>
+                        Buy our best-selling cookbook full of easy and simple Japanese recipes! This cookbook has over 100 recipes and instructions for all types of ramen.
+                    </p>
+                    <a class="btn purchase-button" href="#">Purchase today!</a>
+                                
+            </div>
+        </div>
     </div>
+    <!-- /book -->
 
-    
-
+    <!-- random recipes -->
+    <div class="container title-section">
+        <div class="row">
+            <div class="col s6">
+                <h3 class="recipe-title">You may like</h3>
+                <hr class="title-underline">
+                <span class="recipe-subtitle">Browse our selection of recipes</span>
+            </div>
+        </div>        
+    </div>
     {% if recipes|length > 0 %}
-        
+        <div class="container">
             <div class="row">
                 {% for recipe in recipes %}
-                    <div class="col s12 m7 l4">
-                        <div class="card medium hoverable">
-                            <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
-                                <div class="card-image">
-                                    <img src="{{ recipe.recipe_img }}">
-                                    <span class="card-title">{{ recipe.recipe_name }}</span>
-                                </div>
-                                <div class="card-content">
-                                    <p>
-                                        {{ recipe.recipe_description }}
-                                    </p>
-                                    <p><em>by: {{ recipe.created_by }}</em></p>
-                                </div>
-                                <div class="card-action">
-                                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">This is a link</a>
-                                    {% if session.user|lower == recipe.created_by|lower %}
-                                        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn-small green accent-4">Done</a>
-                                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small light-blue lighten-1">Edit</a>                                    
-                                    {% endif %}
-                                </div>
-                            </a>
-                        </div>                
-                    </div>
+                    {% if loop.index <= 3  %}
+                        <div class="col s12 m7 l4">
+                            <div class="card medium hoverable">
+                                <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
+                                    <div class="card-image">
+                                        <img src="{{ recipe.recipe_img }}">
+                                        <span class="card-title"></span>
+                                    </div>
+                                    <div class="card-content center-align">
+                                        <h5 class="recipe-name">
+                                            {{ recipe.recipe_name }}
+                                        </h5>                                                                        
+                                        <div class="chip">
+                                            {{ recipe.difficulty }}                
+                                        </div>
+                                    </div>                                                               
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        {{ break }}
+                    {% endif  %}
                 {% endfor %}
             </div>
-        
+        </div>
     {% else %}
         <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
-    {% endif %}    
+    {% endif %}
+    <!-- /random recipes -->
 
 {% endblock %}

@@ -1,58 +1,143 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="light-blue-text text-darken-4 center-align">{{ recipe.recipe_name }}</h3>
-    <h4 class="light-blue-text text-darken-4 center-align">Created by: {{ recipe.created_by }}</h4>
+    
 
-    <div class="row card-panel feature-panel">
-        <div class="col s8 no-padding">
-            <img class="recipe-img materialboxed" src="{{ recipe.recipe_img }}" alt="recipe_image">
-        </div>
-        <div class="col s4">
-            <h4 class="center-align">Features:</h4>
-            <ul>
-                <li><i class="fas fa-clock feature-icon"></i>Preparation Time: NO DATA</li>
-                <li><i class="fas fa-users feature-icon"></i>Serves: NO DATA</li>
-                <li><i class="fas fa-utensils feature-icon"></i>Difficulty: NO DATA</li>
-            </ul>
-            <div class="like-box center-align">
-                <a class="waves-effect waves-light btn btn-like"><i class="material-icons left">favorite</i>Likes!</a>
+    <div class="container title-section">
+        <div class="row">
+            <nav class="nav-breadcrumb">
+                <div class="nav-wrapper">
+                    <div class="col s12">
+                        <a href="{{ url_for('home') }}" class="breadcrumb">Home</a>
+                        <a href="{{ url_for('get_recipes') }}" class="breadcrumb">Recipes</a>
+                        <a href="{{ url_for('category', category=recipe.category_name) }}" class="breadcrumb">{{ recipe.category_name }}</a>
+                        <a href="" class="breadcrumb">{{ recipe.recipe_name }}</a>
+                    </div>
+                </div>
+            </nav>            
+            <div class="col s12">
+                <h3 class="recipe-title">{{ recipe.recipe_name }}</h3>
+                <hr class="title-underline">
+                <span class="recipe-subtitle">{{ recipe.category_name }}</span>
+            </div>
+        </div>        
+    </div>
+
+    <div class="container">
+        <div class="row card-panel feature-panel">
+            <div class="col s8 no-padding">
+                <img class="recipe-img materialboxed" src="{{ recipe.recipe_img }}" alt="recipe_image">
+            </div>
+            <div class="col s4">
+                <h4 class="center-align">Features:</h4>
+                <ul>
+                    <li><i class="fas fa-clock feature-icon"></i>Preparation Time: {{ recipe.preparation_time }} min</li>
+                    <li><i class="fas fa-users feature-icon"></i>Serves: {{ recipe.servings }}</li>
+                    <li><i class="fas fa-utensils feature-icon"></i>Difficulty: {{ recipe.difficulty }}</li>
+                </ul>
+                <br>
+                <div class="tag-section">
+                    <div class="chip">
+                        Vegan                
+                    </div>
+                    <div class="chip">
+                        Spicy                
+                    </div>
+                </div>
+                <div class="like-box center-align">
+                    <a class="waves-effect waves-light btn btn-like"><i class="material-icons left">favorite</i>Likes!</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col s4 card-panel ingredient-panel">
-            <h3>Ingredient List:</h3>
-            <!-- <form>
-                {% for ingredient in recipe.ingredient_list %}
-                    <p>
-                        <label>
-                            <input type="checkbox" />
-                            <span>{{ ingredient }}</span>
-                        </label>
-                    </p>                    
-                {% endfor %}
-                </form> -->
-                <ul class="ingredient-list">
-                {% for ingredient in recipe.ingredient_list %}
-                    <li>{{ ingredient }}</li>
-                {% endfor %}
-                </ul>
-        </div>
-        <div class="col s8" id="recipe-steps">
-            <h3>Recipe Steps:</h3>
-            <ol>
-                {% for step in recipe.recipe_steps %}
-                    <li>{{ step }}</li><br>
-                {% endfor %}
-            </ol>  
+    <div class="container">
+        <div class="row recipe-content">
+            <div class="col s4 card-panel ingredient-panel">
+                <h3 class="white-text">Ingredient List:</h3>
+                <hr class="title-underline white">
+                <!-- <form>
+                    {% for ingredient in recipe.ingredient_list %}
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>{{ ingredient }}</span>
+                            </label>
+                        </p>                    
+                    {% endfor %}
+                    </form> -->
+                    <ul class="ingredient-list">
+                    {% for ingredient in recipe.ingredient_list %}
+                        <li>{{ ingredient }}</li>
+                    {% endfor %}
+                    </ul>
+            </div>
+            <div class="col s8" id="recipe-steps">
+                <h3>Recipe Steps:</h3>
+                <hr class="title-underline">
+                <ol>
+                    {% for step in recipe.recipe_steps %}
+                        <li>{{ step }}</li><br>
+                    {% endfor %}
+                </ol>  
+            </div>
         </div>
     </div>
 
-    {% if session.user|lower == recipe.created_by|lower %}
-        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn-small green accent-4">Done</a>
-        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small light-blue lighten-1">Edit</a>                                    
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                {% if session.user|lower == recipe.created_by|lower %}
+                    <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn-small green accent-4">Done</a>
+                    <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small light-blue lighten-1">Edit</a>                                    
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- random recipes -->
+    <div class="container title-section">
+        <div class="row">
+            <div class="col s6">
+                <h3 class="recipe-title">You may like</h3>
+                <hr class="title-underline">
+                <span class="recipe-subtitle">Browse our selection of recipes</span>
+            </div>
+        </div>        
+    </div>
+    {% if recipes|length > 0 %}
+        <div class="container">
+            <div class="row">
+                {% for recipe in recipes %}
+                    {% if loop.index <= 3  %}
+                        <div class="col s12 m7 l4">
+                            <div class="card medium hoverable">
+                                <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
+                                    <div class="card-image">
+                                        <img src="{{ recipe.recipe_img }}">
+                                        <span class="card-title"></span>
+                                    </div>
+                                    <div class="card-content center-align">
+                                        <h5 class="recipe-name">
+                                            {{ recipe.recipe_name }}
+                                        </h5>                                                                        
+                                        <div class="chip">
+                                            {{ recipe.difficulty }}                
+                                        </div>
+                                    </div>                                                               
+                                </a>
+                            </div>                
+                        </div>
+                    {% else %}
+                        {{ break }}
+                    {% endif  %}
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
     {% endif %}
+    <!-- /random recipes -->
 
 {% endblock %}

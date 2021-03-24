@@ -1,9 +1,15 @@
 body {
     font-family: "Montserrat",sans-serif;
+    background-color: #f6f5f3;
 }
 
 h1, h2, h3, .brand-logo {
     font-family: "Pattaya", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Pattaya', sans-serif;
+    color: #000;
 }
 
 
@@ -21,7 +27,12 @@ h1, h2, h3, .brand-logo {
 }
 
 .nav-wrapper {
-    margin: 0 1rem;
+    margin: 0 1rem;    ;
+}
+
+.main-navbar {    
+    width: 80%;
+    padding-left: 16%;
 }
 
 .recipe-img {
@@ -51,7 +62,7 @@ li::marker {
 .feature-panel {
     height: 400px;
     padding: 0;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
 }
 
 .no-padding {
@@ -66,7 +77,7 @@ li::marker {
 
 .like-box {
     margin: 0 auto;
-    padding-top: 100px;
+    padding-top: 70px;
 }
 
 .ingredient-panel {
@@ -76,6 +87,234 @@ li::marker {
 
 #recipe-steps {
     padding-left: 100px;
+}
+
+.tag-section {
+    padding-left: 15px;
+}
+
+/* .title-section {
+    margin: 30px 0 0;
+} */
+
+.nav-breadcrumb {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.breadcrumb {
+    font-size: 18px;
+    color: rgba(0,0,0,0.7);
+}
+
+.breadcrumb::before {
+    color: rgba(0,0,0,0.7);
+}
+
+.breadcrumb:last-child {
+    color: #000;
+    cursor: default;
+    pointer-events: none;
+}
+
+.recipe-title {
+    font-size: 3.5rem;
+    margin: 0;
+}
+
+.recipe-subtitle {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.btn {
+    background-color: #ef6c00;
+}
+
+.title-underline {
+    width: 50px;    
+    height: 3px;
+    border-radius: 2px;
+    background-color: #ef6c00;
+    border: none;    
+    margin: 10px;
+}
+
+.recipe-content {
+    display: flex;
+    margin-bottom: 80px;
+}
+
+#user-icon {
+    font-size: 50px;
+}
+
+.user-login-icon {    
+    width: 110px;
+}
+
+nav .brand-logo {
+    display: inline-flex;
+}
+
+.img-logo {    
+    border-style: none;
+    width: 50px;
+    padding-top: 5px;
+}
+
+.text-logo {
+    font-size: 35px;
+    margin: 0 15px;
+    padding-top: 10px;
+}
+
+.callout-up, .callout-bottom {
+    height: 238px;
+    padding: 0;
+    margin: 0;
+    background-size: cover;
+    position: relative;
+}
+
+.callout-up:hover .overlay, .callout-bottom:hover .overlay {
+  opacity: 0.2;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #000;
+}
+
+.callout-text {
+    position: absolute;
+}
+
+.carousel-item {
+    background-size: cover;
+}
+
+.callout-overlay {
+    /* height: 120px; */
+    height: 100%;
+    background-color: black;
+    padding-top: 20px;
+    opacity: 0.5;
+}
+
+.callout-up {
+    margin-bottom: 0.75rem;
+    background-image: url(/static/images/callout-7.png);
+    
+}
+
+.callout-bottom {
+    margin-top: 0.75rem;
+    background-image: url(/static/images/callout-5.png)
+}
+
+.callout {
+    padding-top: 25px;
+    width: 80%;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+}
+
+.carousel {
+    height: 500px;
+}
+
+.carousel-text-heading {
+    position: absolute;
+    top: 160px;
+    right: 10%;
+    left: 10%;
+}
+
+.carousel-text-paragraph {
+    position: absolute;
+    top: 220px;
+    right: 10%;
+    left: 10%;    
+}
+
+.carousel.carousel-slider .carousel-item p {
+    font-size: 1.5rem;
+}
+
+.carousel-1 {
+    background-image: url(/static/images/callout-1.png);
+    object-fit: cover;
+}
+
+.carousel-2 {
+    background-image: url(/static/images/callout-2.png);
+    object-fit: cover;
+}
+
+.carousel-3 {
+    background-image: url(/static/images/callout-3.png);
+    object-fit: cover;
+}
+
+.carousel-4 {
+    background-image: url(/static/images/callout-4.png);
+    object-fit: cover;
+}
+
+.btn-more {
+    font-size: 1rem;
+    margin: 0;
+    float: right;
+}
+
+.book-section {
+    background-color: #ef6c00;
+    height: 300px;
+    margin-bottom: 30px;
+}
+
+.book-image {
+    float: right;
+    height: 200px;
+    margin: 40px 20px;
+}
+
+.book-description-section {
+    max-width: 500px;    
+}
+
+.book-heading {
+    margin-top: 40px;
+}
+
+.purchase-button {
+    background-color: #26a69a;
+}
+
+.ramen-home-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    float: right;    
+    margin: 40px 20px;
+}
+
+.register-section {
+    background-color: #fff;
+    padding-top: 30px;    
+}
+
+.callout-wrapper {
+    background-color: #fff;
 }
 
 /* da rinominare */
@@ -103,9 +342,7 @@ li::marker {
     font-size: 1.5rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Pattaya', sans-serif;
-}
+
 
 .mv-half {
     margin: 0.5rem 0;
@@ -116,14 +353,6 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 1rem;
     color: white;
     font-weight: 400;
-}
-
-.row .col {
-    float: left;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 0 .75rem;
-    min-height: 1px;
 }
 
 /* fine da rinominare */

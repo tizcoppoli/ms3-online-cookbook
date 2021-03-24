@@ -17,12 +17,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     {% block styles %}
     {% endblock %}
-    <title>Roucola</title>
+    <title>Just Ramen</title>
 </head>
 <body>
 
 	<header>
         <!-- top navbar -->
+        <ul id="dropdown-category" class="dropdown-content">            
+
+            
+            
+        </ul>
         <ul id="dropdown-user" class="dropdown-content">
             <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
             <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li>
@@ -37,22 +42,27 @@
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
         </ul>
 		<nav class="nav-extended orange darken-3">
-			<div class="nav-wrapper">
-				<a href="{{ url_for('home') }}" class="brand-logo">
-                    <i class="fas fa-cookie-bite"></i>Roucola</a>
-				<a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
-				<ul class="right hide-on-med-and-down">
+			<div class="nav-wrapper main-navbar">
+                <div class="left">
+                    <a href="{{ url_for('home') }}" class="brand-logo valign-wrapper">
+                        <img class="img-logo" src="../static/images/logo2.png" alt="logo">
+                        <h5 class="text-logo white-text">Just Ramen</h5>
+                        <!-- <i class="fas fa-cookie-bite"></i> -->
+                    </a>
+                </div>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+				<ul class="right hide-on-med-and-down">                    
                     <li><a href="{{ url_for('home') }}">Home</a></li>
-                    <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
+                    <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>                    
                     {% if session.user %}
-                        <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                        <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li>
+                        <!-- <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li> -->
+                        <!-- <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li> -->
                         {% if session.user|lower == "admin"|lower %}
-                            <li><a class="dropdown-trigger" href="#!" data-target="dropdown-admin">
-                                
-                                Admin<i class="material-icons right">arrow_drop_down</i></a></li>
+                            <li class="user-login-icon"><a class="dropdown-trigger" href="#!" data-target="dropdown-admin">                                
+                                <i class="material-icons right" id="user-icon">account_circle</i></a></li>
                         {% else %}
-                            <li><a class="dropdown-trigger" href="#!" data-target="dropdown-user">User<i class="material-icons right">arrow_drop_down</i></a></li>
+                            <li class="user-login-icon"><a class="dropdown-trigger" href="#!" data-target="dropdown-user">
+                                <i class="material-icons right" id="user-icon">account_circle</i></a></li>
                         {% endif %}                        
                     {% else %}
                         <li><a href="{{ url_for('login') }}">Sign In</a></li>
@@ -60,8 +70,8 @@
                     {% endif %}                    
 				</ul>
 			</div>
-		</nav>
-
+        </nav>
+        
         <!-- mobile sidenav -->
 		<ul class="sidenav" id="mobile-demo">
             <li><h4 class="center-align light-blue-text text-darken 4">Task Manager</h4></li>
@@ -96,7 +106,7 @@
         {% endwith %}
     </section>
 
-    <main class="container">
+    <main>
         {% block content %}
         {% endblock %}
     </main>    
