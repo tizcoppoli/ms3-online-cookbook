@@ -5,6 +5,7 @@ $(document).ready(function () {
     $("select").formSelect();
     $('.parallax').parallax();
     $('.materialboxed').materialbox();
+     $('.modal').modal();
     $(".dropdown-trigger").dropdown({ hover: false });
     $('.carousel.carousel-slider').carousel({
         fullWidth: true,

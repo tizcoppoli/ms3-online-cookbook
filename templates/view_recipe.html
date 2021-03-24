@@ -44,10 +44,40 @@
                         Spicy                
                     </div>
                 </div>
-                <div class="like-box center-align">
-                    <a class="waves-effect waves-light btn btn-like"><i class="material-icons left">favorite</i>Likes!</a>
-                </div>
+                <form method="POST" action="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
+                    <div class="like-box center-align">
+                        <!-- {{ is_liked }}{{ session.user }} -->
+                        {% if session.user %}
+                            {% if session.user in recipe.like_array %}
+                                <button  class="waves-light btn btn-like-yes">
+                                    <i class="material-icons left">favorite</i>{{ recipe.likes }} You like it!
+                                </button>
+                            {% else %}
+                                <button  class="waves-light btn btn-like-no">
+                                    <i class="material-icons left">favorite</i>{{ recipe.likes }} Likes!
+                                </button>
+                            {% endif %}
+                        {% else %}
+                            <a class="waves-light btn btn-like-no modal-trigger" href="#modal-like-button">
+                                <i class="material-icons left">favorite</i>{{ recipe.likes }} Likes!
+                            </a>
+                        {% endif %}
+                    </div>
+                </form>
             </div>
+        </div>
+    </div>
+
+    
+    <!-- Modal Structure -->
+    <div id="modal-like-button" class="modal">
+        <div class="modal-content">
+            <h4>Register to leave a like!</h4>
+            <p>Please register now to leave a like and upload your unique recipes!</p>
+        </div>        
+        <div class="modal-footer">
+            <a class="btn" href="{{ url_for('register') }}">Sign Up!</a>
+            <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
         </div>
     </div>
 

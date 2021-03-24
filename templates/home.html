@@ -121,7 +121,10 @@
                                                 <div class="card-content center-align">
                                                     <h5 class="recipe-name">
                                                         {{ recipe.recipe_name }}
-                                                    </h5>                                                                     
+                                                    </h5>
+                                                    <div class="chip">
+                                                        <i class="fas fa-heart"> {{ recipe.likes}}</i>                
+                                                    </div>
                                                     <div class="chip">
                                                         {{ recipe.difficulty }}                
                                                     </div>
@@ -186,7 +189,10 @@
                                     <div class="card-content center-align">
                                         <h5 class="recipe-name">
                                             {{ recipe.recipe_name }}
-                                        </h5>                                                                        
+                                        </h5>
+                                        <div class="chip">
+                                            <i class="fas fa-heart"> {{ recipe.likes}}</i>                
+                                        </div>                                                                        
                                         <div class="chip">
                                             {{ recipe.difficulty }}                
                                         </div>

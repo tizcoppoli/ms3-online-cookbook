@@ -131,6 +131,14 @@ li::marker {
     background-color: #ef6c00;
 }
 
+.btn-like-no {
+    background-color: #ef6c00;
+}
+
+.btn-like-yes {
+    background-color: #26a69a;
+}
+
 .title-underline {
     width: 50px;    
     height: 3px;

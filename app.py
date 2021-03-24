@@ -180,8 +180,70 @@ def edit_recipe(recipe_id):
     return render_template("edit_recipe.html", recipe=recipe, categories=categories)
 
 
+""" @app.route("/view_recipe/<recipe_id>", methods=["GET", "POST"])
+def view_recipe(recipe_id):
+    if request.method == "POST":
+        user = mongo.db.users.find_one({"username": session["user"]})
+        is_liked = mongo.db.users.find({"given_likes": recipe_id, "username": session["user"]})
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        if recipe_id in user["given_likes"]:
+            submit = {
+                "$inc": {
+                    "likes": -1
+                }
+            }
+            pull = {
+                "$pull": {
+                    "given_likes": {
+                        "$in": [recipe_id]
+                    }
+                }
+            }
+            user = mongo.db.users.find_one({"username": session["user"]})
+            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
+            mongo.db.users.update(user, pull)
+            flash("Recipe Successfully Updated")
+        else:
+            submit = {
+                "$inc": {
+                    "likes": 1
+                }
+            }
+            push = {
+                "$push": {
+                    "given_likes": recipe_id
+                }
+            }
+            user = mongo.db.users.find_one({"username": session["user"]})
+            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
+            mongo.db.users.update(user, push)
+            flash("Recipe Successfully Updated")
+
+    is_liked = mongo.db.users.find_one({"given_likes": recipe_id, "username": session["user"]})
+    recipes = list(mongo.db.recipes.find())
+    random.shuffle(recipes)
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template("view_recipe.html", recipe=recipe, categories=categories, recipes=recipes, is_liked=is_liked) """
+
+
 @app.route("/view_recipe/<recipe_id>", methods=["GET", "POST"])
 def view_recipe(recipe_id):
+    if request.method == "POST":
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        if session["user"] in recipe["like_array"]:
+            submit = {"$inc": {"likes": -1}}
+            pull = {"$pull": {"like_array": {"$in": [session["user"]]}}}
+            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
+            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, pull)
+            flash("Like tolto")
+        else:
+            submit = {"$inc": {"likes": 1}}
+            push = {"$push": {"like_array": session["user"]}}
+            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
+            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, push)
+            flash("Like messo")
+
     recipes = list(mongo.db.recipes.find())
     random.shuffle(recipes)
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
