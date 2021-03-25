@@ -325,6 +325,34 @@ nav .brand-logo {
     background-color: #fff;
 }
 
+.comment {
+    background-color: white;
+    display: inline-block;
+    padding: 20px;
+    box-shadow: 1px 1px 5px grey;
+    margin: 5px;
+}
+
+#comment-user {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#comment-date {
+    padding-left: 5px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: grey;
+}
+
+#comment-text {
+    /* margin-left: 15px; */
+}
+
+.comment-section {
+    margin-bottom: 50px;
+}
+
 /* da rinominare */
 
 #form_contact {

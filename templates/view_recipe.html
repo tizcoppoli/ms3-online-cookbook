@@ -2,6 +2,35 @@
 {% block content %}
 
     
+    
+    <div id="modal-comment" class="modal">
+        <div class="modal-content">
+            <h4>Register to leave a like!</h4>
+            <p>Please register now to leave a like and upload your unique recipes!</p>
+            <div class="container-fluid">
+                <form method="POST" action="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="textarea-comment" class="materialize-textarea" name="textarea-comment" required></textarea>
+                            <label for="textarea-comment">Textarea</label>
+                        </div>
+                    </div>
+                    <button  class="waves-light btn">
+                        comment
+                    </button>
+                </form>
+            </div>
+        </div>        
+        <div class="modal-footer">
+            <!-- <a class="btn" href="{{ url_for('register') }}">Sign Up!</a> -->
+            <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
+        </div>
+    </div>
+
+    <div class="container">
+
+    </div>
+    
 
     <div class="container title-section">
         <div class="row">
@@ -16,7 +45,7 @@
                 </div>
             </nav>            
             <div class="col s12">
-                <h3 class="recipe-title">{{ recipe.recipe_name }}</h3>
+                <h3 class="recipe-title">{{ recipe.recipe_name }} - {{ recipe.likes }} <i class="far fa-heart"></i></h3>
                 <hr class="title-underline">
                 <span class="recipe-subtitle">{{ recipe.category_name }}</span>
             </div>
@@ -124,6 +153,39 @@
             </div>
         </div>
     </div>
+
+    <!-- comment section -->
+    <div class="container title-section">
+        <div class="row">
+            <div class="col s12">
+                <h3 class="recipe-title">Comments - {{ recipe.comment_array|length }} <i class="far fa-comment"></i></h3>
+                <hr class="title-underline">
+                <span class="recipe-subtitle">Share your thoughts with the community</span>
+            </div>
+        </div>        
+    </div>
+    <div class="container comment-section">
+        <div class="row">
+            {% for comment in recipe.comment_array %}
+                <div class="comment">
+                    <span id="comment-user">{{ comment[0] }}</span><span id="comment-date"> {{ comment[2] }}</span><br>                    
+                    <span id="comment-text">{{ comment[1] }}</span>                    
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+
+        {% if session.user %}
+            <a class="waves-light btn btn-like-no modal-trigger" href="#modal-comment">
+                comment
+            </a>
+        {% else %}
+            <a class="waves-light btn btn-like-no modal-trigger" href="#modal-like-button">
+                Comment
+            </a>
+        {% endif %}
+    </div>
+    <!-- /comment section -->
     
 
     <!-- random recipes -->
