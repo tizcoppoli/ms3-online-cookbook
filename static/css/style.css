@@ -129,6 +129,7 @@ li::marker {
 
 .btn {
     background-color: #ef6c00;
+    font-family: "Montserrat",sans-serif;
 }
 
 .btn-like-no {
@@ -351,6 +352,105 @@ nav .brand-logo {
 
 .comment-section {
     margin-bottom: 50px;
+}
+
+/* .profile-image-box {
+    background-color: #ef6c00;
+} */
+
+.user-section {
+    margin-top: 50px;
+    margin-bottom: 50px;    
+}
+
+.user-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 24px;
+}
+
+.profile-image-box {
+    display: inline-block;
+    background-color: #ef6c00;
+}
+
+.profile-image-wrapper {
+    padding: 0;
+}
+
+.profile-info-box {
+    margin-left: 40px;
+}
+
+.add-recipe-icon {
+    padding-top: 200px;
+    color: darkgrey;
+    font-size: 100px;
+    width: 100%;
+    height: 100%;
+}
+
+.add-recipe-card {
+    border-style: dashed;
+    border-color: darkgray;
+}
+
+.add-recipe-card:hover {
+    opacity: 0.8;
+}
+
+.card .card-image img {
+    object-fit: cover;
+    height: 300px;
+}
+
+.profile-info {
+    font-weight: bold;
+}
+
+td {
+    padding: 0;
+}
+
+tr {
+    border: none;
+}
+
+table {
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px;
+    padding: 24px;
+}
+
+.modal .modal-content {
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+}
+
+/* textarea.materialize-textarea {
+    height: 85px;
+} */
+
+.edit-panel {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.edit-title {
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 30px;
+    padding: 24px;
 }
 
 /* da rinominare */

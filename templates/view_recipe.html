@@ -45,9 +45,14 @@
                 </div>
             </nav>            
             <div class="col s12">
-                <h3 class="recipe-title">{{ recipe.recipe_name }} - {{ recipe.likes }} <i class="far fa-heart"></i></h3>
+                <h3 class="recipe-title">{{ recipe.recipe_name }} - {{ recipe.likes }} <i class="far fa-heart"></i>
+                    {% if session.user|lower == recipe.created_by|lower %}
+                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn">Edit</a>
+                        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn red accent-4">Delete</a>
+                    {% endif %}
+                </h3>
                 <hr class="title-underline">
-                <span class="recipe-subtitle">{{ recipe.category_name }}</span>
+                <span class="recipe-subtitle">A {{ recipe.category_name }} created by {{ recipe.created_by }}</span>
             </div>
         </div>        
     </div>
@@ -143,7 +148,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <!-- <div class="container">
         <div class="row">
             <div class="col s12">
                 {% if session.user|lower == recipe.created_by|lower %}
@@ -152,7 +157,7 @@
                 {% endif %}
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- comment section -->
     <div class="container title-section">

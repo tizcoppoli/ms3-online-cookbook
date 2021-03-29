@@ -4,6 +4,7 @@ from datetime import datetime
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
+from flask_paginate import Pagination, get_page_args
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -108,11 +109,40 @@ def login():
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # grab the session user's username from db
+    user = mongo.db.users.find_one({"username": session["user"]})
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
 
     if session["user"]:
-        return render_template("profile.html", username=username)
+        if request.method == "POST":
+            recipe_img = request.form.get("recipe_img") if request.form.get("recipe_img") else "https://i.imgur.com/3XizFU1.png"
+            is_spicy = "on" if request.form.get("is_spicy") else "off"
+            is_vegan = "on" if request.form.get("is_vegan") else "off"
+            ingredient_list = request.form.get("ingredient_list").splitlines()
+            recipe_steps = request.form.get("recipe_steps").splitlines()
+            recipe = {
+                "category_name": request.form.get("category_name"),
+                "recipe_name": request.form.get("recipe_name"),
+                "is_spicy": is_spicy,
+                "is_vegan": is_vegan,
+                "created_by": session["user"],
+                "ingredient_list": ingredient_list,
+                "recipe_steps": recipe_steps,
+                "recipe_img": recipe_img,
+                "preparation_time": request.form.get("preparation_time"),
+                "servings": request.form.get("servings"),
+                "difficulty": request.form.get("difficulty"),
+                "likes": 0,
+                "like_array": [],
+                "comment_array": []
+            }
+            mongo.db.recipes.insert_one(recipe)
+            flash("Recipe Successfully Added")
+            return redirect(url_for("profile", username=username))
+
+        recipes = list(mongo.db.recipes.find({"created_by": session["user"]}))
+        categories = mongo.db.categories.find().sort("category_name", 1)
+        return render_template("profile.html", user=user, username=username, recipes=recipes, categories=categories)
 
     return redirect(url_for("login"))
 
@@ -160,11 +190,11 @@ def edit_recipe(recipe_id):
         is_vegan = "on" if request.form.get("is_vegan") else "off"
         ingredient_list = request.form.get("ingredient_list").splitlines()
         recipe_steps = request.form.get("recipe_steps").splitlines()
-        submit = {
+        submit = {"$set": {
             "category_name": request.form.get("category_name"),
-            "recipe_name": request.form.get("recipe_name"),            
+            "recipe_name": request.form.get("recipe_name"),
             "is_spicy": is_spicy,
-            "is_vegan": is_vegan,            
+            "is_vegan": is_vegan,
             "created_by": session["user"],
             "ingredient_list": ingredient_list,
             "recipe_steps": recipe_steps,
@@ -172,9 +202,23 @@ def edit_recipe(recipe_id):
             "preparation_time": request.form.get("preparation_time"),
             "servings": request.form.get("servings"),
             "difficulty": request.form.get("difficulty")
-        }
+            }}
+        """ submit = {
+            "category_name": request.form.get("category_name"),
+            "recipe_name": request.form.get("recipe_name"),
+            "is_spicy": is_spicy,
+            "is_vegan": is_vegan,
+            "created_by": session["user"],
+            "ingredient_list": ingredient_list,
+            "recipe_steps": recipe_steps,
+            "recipe_img": request.form.get("recipe_img"),
+            "preparation_time": request.form.get("preparation_time"),
+            "servings": request.form.get("servings"),
+            "difficulty": request.form.get("difficulty")
+        } """
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
         flash("Recipe Successfully Updated")
+        return redirect(url_for("view_recipe", recipe_id=recipe_id))
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
@@ -242,7 +286,7 @@ def add_category():
 
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
-    if request.method == "POST":
+    if request.method == "POST":        
         submit = {
             "category_name": request.form.get("category_name")
         }
