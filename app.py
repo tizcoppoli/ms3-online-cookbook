@@ -48,7 +48,7 @@ def get_recipes():
     """    
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
-    per_page = 9
+    per_page = 12
     total = len(recipes)
     pagination_users = get_users(offset=page*per_page-per_page, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total)
