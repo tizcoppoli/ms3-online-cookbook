@@ -110,51 +110,39 @@
                     </div>
                 {% endfor %}
             </div>
+            <div class="row center-align">
+                {{ pagination.links }}
+            </div>
         </div>
     {% else %}
         <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
     {% endif %}
 
-    <ul class="pagination">
-        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-        <li class="active"><a href="#!">1</a></li>
-        <li class="waves-effect"><a href="#!">2</a></li>
-        <li class="waves-effect"><a href="#!">3</a></li>
-        <li class="waves-effect"><a href="#!">4</a></li>
-        <li class="waves-effect"><a href="#!">5</a></li>
-        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-    </ul>
     
-    <!-- {% if recipes|length > 0 %}
-    <ul class="collapsible">
-        {% for recipe in recipes %}
-        <li>
-            <div class="collapsible-header white-text cyan darken-1 text-shadow">
-                <div class="col s3">
-                    <i class="fas fa-caret-down"></i>
-                    {% if session.user|lower == recipe.created_by|lower %}
-                        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn-small green accent-4">Done</a>
-                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small light-blue lighten-1">Edit</a>
-                    {% endif %}
-                </div>
-                <div class="col s9">
-                    <strong>{{ recipe.recipe_name }}</strong> : {{ recipe.due_date }}
-                    {% if recipe.is_urgent == "on" %}
-                        <i class="fas fa-exclamation-circle light-blue-text text-lighten-2 tooltipped"
-                            data-position="right" data-tooltip="URGENT!"></i>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="collapsible-body">
-                <strong>{{ recipe.category_name }}</strong>
-                <p>{{ recipe.recipe_description }}</p>
-                <p><em>by: {{ recipe.created_by }}</em></p>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-        <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
-    {% endif %} -->
 
+    <!-- <div class="container">
+      {{ pagination.links }}
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr>
+              <td>{{ loop.index + (page - 1) * per_page }}</td>
+              <td>{{ user }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {{ pagination.links }}
+    </div> -->
+
+   
+  
 {% endblock %}

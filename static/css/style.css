@@ -453,6 +453,10 @@ table {
     padding: 24px;
 }
 
+.pagination li.active {
+    background-color: #ef6c00;
+}
+
 /* da rinominare */
 
 #form_contact {

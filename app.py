@@ -20,6 +20,14 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+"""
+pagination test
+"""
+""" users = list(range(100)) """
+
+def get_users(offset=0, per_page=10):    
+    recipes = list(mongo.db.recipes.find())
+    return recipes[offset: offset + per_page]
 
 @app.route("/")
 @app.route("/home")
@@ -35,7 +43,24 @@ def home():
 def get_recipes():
     recipes = list(mongo.db.recipes.find())
     categories = list(mongo.db.categories.find().sort("category_name", 1))
-    return render_template("recipes.html", recipes=recipes, categories=categories)
+    """
+    pagination test
+    """    
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    per_page = 9
+    total = len(recipes)
+    pagination_users = get_users(offset=page*per_page-per_page, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total)
+    """
+    end pagination
+    """
+    
+    return render_template("recipes.html", categories=categories, recipes=pagination_users,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination,)
+    """ return render_template("recipes.html", recipes=recipes, categories=categories) """
 
 
 @app.route("/search", methods=["GET", "POST"])
