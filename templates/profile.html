@@ -3,8 +3,8 @@
 
     <div class="container user-section">
         <div class="row card-panel profile-image-wrapper">
-            <div class="col s4 profile-image-box center-align valign-wrapper">
-                <img src="{{ user.user_img }}" alt="user-image" class="circle user-image">                                            
+            <div class="col s4 profile-image-box center-align valign-wrapper">                
+                    <img src="{{ user.user_img }}" alt="user-image" class="circle user-image">                
             </div>
             <div class="col s8">
                 <div class="profile-info-box">
@@ -16,7 +16,7 @@
                         </tr>
                         <tr>
                             <td><span class="profile-info">Email:</span></td>
-                            <td>{{ user.mail }}</td>
+                            <td>{{ user.email }}</td>
                         </tr>
                         <tr>
                             <td><span class="profile-info">Recipes:</span></td>
@@ -28,7 +28,7 @@
                         <li><span class="profile-info">Email: </span>{{ user.mail }}</li>
                         <li><span class="profile-info">Recipes: </span>{{ recipes|length }}</li>
                     </ul> -->
-                    <a href="" class="btn">Edit Profile</a>
+                    <a href="#modal-img" class="btn modal-trigger">Edit Profile</a>
                     <a href="{{ url_for('logout') }}" class="btn">Log Out</a>              
                 </div>
             </div>
@@ -43,17 +43,17 @@
                 <span class="recipe-subtitle">Upload your personal recipes</span>
             </div>
         </div>        
-    </div>                
-    {% if recipes|length > 0 %}
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m7 l4">
-                    <div class="card large hoverable center-align add-recipe-card">
-                        <a class="modal-trigger" href="#modal1">                                
-                            <i class="fas fa-plus add-recipe-icon"></i>                                                               
-                        </a>
-                    </div>                
-                </div>
+    </div>    
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m7 l4">
+                <div class="card large hoverable center-align add-recipe-card">
+                    <a class="modal-trigger" href="#modal1">                                
+                        <i class="fas fa-plus add-recipe-icon"></i>                                                               
+                    </a>
+                </div>                
+            </div>
+            <!-- {% if recipes|length > 0 %} -->
                 {% for recipe in recipes %}
                     <div class="col s12 m7 l4">
                         <div class="card large hoverable">
@@ -91,9 +91,48 @@
                 {% endfor %}
             </div>
         </div>
-    {% else %}
+    <!-- {% else %}
         <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
-    {% endif %}    
+    {% endif %} -->
+    
+    
+
+  <!-- Modal Structure -->
+    <div id="modal-img" class="modal">
+        <div class="modal-title center-align">
+            <h4>Edit Profile</h4>
+            <p>Change your info</p>
+        </div>
+        <div class="modal-content">            
+            <form class="col s12" method="POST" action="{{ url_for('profile', username=username) }}">
+                <!-- email address -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input type="email" id="user_email" name="user_email" minlength="5" maxlength="50"
+                            value="{{ user.email }}" class="validate" required>
+                        <label for="user_email">Email*</label>
+                    </div>
+                </div>
+                <!-- recipe image -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="user_img" name="user_img" minlength="5"
+                            maxlength="200" class="materialize-textarea validate">{{ user.user_img }}</textarea>
+                        <label for="user_img">Image URL</label>
+                        <small>Leave blank to set the default image.</small>
+                    </div>
+                </div>
+                <!-- submit button -->
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <button type="submit" class="btn">
+                            Confirm
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
@@ -117,7 +156,8 @@
                         <select id="category_name" name="category_name" class="validate" required>
                             <option value="" disabled selected>Choose Category</option>
                             {% for category in categories %}
-                                <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                                <!-- <option value="{{ category.category_name }}">{{ category.category_name }}</option> -->
+                                <option value="{{ category._id }}">{{ category.category_name }}</option>
                             {% endfor %}
                         </select>
                         <label for="category_name">Recipe Category*</label>

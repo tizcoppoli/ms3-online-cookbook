@@ -10,13 +10,13 @@
                     <div class="col s12">
                         <a href="{{ url_for('home') }}" class="breadcrumb">Home</a>
                         <a href="{{ url_for('get_recipes') }}" class="breadcrumb">Recipes</a>
-                        <a href="{{ url_for('category', category=category) }}" class="breadcrumb">{{ category }}</a>
+                        <a href="{{ url_for('category', category=category) }}" class="breadcrumb">{{ category_obj.category_name }}</a>
                     </div>
                 </div>
             </nav>
             
             <div class="col s6">
-                <h3 class="recipe-title">{{ category }}</h3>
+                <h3 class="recipe-title">{{ category_obj.category_name }}</h3>
                 <hr class="title-underline">
                 <span class="recipe-subtitle">Browse our selection of recipes</span>
             </div>

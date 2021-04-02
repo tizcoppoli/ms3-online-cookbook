@@ -38,7 +38,7 @@
 
             <div class="col s12">
                 {% for category in categories %}
-                    <a href="{{ url_for('category', category=category.category_name) }}">
+                    <a href="{{ url_for('category', category=category._id) }}">
                         <div class="chip hoverable">
                             {{ category.category_name}}                
                         </div>
@@ -75,7 +75,7 @@
         <div class="container">
             <div class="row">
                 {% for recipe in recipes %}
-                    <div class="col s12 m7 l3">
+                    <div class="col s12 m7 l4">
                         <div class="card medium hoverable">
                             <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
                                 <div class="card-image">

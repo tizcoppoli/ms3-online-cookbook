@@ -23,20 +23,20 @@ mongo = PyMongo(app)
 """
 pagination test
 """
-""" users = list(range(100)) """
 
 def get_users(offset=0, per_page=10):    
     recipes = list(mongo.db.recipes.find())
     return recipes[offset: offset + per_page]
 
+
 @app.route("/")
 @app.route("/home")
 def home():
     recipes = list(mongo.db.recipes.find())
-    categories = mongo.db.categories.find().sort("category_name", 1)
+    """ categories = mongo.db.categories.find().sort("category_name", 1) """
+    categories = list(mongo.db.categories.find().sort("category_name", 1))
     random.shuffle(recipes)
-    return render_template(
-        "home.html", recipes=recipes, categories=categories)
+    return render_template("home.html", recipes=recipes, categories=categories)
 
 
 @app.route("/get_recipes")
@@ -48,7 +48,7 @@ def get_recipes():
     """    
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
-    per_page = 12
+    per_page = 9
     total = len(recipes)
     pagination_users = get_users(offset=page*per_page-per_page, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total)
@@ -73,8 +73,9 @@ def search():
 
 @app.route("/category/<category>", methods=["GET", "POST"])
 def category(category):
-    recipes = list(mongo.db.recipes.find({"category_name": category}))
-    return render_template("category.html", recipes=recipes, category=category)
+    recipes = list(mongo.db.recipes.find({"category": category}))
+    category_obj = mongo.db.categories.find_one({"_id": ObjectId(category)})
+    return render_template("category.html", recipes=recipes, category=category, category_obj=category_obj)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -90,12 +91,14 @@ def register():
 
         register = {
             "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
+            "password": generate_password_hash(request.form.get("password")),
+            "email": request.form.get("email").lower(),
+            "user_img": "https://i.imgur.com/3XizFU1.png"
         }
         mongo.db.users.insert_one(register)
 
         # put the new user into 'session' cookie
-        session["user"] = request.form.get("username").lower()
+        session["user"] = request.form.get("username").lower()     
         flash("Registration Successful!")
         return redirect(url_for("profile", username=session["user"]))
 
@@ -140,30 +143,40 @@ def profile(username):
 
     if session["user"]:
         if request.method == "POST":
-            recipe_img = request.form.get("recipe_img") if request.form.get("recipe_img") else "https://i.imgur.com/3XizFU1.png"
-            is_spicy = "on" if request.form.get("is_spicy") else "off"
-            is_vegan = "on" if request.form.get("is_vegan") else "off"
-            ingredient_list = request.form.get("ingredient_list").splitlines()
-            recipe_steps = request.form.get("recipe_steps").splitlines()
-            recipe = {
-                "category_name": request.form.get("category_name"),
-                "recipe_name": request.form.get("recipe_name"),
-                "is_spicy": is_spicy,
-                "is_vegan": is_vegan,
-                "created_by": session["user"],
-                "ingredient_list": ingredient_list,
-                "recipe_steps": recipe_steps,
-                "recipe_img": recipe_img,
-                "preparation_time": request.form.get("preparation_time"),
-                "servings": request.form.get("servings"),
-                "difficulty": request.form.get("difficulty"),
-                "likes": 0,
-                "like_array": [],
-                "comment_array": []
-            }
-            mongo.db.recipes.insert_one(recipe)
-            flash("Recipe Successfully Added")
-            return redirect(url_for("profile", username=username))
+            if request.form.get("user_email"):
+                user_img = request.form.get("user_img") if request.form.get("user_img") else "https://i.imgur.com/3XizFU1.png"
+                submit = {"$set": {
+                    "email": request.form.get("user_email"),
+                    "user_img": user_img
+                    }}
+                mongo.db.users.update(user, submit)
+                flash("User Successfully Updated")
+                return redirect(url_for("profile", username=username))
+            else:
+                recipe_img = request.form.get("recipe_img") if request.form.get("recipe_img") else "https://i.imgur.com/3XizFU1.png"
+                is_spicy = "on" if request.form.get("is_spicy") else "off"
+                is_vegan = "on" if request.form.get("is_vegan") else "off"
+                ingredient_list = request.form.get("ingredient_list").splitlines()
+                recipe_steps = request.form.get("recipe_steps").splitlines()
+                recipe = {
+                    "category": request.form.get("category_name"),
+                    "recipe_name": request.form.get("recipe_name"),
+                    "is_spicy": is_spicy,
+                    "is_vegan": is_vegan,
+                    "created_by": session["user"],
+                    "ingredient_list": ingredient_list,
+                    "recipe_steps": recipe_steps,
+                    "recipe_img": recipe_img,
+                    "preparation_time": request.form.get("preparation_time"),
+                    "servings": request.form.get("servings"),
+                    "difficulty": request.form.get("difficulty"),
+                    "likes": 0,
+                    "like_array": [],
+                    "comment_array": []
+                }
+                mongo.db.recipes.insert_one(recipe)
+                flash("Recipe Successfully Added")
+                return redirect(url_for("profile", username=username))
 
         recipes = list(mongo.db.recipes.find({"created_by": session["user"]}))
         categories = mongo.db.categories.find().sort("category_name", 1)
@@ -188,7 +201,7 @@ def add_recipe():
         ingredient_list = request.form.get("ingredient_list").splitlines()
         recipe_steps = request.form.get("recipe_steps").splitlines()
         recipe = {
-            "category_name": request.form.get("category_name"),
+            "category": request.form.get("category_name"),
             "recipe_name": request.form.get("recipe_name"),
             "is_spicy": is_spicy,
             "is_vegan": is_vegan,
@@ -216,7 +229,7 @@ def edit_recipe(recipe_id):
         ingredient_list = request.form.get("ingredient_list").splitlines()
         recipe_steps = request.form.get("recipe_steps").splitlines()
         submit = {"$set": {
-            "category_name": request.form.get("category_name"),
+            "category": request.form.get("category_name"),
             "recipe_name": request.form.get("recipe_name"),
             "is_spicy": is_spicy,
             "is_vegan": is_vegan,
@@ -227,20 +240,7 @@ def edit_recipe(recipe_id):
             "preparation_time": request.form.get("preparation_time"),
             "servings": request.form.get("servings"),
             "difficulty": request.form.get("difficulty")
-            }}
-        """ submit = {
-            "category_name": request.form.get("category_name"),
-            "recipe_name": request.form.get("recipe_name"),
-            "is_spicy": is_spicy,
-            "is_vegan": is_vegan,
-            "created_by": session["user"],
-            "ingredient_list": ingredient_list,
-            "recipe_steps": recipe_steps,
-            "recipe_img": request.form.get("recipe_img"),
-            "preparation_time": request.form.get("preparation_time"),
-            "servings": request.form.get("servings"),
-            "difficulty": request.form.get("difficulty")
-        } """
+            }}        
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
         flash("Recipe Successfully Updated")
         return redirect(url_for("view_recipe", recipe_id=recipe_id))
@@ -261,16 +261,18 @@ def view_recipe(recipe_id):
             return redirect(url_for("view_recipe", recipe_id=recipe_id))
         else:
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-            if session["user"] in recipe["like_array"]:
+            user = mongo.db.users.find_one({"username": session["user"]})
+            """ if session["user"] in recipe["like_array"]: """
+            if str(user["_id"]) in recipe["like_array"]:
                 submit = {"$inc": {"likes": -1}}
-                pull = {"$pull": {"like_array": {"$in": [session["user"]]}}}
+                pull = {"$pull": {"like_array": {"$in": [str(user["_id"])]}}}
                 mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
                 mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, pull)
                 flash("Like tolto")
                 return redirect(url_for("view_recipe", recipe_id=recipe_id))
             else:
                 submit = {"$inc": {"likes": 1}}
-                push = {"$push": {"like_array": session["user"]}}
+                push = {"$push": {"like_array": str(user["_id"])}}
                 mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
                 mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, push)
                 flash("Like messo")
@@ -279,8 +281,12 @@ def view_recipe(recipe_id):
     recipes = list(mongo.db.recipes.find())
     random.shuffle(recipes)
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    category = mongo.db.categories.find_one({"_id": ObjectId(recipe["category"])})
     categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("view_recipe.html", recipe=recipe, categories=categories, recipes=recipes)
+    
+    user = mongo.db.users.find_one({"username": session["user"]}) if session else ""    
+    """ user = mongo.db.users.find_one({"username": session["user"]}) if session["user"] else "default" """
+    return render_template("view_recipe.html", recipe=recipe, categories=categories, recipes=recipes, category=category, user=user)
 
 
 @app.route("/delete_recipe/<recipe_id>")
@@ -311,7 +317,7 @@ def add_category():
 
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
-    if request.method == "POST":        
+    if request.method == "POST":
         submit = {
             "category_name": request.form.get("category_name")
         }

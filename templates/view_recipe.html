@@ -39,7 +39,7 @@
                     <div class="col s12">
                         <a href="{{ url_for('home') }}" class="breadcrumb">Home</a>
                         <a href="{{ url_for('get_recipes') }}" class="breadcrumb">Recipes</a>
-                        <a href="{{ url_for('category', category=recipe.category_name) }}" class="breadcrumb">{{ recipe.category_name }}</a>
+                        <a href="{{ url_for('category', category=recipe.category) }}" class="breadcrumb">{{ category.category_name }}</a>
                         <a href="" class="breadcrumb">{{ recipe.recipe_name }}</a>
                     </div>
                 </div>
@@ -52,7 +52,8 @@
                     {% endif %}
                 </h3>
                 <hr class="title-underline">
-                <span class="recipe-subtitle">A {{ recipe.category_name }} created by {{ recipe.created_by }}</span>
+                <!-- <span class="recipe-subtitle">A {{ recipe.category_name }} created by {{ recipe.created_by }}</span> -->
+                <span class="recipe-subtitle">A {{ category.category_name }} created by {{ recipe.created_by }}</span>
             </div>
         </div>        
     </div>
@@ -81,8 +82,8 @@
                 <form method="POST" action="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
                     <div class="like-box center-align">
                         <!-- {{ is_liked }}{{ session.user }} -->
-                        {% if session.user %}
-                            {% if session.user in recipe.like_array %}
+                        {% if session.user %}                        
+                            {% if user._id|string in recipe.like_array %}
                                 <button  class="waves-light btn btn-like-yes">
                                     <i class="material-icons left">favorite</i>{{ recipe.likes }} You like it!
                                 </button>

@@ -14,11 +14,13 @@
                         {% if loop.index < 5 %}
                             <div class="carousel-item" href="{{ url_for('view_recipe', recipe_id=recipe._id) }}" style="background-image: url({{ recipe.recipe_img }});">
                                 <div class="callout-overlay"></div>
-                                <h3 class="carousel-text-heading white-text">{{ recipe.recipe_name }}</h3>
-                                <p class="carousel-text-paragraph white-text">{{ recipe.category_name }}</p>                                                           
+                                <h3 class="carousel-text-heading white-text">{{ recipe.recipe_name }}</h3>                                
+                                    {% for category in categories %}
+                                        {% if recipe.category == category._id|string %}
+                                            <p class="carousel-text-paragraph white-text">{{ category.category_name }}</p>
+                                        {% endif %}
+                                    {% endfor %}
                             </div>
-                        {% else %}
-                            {{ break }}
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -39,7 +41,7 @@
             </div>
         </div>
     </div>
-
+    
 {% endblock %}
 
 {% block content %}
@@ -84,6 +86,8 @@
         </div>
     </div> -->
     <!-- search bar -->
+
+    
 
     <!-- categories -->
     {% for category in categories %}

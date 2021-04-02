@@ -30,13 +30,13 @@
         </ul>
         <ul id="dropdown-user" class="dropdown-content">
             <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-            <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li>
+            <!-- <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li> -->
             <li class="divider"></li>
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
         </ul>
         <ul id="dropdown-admin" class="dropdown-content">
             <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-            <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li>
+            <!-- <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li> -->
             <li><a href="{{ url_for('get_categories') }}">Manage Categories</a></li>
             <li class="divider"></li>
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
