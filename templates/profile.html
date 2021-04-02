@@ -20,7 +20,7 @@
                         </tr>
                         <tr>
                             <td><span class="profile-info">Recipes:</span></td>
-                            <td>{{ recipes|length }}</td>
+                            <td>{{ recipes_complete|length }}</td>
                         </tr>
                     </table>
                     <!-- <ul>
@@ -38,7 +38,7 @@
     <div class="container title-section">
         <div class="row">
             <div class="col s12">
-                <h3 class="recipe-title">Your Recipes - {{ recipes|length }}</h3>
+                <h3 class="recipe-title">Your Recipes - {{ recipes_complete|length }}</h3>
                 <hr class="title-underline">
                 <span class="recipe-subtitle">Upload your personal recipes</span>
             </div>
@@ -90,6 +90,9 @@
                     </div>
                 {% endfor %}
             </div>
+            <div class="row center-align">
+                {{ pagination.links }}
+            </div>
         </div>
     <!-- {% else %}
         <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
@@ -116,8 +119,13 @@
                 <!-- recipe image -->
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea id="user_img" name="user_img" minlength="5"
+                        {% if user.user_img == "https://i.imgur.com/3XizFU1.png" %}
+                            <textarea id="user_img" name="user_img" minlength="5"
+                            maxlength="200" class="materialize-textarea validate"></textarea>
+                        {% else %}
+                            <textarea id="user_img" name="user_img" minlength="5"
                             maxlength="200" class="materialize-textarea validate">{{ user.user_img }}</textarea>
+                        {% endif %}                        
                         <label for="user_img">Image URL</label>
                         <small>Leave blank to set the default image.</small>
                     </div>

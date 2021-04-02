@@ -25,6 +25,13 @@ def get_users(offset=0, per_page=10):
     recipes = list(mongo.db.recipes.find())
     return recipes[offset: offset + per_page]
 
+
+def get_users_profile(offset=0, per_page=10):
+    user = mongo.db.users.find_one({"username": session["user"]})    
+    recipes = list(mongo.db.recipes.find({"created_by": str(user["_id"])}))
+    return recipes[offset: offset + per_page]
+
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -175,9 +182,23 @@ def profile(username):
                 flash("Recipe Successfully Added")
                 return redirect(url_for("profile", username=username))
 
-        recipes = list(mongo.db.recipes.find({"created_by": str(user["_id"])}))
+        recipes_complete = list(mongo.db.recipes.find({"created_by": str(user["_id"])}))
         categories = mongo.db.categories.find().sort("category_name", 1)
-        return render_template("profile.html", user=user, username=username, recipes=recipes, categories=categories)
+        """
+        pagination test
+        """    
+        page, per_page, offset = get_page_args(page_parameter='page',
+                                            per_page_parameter='per_page')
+        per_page = 8
+        total = len(recipes_complete)
+        pagination_users = get_users_profile(offset=page*per_page-per_page, per_page=per_page)
+        pagination = Pagination(page=page, per_page=per_page, total=total)
+        """
+        end pagination
+        """
+        return render_template("profile.html", user=user, username=username, categories=categories, recipes=pagination_users, recipes_complete=recipes_complete,
+                           page=page, per_page=per_page, pagination=pagination,)
+        """ return render_template("profile.html", user=user, username=username, recipes=recipes, categories=categories) """
 
     return redirect(url_for("login"))
 
