@@ -46,14 +46,14 @@
             </nav>            
             <div class="col s12">
                 <h3 class="recipe-title">{{ recipe.recipe_name }} - {{ recipe.likes }} <i class="far fa-heart"></i>
-                    {% if session.user|lower == recipe.created_by|lower %}
+                    {% if user._id|string == recipe.created_by %}
                         <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn">Edit</a>
                         <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn red accent-4">Delete</a>
                     {% endif %}
                 </h3>
                 <hr class="title-underline">
                 <!-- <span class="recipe-subtitle">A {{ recipe.category_name }} created by {{ recipe.created_by }}</span> -->
-                <span class="recipe-subtitle">A {{ category.category_name }} created by {{ recipe.created_by }}</span>
+                <span class="recipe-subtitle">A {{ category.category_name }} created by {{ author.username }}</span>
             </div>
         </div>        
     </div>
@@ -72,12 +72,16 @@
                 </ul>
                 <br>
                 <div class="tag-section">
-                    <div class="chip">
-                        Vegan                
-                    </div>
-                    <div class="chip">
-                        Spicy                
-                    </div>
+                    {% if recipe.is_vegan == "on" %}
+                        <div class="chip">
+                            Vegan                
+                        </div>
+                    {% endif %}
+                    {% if recipe.is_spicy == "on" %}
+                        <div class="chip">
+                            Spicy                
+                        </div>
+                    {% endif %}
                 </div>
                 <form method="POST" action="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
                     <div class="like-box center-align">

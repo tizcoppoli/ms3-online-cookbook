@@ -104,7 +104,8 @@
                         <span class="recipe-subtitle">{{ category.category_description}}</span>
                     </div>
                     <div class="col s2">
-                        <a class="btn btn-more" href="{{ url_for('category', category=category.category_name) }}">More</a>                        
+                        <!-- <a class="btn btn-more" href="{{ url_for('category', category=category.category_name) }}">More</a> -->
+                        <a class="btn btn-more" href="{{ url_for('category', category=category._id) }}">More</a>
                     </div>
                 </div>
             </div>

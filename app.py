@@ -20,14 +20,10 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
-"""
-pagination test
-"""
 
 def get_users(offset=0, per_page=10):    
     recipes = list(mongo.db.recipes.find())
     return recipes[offset: offset + per_page]
-
 
 @app.route("/")
 @app.route("/home")
@@ -67,8 +63,9 @@ def get_recipes():
 def search():
     query = request.form.get("query")
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
-    flash("You searched: " + query)
-    return render_template("recipes.html", recipes=recipes)
+    categories = list(mongo.db.categories.find().sort("category_name", 1))
+    flash("You searched: " + query)    
+    return render_template("search.html", recipes=recipes)
 
 
 @app.route("/category/<category>", methods=["GET", "POST"])
@@ -163,7 +160,7 @@ def profile(username):
                     "recipe_name": request.form.get("recipe_name"),
                     "is_spicy": is_spicy,
                     "is_vegan": is_vegan,
-                    "created_by": session["user"],
+                    "created_by": str(user["_id"]),
                     "ingredient_list": ingredient_list,
                     "recipe_steps": recipe_steps,
                     "recipe_img": recipe_img,
@@ -178,7 +175,7 @@ def profile(username):
                 flash("Recipe Successfully Added")
                 return redirect(url_for("profile", username=username))
 
-        recipes = list(mongo.db.recipes.find({"created_by": session["user"]}))
+        recipes = list(mongo.db.recipes.find({"created_by": str(user["_id"])}))
         categories = mongo.db.categories.find().sort("category_name", 1)
         return render_template("profile.html", user=user, username=username, recipes=recipes, categories=categories)
 
@@ -192,7 +189,9 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
-
+"""
+this method is deprecated
+"""
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     if request.method == "POST":
@@ -232,8 +231,7 @@ def edit_recipe(recipe_id):
             "category": request.form.get("category_name"),
             "recipe_name": request.form.get("recipe_name"),
             "is_spicy": is_spicy,
-            "is_vegan": is_vegan,
-            "created_by": session["user"],
+            "is_vegan": is_vegan,            
             "ingredient_list": ingredient_list,
             "recipe_steps": recipe_steps,
             "recipe_img": request.form.get("recipe_img"),
@@ -282,11 +280,12 @@ def view_recipe(recipe_id):
     random.shuffle(recipes)
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     category = mongo.db.categories.find_one({"_id": ObjectId(recipe["category"])})
+    author = mongo.db.users.find_one({"_id": ObjectId(recipe["created_by"])})
     categories = mongo.db.categories.find().sort("category_name", 1)
     
     user = mongo.db.users.find_one({"username": session["user"]}) if session else ""    
     """ user = mongo.db.users.find_one({"username": session["user"]}) if session["user"] else "default" """
-    return render_template("view_recipe.html", recipe=recipe, categories=categories, recipes=recipes, category=category, user=user)
+    return render_template("view_recipe.html", recipe=recipe, categories=categories, recipes=recipes, category=category, user=user, author=author)
 
 
 @app.route("/delete_recipe/<recipe_id>")
