@@ -10,16 +10,16 @@
                     <div class="carousel-fixed-item center">
                         <a class="btn waves-effect" id="carousel-button">Check the Recipe</a>
                     </div>
-                    {% for recipe in recipes %}
+                    {% for recipe in recipes_admin %}
                         {% if loop.index < 5 %}
                             <div class="carousel-item" href="{{ url_for('view_recipe', recipe_id=recipe._id) }}" style="background-image: url({{ recipe.recipe_img }});">
                                 <div class="callout-overlay"></div>
                                 <h3 class="carousel-text-heading white-text">{{ recipe.recipe_name }}</h3>                                
-                                    {% for category in categories %}
-                                        {% if recipe.category == category._id|string %}
-                                            <p class="carousel-text-paragraph white-text">{{ category.category_name }}</p>
-                                        {% endif %}
-                                    {% endfor %}
+                                {% for category in categories %}
+                                    {% if recipe.category == category._id|string %}
+                                        <p class="carousel-text-paragraph white-text">{{ category.category_name }}</p>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         {% endif %}
                     {% endfor %}
@@ -91,7 +91,7 @@
 
     <!-- categories -->
     {% for category in categories %}
-        {% if category.category_name == "Shio Ramen" or category.category_name == "Shoyu Ramen" %}
+        {% if category._id|string == "6048b1f2595caef8e390a6ac" or category._id|string == "60491e3c4b1e42b5f3519954" %}
             <div class="container title-section">
                 <div class="row">            
                     <div class="col s12">
@@ -115,7 +115,7 @@
                     <div class="row">
                         {% for recipe in recipes %}
                             {% if cnt.cnt_index < 3 %}
-                                {% if recipe.category_name == category.category_name  %}
+                                {% if recipe.category == category._id|string  %}
                                     <div class="col s12 m7 l4">
                                         <div class="card medium hoverable">
                                             <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
@@ -171,6 +171,70 @@
         </div>
     </div>
     <!-- /book -->
+
+    <!-- categories -->
+    {% for category in categories %}
+        {% if category._id|string == "6048ad7b538afe6d28503533" or category._id|string == "6054cc76c375d858d90998d7" %}
+            <div class="container title-section">
+                <div class="row">            
+                    <div class="col s12">
+                        <h3 class="recipe-title">{{ category.category_name }}</h3>
+                        <hr class="title-underline">                        
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col s10">
+                        <span class="recipe-subtitle">{{ category.category_description}}</span>
+                    </div>
+                    <div class="col s2">
+                        <!-- <a class="btn btn-more" href="{{ url_for('category', category=category.category_name) }}">More</a> -->
+                        <a class="btn btn-more" href="{{ url_for('category', category=category._id) }}">More</a>
+                    </div>
+                </div>
+            </div>
+            {% if recipes|length > 0 %}
+                {% set cnt = namespace (cnt_index = 0) %}
+                <div class="container">
+                    <div class="row">
+                        {% for recipe in recipes %}
+                            {% if cnt.cnt_index < 3 %}
+                                {% if recipe.category == category._id|string  %}
+                                    <div class="col s12 m7 l4">
+                                        <div class="card medium hoverable">
+                                            <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
+                                                <div class="card-image">
+                                                    <img src="{{ recipe.recipe_img }}">
+                                                    <span class="card-title"></span>
+                                                </div>
+                                                <div class="card-content center-align">
+                                                    <h5 class="recipe-name">
+                                                        {{ recipe.recipe_name }}
+                                                    </h5>
+                                                    <div class="chip">
+                                                        <i class="fas fa-heart"> {{ recipe.likes}}</i>                
+                                                    </div>
+                                                     <div class="chip">
+                                                        <i class="fas fa-comment"> {{ recipe.comment_array|length }}</i>                
+                                                    </div>
+                                                    <div class="chip">
+                                                        {{ recipe.difficulty }}                
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>                
+                                    </div>                            
+                                    {% set cnt.cnt_index = cnt.cnt_index + 1|int %}                            
+                                {% endif %}
+                            {% endif  %}
+                        {% endfor %}
+                    </div>
+                </div>        
+            {% else %}
+                <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    <!-- /categories -->
 
     <!-- random recipes -->
     <div class="container title-section">

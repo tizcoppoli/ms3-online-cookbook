@@ -1,6 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
 
+    <div class="container">
+        <div class="row card-panel edit-panel">
+            <div class="col s12">
+                <div class="edit-title center-align">
+                    <h4>Edit Category</h4>
+                    <p>Fill the fields and press confirm</p>
+                </div>
+            </div>
+        <!-- </div>
+        <div class="row"> -->
+            <div class="col s12">
+                <div class="modal-content">            
+                    <form class="col s12" method="POST" action="">                
+                        <!-- category name -->
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="category_name" name="category_name" minlength="4" maxlength="15"
+                                    value="{{ category.category_name }}" type="text" class="validate" required>
+                                <label for="category_name">Category Name*</label>                        
+                            </div>
+                        </div>                        
+                        <!-- submit button -->
+                        <div class="row">
+                            <div class="col s12 center-align">
+                                <button type="submit" class="btn">
+                                    Confirm
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <h3 class="light-blue-text text-darken-4 center-align">Edit Category</h3>
 
     <div class="row card-panel grey lighten-5">

@@ -32,14 +32,20 @@ def get_users_profile(offset=0, per_page=10):
     return recipes[offset: offset + per_page]
 
 
+def get_users_category(category, offset=0, per_page=10):
+    recipes = list(mongo.db.recipes.find({"category": category}))
+    return recipes[offset: offset + per_page]
+
+
 @app.route("/")
 @app.route("/home")
 def home():
     recipes = list(mongo.db.recipes.find())
+    recipes_admin = list(mongo.db.recipes.find({"created_by": "605b52c31a93cdb5624e75ba"}))
     """ categories = mongo.db.categories.find().sort("category_name", 1) """
     categories = list(mongo.db.categories.find().sort("category_name", 1))
     random.shuffle(recipes)
-    return render_template("home.html", recipes=recipes, categories=categories)
+    return render_template("home.html", recipes=recipes_admin, categories=categories, recipes_admin=recipes_admin)
 
 
 @app.route("/get_recipes")
@@ -79,7 +85,22 @@ def search():
 def category(category):
     recipes = list(mongo.db.recipes.find({"category": category}))
     category_obj = mongo.db.categories.find_one({"_id": ObjectId(category)})
-    return render_template("category.html", recipes=recipes, category=category, category_obj=category_obj)
+    """
+    pagination test
+    """    
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    per_page = 9
+    total = len(recipes)
+    pagination_users = get_users_category(category, offset=page*per_page-per_page, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total)
+    """
+    end pagination
+    """
+    """ return render_template("category.html", recipes=recipes, category=category, category_obj=category_obj) """
+    return render_template("category.html", recipes=pagination_users, category=category, category_obj=category_obj, page=page,
+                           per_page=per_page,
+                           pagination=pagination)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -316,8 +337,16 @@ def delete_recipe(recipe_id):
     return redirect(url_for("get_recipes"))
 
 
-@app.route("/get_categories")
+@app.route("/get_categories", methods=["GET", "POST"])
 def get_categories():
+    if request.method == "POST":
+        category = {
+            "category_name": request.form.get("category_name")
+        }
+        mongo.db.categories.insert_one(category)
+        flash("New Category Added")
+        return redirect(url_for("get_categories"))
+
     categories = list(mongo.db.categories.find().sort("category_name", 1))
     return render_template("categories.html", categories=categories)
 
