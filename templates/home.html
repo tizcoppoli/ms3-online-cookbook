@@ -58,7 +58,7 @@
                     <p>
                         There’s something special about noodles. It seems like as long people have been cooking, we’ve been finding something tasty to put alongside noodles. Today, nearly every culture on the planet has some version of noodles, whether it’s for pasta, soup, or something else.
                     </p>
-                    <a class="btn" href="{{ url_for('register') }}">Sign Up!</a>
+                    <a class="btn" href="{{ url_for('register') }}">Join The Community</a>
                                 
             </div>
         </div>
@@ -236,21 +236,69 @@
     {% endfor %}
     <!-- /categories -->
 
+    <!-- newsletter -->
+    <div class="container-fluid book-section">
+        <div class="row newsletter-signup-text">
+            <!-- <div class="col s6 book-cover-section">
+                <img class="book-image" src="/static/images/drink.png" alt="book">                                
+            </div> -->            
+            <div class="col s12 white-text center-align">
+                    <h4 class="book-heading white-text">Newsletter Sign Up</h4>
+                    <p>Enter your email address to receive each month our latest news and special offers!</p>
+                    <!-- <a class="btn purchase-button" href="#">Purchase today!</a> -->                                
+            </div>
+            <div class="input-field col s12">
+                <!-- <form id="form-newsletter">                   
+                    <input type="email" id="email" name="email" minlength="5" maxlength="50"
+                        class="validate" required>
+                    <label for="email">Email*</label>
+                </form> -->
+                <!-- <form id="form-newsletter" onsubmit="return sendMail(this);"> -->
+                <form id="form-newsletter" method="POST">                    
+                    <input type="email" name="email-address" id="email-address" placeholder="email" required>
+                    <label for="email-address" class="valign-wrapper active">
+                        <button id="newsletter-button" type="submit">
+                            <i class="far fa-paper-plane icon-newsletter"></i>
+                        </button>
+                    </label>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /book -->
+
     <!-- random recipes -->
     <div class="container title-section">
+        <div class="row">            
+            <div class="col s12">
+                <h3 class="recipe-title">You May Like</h3>
+                <hr class="title-underline">                        
+            </div>                    
+        </div>
         <div class="row">
-            <div class="col s6">
+            <div class="col s10">
+                <span class="recipe-subtitle">Browse our selection of recipes</span>
+            </div>
+            <div class="col s2">                
+                <a class="btn btn-more" href="{{ url_for('get_recipes') }}">More</a>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col s10">
                 <h3 class="recipe-title">You may like</h3>
                 <hr class="title-underline">
                 <span class="recipe-subtitle">Browse our selection of recipes</span>
             </div>
-        </div>        
+            <div class="col s2">                
+                <a class="btn btn-more" href="{{ url_for('get_recipes') }}">More</a>
+            </div>
+        </div> -->        
     </div>
     {% if recipes|length > 0 %}
         <div class="container">
             <div class="row">
                 {% for recipe in recipes %}
-                    {% if loop.index <= 3  %}
+                    {% if loop.index <= 6  %}
                         <div class="col s12 m7 l4">
                             <div class="card medium hoverable">
                                 <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">

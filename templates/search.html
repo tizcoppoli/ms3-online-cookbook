@@ -10,14 +10,15 @@
                     <div class="col s12">
                         <a href="{{ url_for('home') }}" class="breadcrumb">Home</a>
                         <a href="{{ url_for('get_recipes') }}" class="breadcrumb">Recipes</a>                        
+                        <a href="" class="breadcrumb">Search Results</a>                        
                     </div>
                 </div>
             </nav>
             
             <div class="col s6">
-                <h3 class="recipe-title">All Recipes</h3>
+                <h3 class="recipe-title">Search Results</h3>
                 <hr class="title-underline">
-                <span class="recipe-subtitle">Browse our categories!</span>
+                <span class="recipe-subtitle">What are you looking for?</span>
             </div>
 
             <form action="{{ url_for('search') }}" method="post" class="col s6">
@@ -27,8 +28,7 @@
                         <input type="text" name="query" id="query" minlength="3" class="validate" required>
                         <label for="query">Search Recipes</label>
                     </div>
-                    <div class="col s12 m6">
-                        <a href="{{ url_for('get_recipes') }}" class="grey btn text-shadow">Reset</a>
+                    <div class="col s12 m6">                        
                         <button type="submit" class="btn text-shadow">
                             <i class="fas fa-search left"></i> Search
                         </button>
@@ -45,7 +45,7 @@
                     </a>
                 {% endfor %}
             </div>
-
+            
         </div>        
     </div>    
 

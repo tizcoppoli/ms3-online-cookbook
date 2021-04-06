@@ -301,6 +301,19 @@ nav .brand-logo {
     max-width: 500px;    
 }
 
+.newsletter-signup-text {
+    max-width: 500px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#form-newsletter {    
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
 .book-heading {
     margin-top: 40px;
 }
@@ -461,6 +474,20 @@ table {
     padding-top: 100px;
 }
 
+#newsletter-button {
+    padding: 0 1rem;
+    background-color: white;
+    border: none;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+
+[type="checkbox"].filled-in:checked+span:not(.lever):after {
+    border: 2px solid #ef6c00;
+    background-color: #ef6c00;
+}
+
 /* da rinominare */
 
 #form_contact {
@@ -470,10 +497,11 @@ table {
     overflow: hidden;
 }
 
-#emailaddress {
+#email-address {
     padding: 0rem;
     margin: 0 0 1rem 1rem;
 }
+
 #submit {
     padding: 0 1rem;
     background-color: white;
@@ -482,11 +510,14 @@ table {
     border: none;
 }
 
-.large-icon {
+.icon-newsletter {
     font-size: 1.5rem;
 }
 
-
+footer li {
+    display: inline-block;
+    margin-right: 10px;
+}
 
 .mv-half {
     margin: 0.5rem 0;

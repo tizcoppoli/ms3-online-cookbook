@@ -130,6 +130,21 @@
                         <small>Leave blank to set the default image.</small>
                     </div>
                 </div>
+                <!-- newsletter toggle -->
+                <div class="row">
+                    <div class="input-field col s12 center-align">
+                        <p>
+                            <label>
+                                {% if is_subscribed %}
+                                    <input type="checkbox" name="newsletter-checkbox" id="newsletter-checkbox" class="filled-in" checked="checked">
+                                {% else %}
+                                    <input type="checkbox" name="newsletter-checkbox" id="newsletter-checkbox" class="filled-in">
+                                {% endif %}
+                                <span>Subscribe to the newsletter</span>
+                            </label>
+                        </p>
+                    </div>
+                </div>
                 <!-- submit button -->
                 <div class="row">
                     <div class="col s12 center-align">

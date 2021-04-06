@@ -37,9 +37,26 @@ def get_users_category(category, offset=0, per_page=10):
     return recipes[offset: offset + per_page]
 
 
-@app.route("/")
-@app.route("/home")
+""" def get_users_search(query, offset=0, per_page=10):
+    recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
+    return recipes[offset: offset + per_page] """
+
+
+@app.route("/", methods=["GET", "POST"])
+@app.route("/home", methods=["GET", "POST"])
 def home():
+    if request.method == "POST":
+        existing_contact = mongo.db.contacts.find_one({"email_address": request.form.get("email-address").lower()})
+        if existing_contact:
+            flash("già in newsletter")
+            return redirect(url_for("home"))
+
+        register = {"email_address": request.form.get("email-address").lower()}
+        mongo.db.contacts.insert_one(register)
+        flash("messo in newsletter")
+        return redirect(url_for("home"))
+
+
     recipes = list(mongo.db.recipes.find())
     recipes_admin = list(mongo.db.recipes.find({"created_by": "605b52c31a93cdb5624e75ba"}))
     """ categories = mongo.db.categories.find().sort("category_name", 1) """
@@ -75,9 +92,22 @@ def get_recipes():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     query = request.form.get("query")
+    """ QUERY = query if query else QUERY """
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
     categories = list(mongo.db.categories.find().sort("category_name", 1))
-    flash("You searched: " + query)    
+    flash("You searched: " + query)
+    """
+    pagination test
+    """    
+    """ page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    per_page = 9
+    total = len(recipes)
+    pagination_users = get_users_search(query, offset=page*per_page-per_page, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total) """
+    """
+    end pagination
+    """    
     return render_template("search.html", recipes=recipes)
 
 
@@ -114,6 +144,16 @@ def register():
             flash("Username already exists")
             return redirect(url_for("register"))
 
+               
+        if request.form.get("newsletter-checkbox"):
+            existing_contact = mongo.db.contacts.find_one({"email_address": request.form.get("email").lower()})
+            if not existing_contact:
+                contact = {"email_address": request.form.get("email").lower()}
+                mongo.db.contacts.insert_one(contact)
+        
+        
+        """
+        """
         register = {
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password")),
@@ -169,6 +209,13 @@ def profile(username):
     if session["user"]:
         if request.method == "POST":
             if request.form.get("user_email"):
+                contact = {"email_address": request.form.get("user_email").lower()}
+                if request.form.get("newsletter-checkbox"):
+                    mongo.db.contacts.insert_one(contact)
+                else:
+                    mongo.db.contacts.remove({"email_address": request.form.get("user_email").lower()})
+                """
+                """
                 user_img = request.form.get("user_img") if request.form.get("user_img") else "https://i.imgur.com/3XizFU1.png"
                 submit = {"$set": {
                     "email": request.form.get("user_email"),
@@ -177,6 +224,8 @@ def profile(username):
                 mongo.db.users.update(user, submit)
                 flash("User Successfully Updated")
                 return redirect(url_for("profile", username=username))
+                """
+                """
             else:
                 recipe_img = request.form.get("recipe_img") if request.form.get("recipe_img") else "https://i.imgur.com/3XizFU1.png"
                 is_spicy = "on" if request.form.get("is_spicy") else "off"
@@ -204,7 +253,8 @@ def profile(username):
                 return redirect(url_for("profile", username=username))
 
         recipes_complete = list(mongo.db.recipes.find({"created_by": str(user["_id"])}))
-        categories = mongo.db.categories.find().sort("category_name", 1)
+        categories = mongo.db.categories.find().sort("category_name", 1)        
+        is_subscribed = mongo.db.contacts.find_one({"email_address": user["email"]})
         """
         pagination test
         """    
@@ -218,7 +268,7 @@ def profile(username):
         end pagination
         """
         return render_template("profile.html", user=user, username=username, categories=categories, recipes=pagination_users, recipes_complete=recipes_complete,
-                           page=page, per_page=per_page, pagination=pagination,)
+                           page=page, per_page=per_page, pagination=pagination, is_subscribed=is_subscribed)
         """ return render_template("profile.html", user=user, username=username, recipes=recipes, categories=categories) """
 
     return redirect(url_for("login"))
