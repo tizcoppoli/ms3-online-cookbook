@@ -22,12 +22,7 @@
                             <td><span class="profile-info">Recipes:</span></td>
                             <td>{{ recipes_complete|length }}</td>
                         </tr>
-                    </table>
-                    <!-- <ul>
-                        <li><span class="profile-info">Username:</span>{{ user.username }}</li>
-                        <li><span class="profile-info">Email: </span>{{ user.mail }}</li>
-                        <li><span class="profile-info">Recipes: </span>{{ recipes|length }}</li>
-                    </ul> -->
+                    </table>                    
                     <a href="#modal-img" class="btn modal-trigger">Edit Profile</a>
                     <a href="{{ url_for('logout') }}" class="btn">Log Out</a>              
                 </div>
@@ -53,7 +48,7 @@
                     </a>
                 </div>                
             </div>
-            <!-- {% if recipes|length > 0 %} -->
+            
                 {% for recipe in recipes %}
                     <div class="col s12 m7 l4">
                         <div class="card large hoverable">
@@ -77,8 +72,7 @@
                                     </div> 
                                 </div>
 
-                                <div class="card-action center-align">
-                                    <!-- <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">Try now</a> -->
+                                <div class="card-action center-align">                                    
                                     {% if user._id|string == recipe.created_by %}
                                         <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn">Edit</a>
                                         <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn red accent-4">Delete</a>
@@ -94,11 +88,6 @@
                 {{ pagination.links }}
             </div>
         </div>
-    <!-- {% else %}
-        <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
-    {% endif %} -->
-    
-    
 
   <!-- Modal Structure -->
     <div id="modal-img" class="modal">
@@ -116,7 +105,7 @@
                         <label for="user_email">Email*</label>
                     </div>
                 </div>
-                <!-- recipe image -->
+                <!-- profile image -->
                 <div class="row">
                     <div class="input-field col s12">
                         {% if user.user_img == "https://i.imgur.com/3XizFU1.png" %}
@@ -178,8 +167,7 @@
                     <div class="input-field col s12">                        
                         <select id="category_name" name="category_name" class="validate" required>
                             <option value="" disabled selected>Choose Category</option>
-                            {% for category in categories %}
-                                <!-- <option value="{{ category.category_name }}">{{ category.category_name }}</option> -->
+                            {% for category in categories %}                                
                                 <option value="{{ category._id }}">{{ category.category_name }}</option>
                             {% endfor %}
                         </select>
@@ -211,16 +199,11 @@
                         <textarea id="recipe_img" name="recipe_img" minlength="5"
                             maxlength="200" class="materialize-textarea validate"></textarea>
                         <label for="recipe_img">Image URL</label>
-                        <small>Insert the image address. This is optional.</small>
+                        <small>Leave blank to set the default image.</small>
                     </div>
                 </div>                
                 <!-- difficulty -->
-                <div class="row">
-                    <!-- <div class="input-field col s12">                        
-                        <textarea id="difficulty" name="difficulty" minlength="4"
-                            maxlength="200" class="materialize-textarea validate" required></textarea>
-                        <label for="difficulty">Difficulty*</label>
-                    </div> -->
+                <div class="row">                    
                     <div class="input-field col s12">
                         <select id="difficulty" name="difficulty" class="validate" required>
                             <option value="" disabled selected>Choose your option</option>
@@ -234,9 +217,7 @@
                 <!-- servings -->
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="servings" placeholder="Example: 2" type="number" name="servings" class="validate" minlength="1" maxlength="1" required>
-                        <!-- <textarea id="servings" name="servings" minlength="1"
-                            maxlength="200" class="materialize-textarea validate" required></textarea> -->
+                        <input id="servings" placeholder="Example: 2" type="number" name="servings" class="validate" minlength="1" maxlength="1" required>                        
                         <label for="servings">Servings*</label>
                     </div>
                 </div>
@@ -244,8 +225,6 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="preparation_time" placeholder="Example: 30" type="number" name="preparation_time" class="validate" minlength="1" maxlength="3" required>
-                        <!-- <textarea id="preparation_time"  minlength="1"
-                            maxlength="200" class="materialize-textarea validate" required></textarea> -->
                         <label for="preparation_time">Preparation Time*</label>
                         <small>Insert the time in minutes.</small>
                     </div>
@@ -284,12 +263,6 @@
                 </div>
             </form>
         </div>
-        <!-- <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-        </div> -->
     </div>
-            
-
-    
 
 {% endblock %}

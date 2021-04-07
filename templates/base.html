@@ -29,14 +29,12 @@
             
         </ul>
         <ul id="dropdown-user" class="dropdown-content">
-            <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-            <!-- <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li> -->
+            <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>            
             <li class="divider"></li>
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
         </ul>
         <ul id="dropdown-admin" class="dropdown-content">
             <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-            <!-- <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li> -->
             <li><a href="{{ url_for('get_categories') }}">Manage Categories</a></li>
             <li class="divider"></li>
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
@@ -46,17 +44,14 @@
                 <div class="left">
                     <a href="{{ url_for('home') }}" class="brand-logo valign-wrapper">
                         <img class="img-logo" src="../static/images/logo2.png" alt="logo">
-                        <h5 class="text-logo white-text">Just Ramen</h5>
-                        <!-- <i class="fas fa-cookie-bite"></i> -->
+                        <h5 class="text-logo white-text">Just Ramen</h5>                        
                     </a>
                 </div>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
 				<ul class="right hide-on-med-and-down">                    
                     <li><a href="{{ url_for('home') }}">Home</a></li>
                     <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>                    
-                    {% if session.user %}
-                        <!-- <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li> -->
-                        <!-- <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li> -->
+                    {% if session.user %}                        
                         {% if session.user|lower == "admin"|lower %}
                             <li class="user-login-icon"><a class="dropdown-trigger" href="#!" data-target="dropdown-admin">                                
                                 <i class="material-icons right" id="user-icon">account_circle</i></a></li>
@@ -89,17 +84,14 @@
             {% endif %}
 		</ul>
     </header>
-    
-    {% block callout %}
-    {% endblock %}
 
     <section>
         <!-- flash messages -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
-                    <div class="row flashes">
-                        <h4 class="light-blue lighten-4 center-align">{{ message }}</h4>
+                    <div class="row flashes orange lighten-4">
+                        <h4 class="center-align">{{ message }}</h4>
                     </div>
                 {% endfor %}
             {% endif %}
@@ -109,46 +101,19 @@
     <main>
         {% block content %}
         {% endblock %}
-    </main>    
-
-    <!-- footer -->
-    <!-- <footer class="page-footer cyan darken-1">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">Footer Content</h5>
-                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Links</h5>
-                    <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                © 2021 Copyright Roucola
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-        </div>
-    </footer> -->
+    </main>
 
     <footer class="page-footer orange darken-3">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                <h5 class="white-text">Contact us!</h5>
+                <h5 class="white-text">Contact us</h5>
                 <p class="grey-text text-lighten-4">Want to share your thoughts about the recipes? <br> Contact us at:    
                     <span class="profile-info">justramen@email.com</span>
                 </p>
                 </div>
                 <div class="col l4 offset-l2 s12">
-                <h5 class="white-text center-align">Social Links</h5>
+                <h5 class="white-text center-align">Follow us</h5>
                 <ul class="center-align">
                     <li><a href="#!"><i class="fab fa-facebook"></i></a></li>
                     <li><a href="#!"><i class="fab fa-linkedin-in"></i></a></li>
@@ -159,7 +124,7 @@
             </div>
         </div>
         <div class="footer-copyright">
-            <div class="container">© 2021 Just Ramen</div>
+            <div class="container center-align">© 2021 Just Ramen</div>
         </div>
     </footer>
     

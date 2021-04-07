@@ -15,6 +15,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .flashes h4 {
     line-height: 2;
+    margin: 0;
+    padding-top: 15px;
+}
+
+.flashes {
+    margin-bottom: 0;
+    padding-bottom: 15px;
 }
 
 .btn-small {
@@ -203,8 +210,33 @@ nav .brand-logo {
     background-color: #000;
 }
 
+.overlay-category {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    transition: .5s ease;
+    background-color: #000;
+}
+
 .callout-text {
     position: absolute;
+}
+
+.category-text {
+    position: absolute;
+    bottom: 150px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.carousel {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
 }
 
 .carousel-item {
@@ -220,6 +252,7 @@ nav .brand-logo {
 }
 
 .callout-up {
+    margin-top: 0.75rem;
     margin-bottom: 0.75rem;
     background-image: url(/static/images/callout-7.png);
     
@@ -227,6 +260,7 @@ nav .brand-logo {
 
 .callout-bottom {
     margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
     background-image: url(/static/images/callout-5.png)
 }
 
@@ -367,9 +401,9 @@ nav .brand-logo {
     margin-bottom: 50px;
 }
 
-/* .profile-image-box {
-    background-color: #ef6c00;
-} */
+.category-image {
+    height: 100%;    
+}
 
 .user-section {
     margin-top: 50px;
@@ -408,6 +442,12 @@ nav .brand-logo {
     border-style: dashed;
     border-color: darkgray;
 }
+
+.category-card {    
+    background-image: url(/static/images/callout-2.png);
+    background-size: cover;
+}
+
 
 .add-recipe-card:hover {
     opacity: 0.8;
@@ -449,13 +489,9 @@ table {
     margin-top: 10px;
 }
 
-/* textarea.materialize-textarea {
-    height: 85px;
-} */
-
 .edit-panel {
     margin-top: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 120px;
 }
 
 .edit-title {
@@ -490,12 +526,12 @@ table {
 
 /* da rinominare */
 
-#form_contact {
+/* #form_contact {
     display: flex;
     background-color: white;
     border-radius: 20px;
     overflow: hidden;
-}
+} */
 
 #email-address {
     padding: 0rem;
@@ -514,9 +550,17 @@ table {
     font-size: 1.5rem;
 }
 
+.icon-newsletter:hover {
+    opacity: 0.8;
+}
+
 footer li {
     display: inline-block;
     margin-right: 10px;
+}
+
+footer li:hover {
+    opacity: 0.8;
 }
 
 .mv-half {

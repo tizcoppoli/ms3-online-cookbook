@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-
-    
     
     <div id="modal-comment" class="modal">
         <div class="modal-content">
@@ -51,8 +49,7 @@
                         <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn red accent-4">Delete</a>
                     {% endif %}
                 </h3>
-                <hr class="title-underline">
-                <!-- <span class="recipe-subtitle">A {{ recipe.category_name }} created by {{ recipe.created_by }}</span> -->
+                <hr class="title-underline">                
                 <span class="recipe-subtitle">A {{ category.category_name }} created by {{ author.username }}</span>
             </div>
         </div>        
@@ -84,8 +81,7 @@
                     {% endif %}
                 </div>
                 <form method="POST" action="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
-                    <div class="like-box center-align">
-                        <!-- {{ is_liked }}{{ session.user }} -->
+                    <div class="like-box center-align">                        
                         {% if session.user %}                        
                             {% if user._id|string in recipe.like_array %}
                                 <button  class="waves-light btn btn-like-yes">
@@ -115,8 +111,7 @@
             <p>Please register now to leave a like and upload your unique recipes!</p>
         </div>        
         <div class="modal-footer">
-            <a class="btn" href="{{ url_for('register') }}">Sign Up!</a>
-            <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
+            <a class="btn" href="{{ url_for('register') }}">Sign Up!</a>            
         </div>
     </div>
 
@@ -125,16 +120,6 @@
             <div class="col s4 card-panel ingredient-panel">
                 <h3 class="white-text">Ingredient List:</h3>
                 <hr class="title-underline white">
-                <!-- <form>
-                    {% for ingredient in recipe.ingredient_list %}
-                        <p>
-                            <label>
-                                <input type="checkbox" />
-                                <span>{{ ingredient }}</span>
-                            </label>
-                        </p>                    
-                    {% endfor %}
-                    </form> -->
                     <ul class="ingredient-list">
                     {% for ingredient in recipe.ingredient_list %}
                         <li>{{ ingredient }}</li>
@@ -152,17 +137,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <div class="container">
-        <div class="row">
-            <div class="col s12">
-                {% if session.user|lower == recipe.created_by|lower %}
-                    <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn-small green accent-4">Done</a>
-                    <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn-small light-blue lighten-1">Edit</a>                                    
-                {% endif %}
-            </div>
-        </div>
-    </div> -->
 
     <!-- comment section -->
     <div class="container title-section">
