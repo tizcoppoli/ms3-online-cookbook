@@ -578,6 +578,10 @@ footer li:hover {
     margin-top: 0;
 }
 
+.categories-box {
+    margin-bottom: 120px;
+}
+
 /* fine da rinominare */
 
 @media only screen and (min-width: 1200px) {
