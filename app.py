@@ -68,7 +68,7 @@ def get_recipes():
     """    
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
-    per_page = 9
+    per_page = 6
     total = len(recipes)
     pagination_users = get_users(offset=page*per_page-per_page, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total)
@@ -109,7 +109,7 @@ def category(category):
     """    
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
-    per_page = 9
+    per_page = 6
     total = len(recipes)
     pagination_users = get_users_category(category, offset=page*per_page-per_page, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total)
@@ -236,7 +236,7 @@ def profile(username):
         """    
         page, per_page, offset = get_page_args(page_parameter='page',
                                             per_page_parameter='per_page')
-        per_page = 8
+        per_page = 5
         total = len(recipes_complete)
         pagination_users = get_users_profile(offset=page*per_page-per_page, per_page=per_page)
         pagination = Pagination(page=page, per_page=per_page, total=total)
@@ -332,14 +332,14 @@ def view_recipe(recipe_id):
                 pull = {"$pull": {"like_array": {"$in": [str(user["_id"])]}}}
                 mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
                 mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, pull)
-                flash("Like tolto")
+                flash("Like removed")
                 return redirect(url_for("view_recipe", recipe_id=recipe_id))
             else:
                 submit = {"$inc": {"likes": 1}}
                 push = {"$push": {"like_array": str(user["_id"])}}
                 mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
                 mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, push)
-                flash("Like messo")
+                flash("Like added")
                 return redirect(url_for("view_recipe", recipe_id=recipe_id))
 
     recipes = list(mongo.db.recipes.find())

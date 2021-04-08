@@ -32,7 +32,7 @@
 
     <div class="container title-section">
         <div class="row">
-            <nav class="nav-breadcrumb">
+            <nav class="nav-breadcrumb hide-on-small-only">
                 <div class="nav-wrapper">
                     <div class="col s12">
                         <a href="{{ url_for('home') }}" class="breadcrumb">Home</a>
@@ -43,32 +43,39 @@
                 </div>
             </nav>            
             <div class="col s12">
-                <h3 class="recipe-title">{{ recipe.recipe_name }} - {{ recipe.likes }} <i class="far fa-heart"></i>
+                <h3 class="recipe-title">{{ recipe.recipe_name }} - {{ recipe.likes }} <i class="far fa-heart"></i>                    
+                </h3>
+                <hr class="title-underline">
+                <div class="col m8 s12">
+                    <span class="recipe-subtitle">Created by: {{ author.username }}
+                    </span>
+                </div>
+                <div class="col m4 s12">
                     {% if user._id|string == recipe.created_by or user.id|string == "605b52c31a93cdb5624e75ba" %}
                         <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn">Edit</a>
                         <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn red accent-4">Delete</a>
                     {% endif %}
-                </h3>
-                <hr class="title-underline">                
-                <span class="recipe-subtitle">A {{ category.category_name }} created by {{ author.username }}</span>
+                </div>
             </div>
         </div>        
     </div>
 
     <div class="container">
         <div class="row card-panel feature-panel">
-            <div class="col s8 no-padding">
+            <div class="col m8 s12 no-padding">
                 <img class="recipe-img materialboxed" src="{{ recipe.recipe_img }}" alt="recipe_image">
             </div>
-            <div class="col s4">
-                <h4 class="center-align">Features:</h4>
-                <ul>
-                    <li><i class="fas fa-clock feature-icon"></i>Preparation Time: {{ recipe.preparation_time }} min</li>
-                    <li><i class="fas fa-users feature-icon"></i>Serves: {{ recipe.servings }}</li>
-                    <li><i class="fas fa-utensils feature-icon"></i>Difficulty: {{ recipe.difficulty }}</li>
-                </ul>
-                <br>
-                <div class="tag-section">
+            <div class="col m4 s12">
+                <div class="col m12 s6">
+                    <h4 class="center-align features-title">Features:</h4>
+                    <ul>
+                        <li><i class="fas fa-clock feature-icon hide-on-med-and-down"></i><span class="profile-info">Prep Time: </span>{{ recipe.preparation_time }} min</li>
+                        <li><i class="fas fa-users feature-icon hide-on-med-and-down"></i><span class="profile-info">Serves: </span>{{ recipe.servings }}</li>
+                        <li><i class="fas fa-utensils feature-icon hide-on-med-and-down"></i><span class="profile-info">Difficulty: </span>{{ recipe.difficulty }}</li>
+                    </ul>                
+                    <br>
+                </div>
+                <div class="col m12 s6 tag-section">
                     {% if recipe.is_vegan == "on" %}
                         <div class="chip">
                             Vegan                
@@ -85,11 +92,11 @@
                         {% if session.user %}                        
                             {% if user._id|string in recipe.like_array %}
                                 <button  class="waves-light btn btn-like-yes">
-                                    <i class="material-icons left">favorite</i>{{ recipe.likes }} You like it!
+                                    <i class="material-icons left">favorite</i>You like it!
                                 </button>
                             {% else %}
                                 <button  class="waves-light btn btn-like-no">
-                                    <i class="material-icons left">favorite</i>{{ recipe.likes }} Likes!
+                                    <i class="material-icons left">favorite</i>Click to like!
                                 </button>
                             {% endif %}
                         {% else %}
@@ -117,7 +124,7 @@
 
     <div class="container">
         <div class="row recipe-content">
-            <div class="col s4 card-panel ingredient-panel">
+            <div class="col m4 s12 card-panel ingredient-panel">
                 <h3 class="white-text">Ingredient List:</h3>
                 <hr class="title-underline white">
                     <ul class="ingredient-list">
@@ -126,7 +133,7 @@
                     {% endfor %}
                     </ul>
             </div>
-            <div class="col s8" id="recipe-steps">
+            <div class="col m8 s12" id="recipe-steps">
                 <h3>Recipe Steps:</h3>
                 <hr class="title-underline">
                 <ol>
@@ -171,14 +178,20 @@
     </div>
     <!-- /comment section -->
     
-
     <!-- random recipes -->
     <div class="container title-section">
+        <div class="row">            
+            <div class="col s12">
+                <h3 class="recipe-title">You May Like</h3>
+                <hr class="title-underline">                        
+            </div>                    
+        </div>
         <div class="row">
-            <div class="col s6">
-                <h3 class="recipe-title">You may like</h3>
-                <hr class="title-underline">
+            <div class="col m10 s12">
                 <span class="recipe-subtitle">Browse our selection of recipes</span>
+            </div>
+            <div class="col m2 s12">                
+                <a class="btn btn-more" href="{{ url_for('get_recipes') }}">More</a>
             </div>
         </div>        
     </div>
@@ -187,7 +200,7 @@
             <div class="row">
                 {% for recipe in recipes %}
                     {% if loop.index <= 3  %}
-                        <div class="col s12 m7 l4">
+                        <div class="col s12 m6 l6 xl4">
                             <div class="card medium hoverable">
                                 <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
                                     <div class="card-image">
@@ -197,23 +210,37 @@
                                     <div class="card-content center-align">
                                         <h5 class="recipe-name">
                                             {{ recipe.recipe_name }}
-                                        </h5>                                                                        
+                                        </h5>
+                                        <div class="chip">
+                                            <i class="fas fa-heart"> {{ recipe.likes}}</i>                
+                                        </div>
+                                         <div class="chip">
+                                            <i class="fas fa-comment"> {{ recipe.comment_array|length }}</i>                
+                                        </div>                                                                        
                                         <div class="chip">
                                             {{ recipe.difficulty }}                
                                         </div>
                                     </div>                                                               
                                 </a>
-                            </div>                
+                            </div>
                         </div>
                     {% else %}
                         {{ break }}
                     {% endif  %}
                 {% endfor %}
+                <div class="col m6 hide-on-small-only hide-on-x-large-only">
+                    <div class="card medium hoverable center-align category-card">
+                        <a class="modal-trigger" href="{{ url_for('get_recipes') }}">
+                            <div class="overlay-category"></div>
+                            <h3 class="white-text category-text">Check more recipes</h3>
+                        </a>
+                    </div>                
+                </div>
             </div>
         </div>
     {% else %}
         <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
     {% endif %}
-    <!-- /random recipes -->
+    <!-- /random recipes -->    
 
 {% endblock %}

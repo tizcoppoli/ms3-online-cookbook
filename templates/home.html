@@ -5,7 +5,7 @@
 
     <div class="container-fluid callout-wrapper">
         <div class="row callout">
-            <div class="col l8 m12">
+            <div class="col l8 m12 s12">
                 <div class="carousel carousel-slider center">
                     <div class="carousel-fixed-item center">
                         <a class="btn waves-effect" id="carousel-button">Check the Recipe</a>
@@ -25,7 +25,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col l4 m12">
+            <div class="col l4 m12 s12">
                 <a href="{{ url_for('get_recipes') }}">
                     <div class="col s12 callout-up hoverable">
                         <div class="overlay"></div>
@@ -45,7 +45,7 @@
     <!-- register section -->
     <div class="container-fluid register-section">
         <div class="row">
-            <div class="col m6 s12 book-cover-section">
+            <div class="col m6 s12 book-cover-section hide-on-small-only">
                 <img class="ramen-home-image circle" src="/static/images/callout-1.png" alt="book">                                
             </div>
             <div class="col m6 s12 book-description-section">                
@@ -71,10 +71,10 @@
                     </div>                    
                 </div>
                 <div class="row">
-                    <div class="col s10">
+                    <div class="col m10 s12">
                         <span class="recipe-subtitle">{{ category.category_description}}</span>
                     </div>
-                    <div class="col s2">                        
+                    <div class="col m2 s12">                        
                         <a class="btn btn-more" href="{{ url_for('category', category=category._id) }}">More</a>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                         {% for recipe in recipes %}
                             {% if cnt.cnt_index < 3 %}
                                 {% if recipe.category == category._id|string  %}
-                                    <div class="col s12 m6 l4">
+                                    <div class="col s12 m6 l6 xl4">
                                         <div class="card medium hoverable">
                                             <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
                                                 <div class="card-image">
@@ -114,7 +114,7 @@
                                 {% endif %}
                             {% endif  %}
                         {% endfor %}
-                        <div class="col m6 hide-on-small-only hide-on-large-only">
+                        <div class="col m6 hide-on-small-only hide-on-x-large-only">
                             <div class="card medium hoverable center-align category-card">
                                 <a class="modal-trigger" href="{{ url_for('category', category=category._id) }}">
                                     <div class="overlay-category"></div>
@@ -134,10 +134,10 @@
     <!-- book -->
     <div class="container-fluid book-section">
         <div class="row">
-            <div class="col s6 book-cover-section">
+            <div class="col m6 book-cover-section hide-on-small-only">
                 <img class="book-image" src="/static/images/drink.png" alt="book">                                
             </div>
-            <div class="col s6 book-description-section white-text">                
+            <div class="col m6 s12 book-description-section white-text">                
                 
                     <h4 class="book-heading white-text">Love Our Recipes? <br>Checkout our Book!</h4>
                     <p>
@@ -161,10 +161,10 @@
                     </div>                    
                 </div>
                 <div class="row">
-                    <div class="col s10">
+                    <div class="col m10 s12">
                         <span class="recipe-subtitle">{{ category.category_description}}</span>
                     </div>
-                    <div class="col s2">                        
+                    <div class="col m2 s12">                        
                         <a class="btn btn-more" href="{{ url_for('category', category=category._id) }}">More</a>
                     </div>
                 </div>
@@ -176,7 +176,7 @@
                         {% for recipe in recipes %}
                             {% if cnt.cnt_index < 3 %}
                                 {% if recipe.category == category._id|string  %}
-                                    <div class="col s12 m6 l4">
+                                    <div class="col s12 m6 l6 xl4">
                                         <div class="card medium hoverable">
                                             <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
                                                 <div class="card-image">
@@ -204,7 +204,7 @@
                                 {% endif %}
                             {% endif  %}
                         {% endfor %}
-                        <div class="col m6 hide-on-small-only hide-on-large-only">
+                        <div class="col m6 hide-on-small-only hide-on-x-large-only">
                             <div class="card medium hoverable center-align category-card">
                                 <a class="modal-trigger" href="{{ url_for('category', category=category._id) }}">
                                     <div class="overlay-category"></div>
@@ -254,10 +254,10 @@
             </div>                    
         </div>
         <div class="row">
-            <div class="col s10">
+            <div class="col m10 s12">
                 <span class="recipe-subtitle">Browse our selection of recipes</span>
             </div>
-            <div class="col s2">                
+            <div class="col m2 s12">                
                 <a class="btn btn-more" href="{{ url_for('get_recipes') }}">More</a>
             </div>
         </div>        
@@ -266,8 +266,8 @@
         <div class="container">
             <div class="row">
                 {% for recipe in recipes %}
-                    {% if loop.index <= 6  %}
-                        <div class="col s12 m6 l4">
+                    {% if loop.index <= 3  %}
+                        <div class="col s12 m6 l6 xl4">
                             <div class="card medium hoverable">
                                 <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
                                     <div class="card-image">
@@ -295,6 +295,14 @@
                         {{ break }}
                     {% endif  %}
                 {% endfor %}
+                <div class="col m6 hide-on-small-only hide-on-x-large-only">
+                    <div class="card medium hoverable center-align category-card">
+                        <a class="modal-trigger" href="{{ url_for('get_recipes') }}">
+                            <div class="overlay-category"></div>
+                            <h3 class="white-text category-text">Check more recipes</h3>
+                        </a>
+                    </div>                
+                </div>
             </div>
         </div>
     {% else %}

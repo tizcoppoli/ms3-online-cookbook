@@ -574,4 +574,180 @@ footer li:hover {
     font-weight: 400;
 }
 
+.recipe-name {
+    margin-top: 0;
+}
+
 /* fine da rinominare */
+
+@media only screen and (min-width: 1200px) {
+
+    .hide-on-x-large-only {
+        display: none;
+    }
+
+}
+
+@media only screen and (max-width: 1200px) {
+
+    #welcome-user-text {
+        font-size: 2rem;
+    }
+
+    .profile-image-box .user-image {
+        margin: 10px;
+        margin-top: 20px;
+    }
+
+    
+
+}
+
+/* large screen */
+
+@media only screen and (max-width: 992px) {
+
+    .brand-logo {
+        margin-left: 70px;
+    }
+
+    .main-navbar {
+        width: 85%;        
+    }
+
+    .title-section {
+        margin-top: 20px;
+    }
+
+    #recipe-steps {
+        padding-left: 50px;
+    }
+
+    .recipe-content {
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        font-size: 0.8rem;
+    }
+
+    .breadcrumb:before {
+        margin: 0;
+    }
+
+    .user-image {
+        width: 150px;
+        height: 150px;        
+        margin: 25px;
+    }
+
+    #welcome-user-text {
+        margin-top: 10px;
+    }
+
+}
+
+/* Small Screen */
+
+@media only screen and (max-width: 600px) {
+
+    .main-navbar {
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .nav-wrapper {
+        margin: 0;
+    }
+
+    .brand-logo {
+        float: left;
+        margin-left: 0;
+    }
+
+    .text-logo {
+        padding-top: 0;
+    }
+
+    .carousel-text-heading {
+        top: 100px;
+    }
+
+    .callout {
+        width: 100%;
+    }
+
+    .book-description-section {
+        margin-bottom: 50px;
+    }
+
+    .recipe-subtitle {
+        font-size: 1rem;
+    }
+
+    .btn-more {
+        float: none;
+        margin-top: 15px;
+    }
+
+    .register-section {
+        padding-top: 0;
+    }
+
+    .book-heading {
+        margin-top: 20px;
+    }
+
+    .book-section {
+        height: 250px;
+    }
+
+    .recipe-title {
+        font-size: 2.5rem;
+    }
+
+    .recipe-content {
+        display: block;
+    }
+
+    .recipe-img {
+        height: 200px;
+    }
+
+    .features-title {
+        margin: 5px;
+    }
+
+    .like-box {
+        padding: 0;
+    }
+
+    .tag-section {
+        margin-top: 5px;
+        padding: 0;
+    }
+
+    #recipe-steps {
+        padding-left: 0px;
+    }
+
+    #query.search-field {
+        margin-left: 0;
+        width: 150px;
+    }
+
+    #search-recipes label {
+        margin: 0;
+    }
+
+    .btn-profile {
+        margin-bottom: 15px;
+    }
+
+    .add-recipe-btn {
+        margin-top: 15px;
+    }
+
+    
+    
+}
