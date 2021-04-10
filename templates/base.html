@@ -52,8 +52,7 @@
                     <li><a href="{{ url_for('home') }}">Home</a></li>
                     <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
                     {% if session.user %}
-                        <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                        <!-- <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li> -->
+                        <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>                        
                         {% if session.user|lower == "admin"|lower %}
                             <li><a href="{{ url_for('get_categories') }}">Manage</a></li>
                         {% endif %}
@@ -61,19 +60,7 @@
                     {% else %}
                         <li><a href="{{ url_for('login') }}">Log In</a></li>
                         <li><a href="{{ url_for('register') }}">Register</a></li>
-                    {% endif %}                   
-                    <!-- {% if session.user %}                        
-                        {% if session.user|lower == "admin"|lower %}
-                            <li class="user-login-icon"><a class="dropdown-trigger" href="#!" data-target="dropdown-admin">                                
-                                <i class="material-icons right" id="user-icon">account_circle</i></a></li>
-                        {% else %}
-                            <li class="user-login-icon"><a class="dropdown-trigger" href="#!" data-target="dropdown-user">
-                                <i class="material-icons right" id="user-icon">account_circle</i></a></li>
-                        {% endif %}                        
-                    {% else %}
-                        <li><a href="{{ url_for('login') }}">Sign In</a></li>
-                        <li><a href="{{ url_for('register') }}">Sign Up</a></li>
-                    {% endif %} -->                    
+                    {% endif %}
 				</ul>
 			</div>
         </nav>
@@ -84,8 +71,7 @@
             <li><a href="{{ url_for('home') }}">Home</a></li>
             <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>            
             {% if session.user %}
-                <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                <!-- <li><a href="{{ url_for('add_recipe') }}">New Recipe</a></li> -->
+                <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>                
                 {% if session.user|lower == "admin"|lower %}
                     <li><a href="{{ url_for('get_categories') }}">Manage Categories</a></li>
                 {% endif %}

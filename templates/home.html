@@ -116,7 +116,7 @@
                         {% endfor %}
                         <div class="col m6 hide-on-small-only hide-on-x-large-only">
                             <div class="card medium hoverable center-align category-card">
-                                <a class="modal-trigger" href="{{ url_for('category', category=category._id) }}">
+                                <a href="{{ url_for('category', category=category._id) }}">
                                     <div class="overlay-category"></div>
                                     <h3 class="white-text category-text">Check more {{ category.category_name }} recipes</h3>
                                 </a>
@@ -206,7 +206,7 @@
                         {% endfor %}
                         <div class="col m6 hide-on-small-only hide-on-x-large-only">
                             <div class="card medium hoverable center-align category-card">
-                                <a class="modal-trigger" href="{{ url_for('category', category=category._id) }}">
+                                <a href="{{ url_for('category', category=category._id) }}">
                                     <div class="overlay-category"></div>
                                     <h3 class="white-text category-text">Check more {{ category.category_name }} recipes</h3>
                                 </a>
@@ -297,7 +297,7 @@
                 {% endfor %}
                 <div class="col m6 hide-on-small-only hide-on-x-large-only">
                     <div class="card medium hoverable center-align category-card">
-                        <a class="modal-trigger" href="{{ url_for('get_recipes') }}">
+                        <a href="{{ url_for('get_recipes') }}">
                             <div class="overlay-category"></div>
                             <h3 class="white-text category-text">Check more recipes</h3>
                         </a>

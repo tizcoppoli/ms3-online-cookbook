@@ -21,7 +21,7 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-def get_users(offset=0, per_page=10):    
+def get_users(offset=0, per_page=10):
     recipes = list(mongo.db.recipes.find())
     return recipes[offset: offset + per_page]
 
@@ -75,28 +75,15 @@ def get_recipes():
     """
     end pagination
     """
-    
     return render_template("recipes.html", categories=categories, recipes=pagination_users, page=page, per_page=per_page, pagination=pagination)    
 
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
-    query = request.form.get("query")   
+    query = request.form.get("query")
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
     categories = list(mongo.db.categories.find().sort("category_name", 1))
     flash("You searched: " + query)
-    """
-    pagination test
-    """    
-    """ page, per_page, offset = get_page_args(page_parameter='page',
-                                           per_page_parameter='per_page')
-    per_page = 9
-    total = len(recipes)
-    pagination_users = get_users_search(query, offset=page*per_page-per_page, per_page=per_page)
-    pagination = Pagination(page=page, per_page=per_page, total=total) """
-    """
-    end pagination
-    """
     return render_template("search.html", recipes=recipes)
 
 
@@ -135,9 +122,7 @@ def register():
             if not existing_contact:
                 contact = {"email_address": request.form.get("email").lower()}
                 mongo.db.contacts.insert_one(contact)
-        
-        
-        
+
         register = {
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password")),
@@ -201,7 +186,7 @@ def profile(username):
                 mongo.db.users.update(user, submit)
                 flash("User Successfully Updated")
                 return redirect(url_for("profile", username=username))
-                
+
             else:
                 recipe_img = request.form.get("recipe_img") if request.form.get("recipe_img") else "https://i.imgur.com/3XizFU1.png"
                 is_spicy = "on" if request.form.get("is_spicy") else "off"
@@ -233,9 +218,8 @@ def profile(username):
         is_subscribed = mongo.db.contacts.find_one({"email_address": user["email"]})
         """
         pagination test
-        """    
-        page, per_page, offset = get_page_args(page_parameter='page',
-                                            per_page_parameter='per_page')
+        """
+        page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page')
         per_page = 5
         total = len(recipes_complete)
         pagination_users = get_users_profile(offset=page*per_page-per_page, per_page=per_page)
@@ -243,7 +227,7 @@ def profile(username):
         """
         end pagination
         """
-        return render_template("profile.html", user=user, username=username, categories=categories, recipes=pagination_users, recipes_complete=recipes_complete, page=page, per_page=per_page, pagination=pagination, is_subscribed=is_subscribed)        
+        return render_template("profile.html", user=user, username=username, categories=categories, recipes=pagination_users, recipes_complete=recipes_complete, page=page, per_page=per_page, pagination=pagination, is_subscribed=is_subscribed)
 
     return redirect(url_for("login"))
 
@@ -255,9 +239,10 @@ def logout():
     session.pop("user")
     return redirect(url_for("login"))
 
+
 """
 this method is deprecated
-"""
+
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     if request.method == "POST":
@@ -284,7 +269,7 @@ def add_recipe():
 
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("add_recipe.html", categories=categories)
-
+"""
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
@@ -298,14 +283,14 @@ def edit_recipe(recipe_id):
             "category": request.form.get("category_name"),
             "recipe_name": request.form.get("recipe_name"),
             "is_spicy": is_spicy,
-            "is_vegan": is_vegan,            
+            "is_vegan": is_vegan,
             "ingredient_list": ingredient_list,
             "recipe_steps": recipe_steps,
             "recipe_img": recipe_img,
             "preparation_time": request.form.get("preparation_time"),
             "servings": request.form.get("servings"),
             "difficulty": request.form.get("difficulty")
-            }}        
+            }}
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
         flash("Recipe Successfully Updated")
         return redirect(url_for("view_recipe", recipe_id=recipe_id))
@@ -375,6 +360,8 @@ def get_categories():
     return render_template("categories.html", categories=categories)
 
 
+"""
+this method is deprecated
 @app.route("/add_category", methods=["GET", "POST"])
 def add_category():
     if request.method == "POST":
@@ -386,6 +373,7 @@ def add_category():
         return redirect(url_for("get_categories"))
 
     return render_template("add_category.html")
+"""
 
 
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
