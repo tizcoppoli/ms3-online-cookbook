@@ -52,15 +52,13 @@ The site's primary goal is to help the visitors making great ramen bowls and ins
   Everything should be easy to understand. There is a simple navigation bar. The user should be able to register, sign in, see a recipe, add a like and/or a comment, edit the profile and add new recipes.
 
 #### 3. Structure
-  
-
-  There is a title screen with a callout image to play the game. There is no need for a navbar since the only purpose is to play the game. After the title screen, there are instructions to teach the user how to play. Then the game starts with level 1 and moves further to level six. If the user makes a mistake or win each level, the ending screen appears. In the ending screen, there is the reward, the score, and the mail form to share the result. 
+  There is a home page which feature a great number or recipes, divided by categories, a callout to register, a subribe reminder and a link to purchase the recipe book. There is the page "Recipes" with all recipes and each recipe has an individual page with its details, picture, ingredients, preparation steps, and comments. The other main page is the user page, where it is possible to edit the user details, upload a new recipe and manage the other recipes.
 
 #### 4. Skeleton
-  The game wrapper is the main div containing the title screen and the game screen. The game screen is composed of a progress box, an information box, a game box, and a button box. All the elements are generated in these boxes at runtime. Check the wireframe for more details.
+  There is a base template that is used for the navbar and the footer. Other templates are loaded into the main section of the base template for the home, recipe, user, login, register, edit pages. Each page have a different layout with common recurring elements. Check the wireframes for more details.
 
 #### 5. Surface
-  The game is in flat design to look modern, easy, and fresh. The theme is travel, so the title screen feature a camera and each element to memorize in the game are pictures of world landmarks. Check the design for more details.
+  The website has a simple design with a few elemnts. The predominant color is orange and the font is handwritten. Check the design section for more details.
 
 ### Design
 
@@ -80,11 +78,11 @@ The site's primary goal is to help the visitors making great ramen bowls and ins
 
 #### Typography
 
-- "Comfortaa" is the main font used throughout the whole website, with Sans Serif as the fallback font in case for any reason the font isn't being imported into the site correctly.
-- "Ribeye" is a clean font used for headings.
+- "Montserrat" is the main font used throughout the whole website, with Sans Serif as the fallback font in case for any reason the font isn't being imported into the site correctly.
+- "Pattaya" is a clean font used for headings.
 
 #### Imagery
-- Imagery is important. The game is in flat design. The images are without borders, and the image under the title is designed to be striking and catch the user's attention. It also has a modern, energetic aesthetic.
+- Imagery is important. The images are all high quality pictures, designed to be striking and catch the user's attention. It also has a modern, energetic aesthetic.
 
 ### Wireframes
 
@@ -95,13 +93,9 @@ The site's primary goal is to help the visitors making great ramen bowls and ins
 ## Features
 
 - Responsive on all device sizes
-- Interactive audio controls
-- Six levels to play
+- Interactive form controls
 - Button hover animations
-- Modal used to choose game options
-- Progress bar
-- Score system
-- Three possible rewards
+- Modal used to add a new recipe and category
 - Send results via mail
 
 ### Features Left to Implement
