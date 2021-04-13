@@ -30,14 +30,31 @@
         </div>
     </div>
 
-    
-
+    <!-- new -->
     <div class="container title-section">
+        <div class="row">            
+            <div class="col s12">
+                <h3 class="recipe-title">Your Recipes - {{ recipes_complete|length }}</h3>
+                <hr class="title-underline">                        
+            </div>                    
+        </div>
+        <div class="row">
+            <div class="col m8 s12">
+                <span class="recipe-subtitle">Upload your original recipes</span>
+            </div>
+            <div class="col m4 s12">                        
+                <a href="#modal1" class="btn modal-trigger btn-more">Add recipe</a>
+            </div>
+        </div>
+    </div>
+    <!-- /new -->
+
+    <!-- <div class="container title-section">
         <div class="row">
             <div class="col s12">
                 <h3 class="recipe-title">Your Recipes - {{ recipes_complete|length }}</h3>
                 <hr class="title-underline">
-                <!-- <span class="recipe-subtitle">Upload your personal recipes</span> -->
+                
                 <div class="col s12">
                     <span class="recipe-subtitle">Upload your personal recipes
                     </span>
@@ -47,16 +64,19 @@
                 </div>
             </div>
         </div>        
-    </div>    
+    </div> -->
+    
+    
     <div class="container">
         <div class="row">
-            <div class="col s12 m6 l6 xl4">
+
+            <!-- <div class="col s12 m6 l6 xl4">
                 <div class="card large hoverable center-align add-recipe-card hide-on-small-only">
                     <a class="modal-trigger" href="#modal1">                                
                         <i class="fas fa-plus add-recipe-icon"></i>                                                               
                     </a>
                 </div>                
-            </div>
+            </div> -->
             
                 {% for recipe in recipes %}
                     <div class="col s12 m6 l6 xl4">
@@ -183,23 +203,33 @@
                         <label for="category_name">Recipe Category*</label>
                     </div>
                 </div>                
-                <!-- recipe ingredients -->            
+                <!-- first ingredient -->            
+                <div class="row" id="ingredients_wrapper">
+                    <div class="input-field col s12">
+                        <input type="text" id="ingredient_list" name="ingredient_list[]" minlength="5"
+                                maxlength="2000" class="validate" 
+                                required>
+                        <label for="ingredient_list">First Ingredient*</label>
+                    </div>
+                </div>
+                <!-- add ingredient button -->            
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea id="ingredient_list" name="ingredient_list" minlength="5"
-                                maxlength="2000" class="materialize-textarea validate" 
-                                required></textarea>
-                        <label for="ingredient_list">Ingredients*</label>
-                        <small>Insert each ingredient in a new line. <br>Don't leave blank lines.</small>                        
+                        <button id="add_recipe" type="button" class="btn">Add new ingredient</button>
                     </div>                    
                 </div>
                 <!-- recipe steps -->            
+                <div class="row" id="steps_wrapper">
+                    <div class="input-field col s12">                        
+                        <input type="text" id="recipe_steps" name="recipe_steps[]" minlength="5"
+                                maxlength="4000" class="validate" required>
+                        <label for="recipe_steps">First Step*</label>                        
+                    </div>                    
+                </div>
+                <!-- recipe step button -->            
                 <div class="row">
                     <div class="input-field col s12">                        
-                        <textarea id="recipe_steps" name="recipe_steps" minlength="5"
-                                maxlength="4000" class="materialize-textarea validate" required></textarea>
-                        <label for="recipe_steps">Recipe Steps*</label>
-                        <small>Insert each step in a new line. <br>Don't leave blank lines.</small>
+                        <button id="add_recipe_step" type="button" class="btn">Add new step</button>                                               
                     </div>                    
                 </div>
                 <!-- recipe image -->

@@ -38,24 +38,72 @@
                         </div>
                     </div>                    
                     <!-- recipe ingredients -->            
+                    <div class="row" id="ingredients_wrapper">                        
+                        <div class="input-field col s12">                            
+                            <input type="text" id="ingredient_list[]" name="ingredient_list[]" minlength="5"
+                                    maxlength="2000" class="validate" 
+                                    required value="{{ recipe.ingredient_list[0] }}">
+                            <label for="ingredient_list[]">First Ingredient*</label>
+                        </div>
+                        {% for ingredient in recipe.ingredient_list %}
+                            {% if loop.index > 1 %}
+                                <div class="input-field col s12">
+                                    <div class="col s10 no-padding">
+                                        <input type="text" name="ingredient_list[]" minlength="5"
+                                                maxlength="2000" class="validate" 
+                                                required placeholder="New Ingredient" value="{{ ingredient }}">            
+                                    </div>
+                                    <div class="col s2">
+                                        <button type="button" class="delete_ingredient_button btn"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <!-- add ingredient button -->
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="ingredient_list" name="ingredient_list" minlength="5"
-                                    maxlength="2000" class="materialize-textarea validate" 
-                                    required>{% for ingredient in recipe.ingredient_list %}{% if loop.index != loop.length %}{{- ingredient -}}&#13;&#10;{% else %}{{- ingredient -}}{% endif %}{% endfor %}</textarea>
-                            <label for="ingredient_list">Ingredients*</label>
-                            <small>Insert each ingredient in a new line. <br>Don't leave blank lines.</small>                        
-                        </div>                    
+                            <button id="add_recipe" type="button" class="btn">Add new ingredient</button>
+                        </div>
                     </div>
                     <!-- recipe steps -->            
+                    <div class="row" id="steps_wrapper">                        
+                        <div class="input-field col s12">                            
+                            <input type="text" id="recipe_steps[]" name="recipe_steps[]" minlength="5"
+                                    maxlength="2000" class="validate" 
+                                    required value="{{ recipe.recipe_steps[0] }}">
+                            <label for="recipe_steps[]">First Step*</label>
+                        </div>
+                        {% for step in recipe.recipe_steps %}
+                            {% if loop.index > 1 %}
+                                <div class="input-field col s12">
+                                    <div class="col s10 no-padding">
+                                        <input type="text" name="recipe_steps[]" minlength="5"
+                                                maxlength="2000" class="validate" 
+                                                required placeholder="New Step" value="{{ step }}">            
+                                    </div>
+                                    <div class="col s2">
+                                        <button type="button" class="delete_step_button btn"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <!-- add step button -->
                     <div class="row">
+                        <div class="input-field col s12">
+                            <button id="add_recipe_step" type="button" class="btn">Add new step</button>
+                        </div>
+                    </div>
+                    <!-- recipe steps -->            
+                    <!-- <div class="row">
                         <div class="input-field col s12">                        
                             <textarea id="recipe_steps" name="recipe_steps" minlength="5"
                                     maxlength="4000" class="materialize-textarea validate" required>{% for step in recipe.recipe_steps %}{% if loop.index != loop.length %}{{- step -}}&#13;&#10;{% else %}{{- step -}}{% endif %}{% endfor %}</textarea>
                             <label for="recipe_steps">Recipe Steps*</label>
                             <small>Insert each step in a new line. <br>Don't leave blank lines.</small>
                         </div>                    
-                    </div>
+                    </div> -->
                     <!-- recipe image -->
                     <div class="row">
                         <div class="input-field col s12">

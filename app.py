@@ -23,12 +23,14 @@ mongo = PyMongo(app)
 
 def get_users(offset=0, per_page=10):
     recipes = list(mongo.db.recipes.find())
+    recipes.reverse()
     return recipes[offset: offset + per_page]
 
 
 def get_users_profile(offset=0, per_page=10):
     user = mongo.db.users.find_one({"username": session["user"]})    
     recipes = list(mongo.db.recipes.find({"created_by": str(user["_id"])}))
+    recipes.reverse()
     return recipes[offset: offset + per_page]
 
 
@@ -108,7 +110,7 @@ def category(category):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    if request.method == "POST":        
+    if request.method == "POST":
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
 
@@ -134,7 +136,7 @@ def register():
         session["user"] = request.form.get("username").lower()     
         flash("Registration Successful!")
         return redirect(url_for("profile", username=session["user"]))
-
+    
     return render_template("register.html")
 
 
@@ -191,8 +193,8 @@ def profile(username):
                 recipe_img = request.form.get("recipe_img") if request.form.get("recipe_img") else "https://i.imgur.com/3XizFU1.png"
                 is_spicy = "on" if request.form.get("is_spicy") else "off"
                 is_vegan = "on" if request.form.get("is_vegan") else "off"
-                ingredient_list = request.form.get("ingredient_list").splitlines()
-                recipe_steps = request.form.get("recipe_steps").splitlines()
+                ingredient_list = request.form.getlist("ingredient_list[]")
+                recipe_steps = request.form.getlist("recipe_steps[]")
                 recipe = {
                     "category": request.form.get("category_name"),
                     "recipe_name": request.form.get("recipe_name"),
@@ -220,7 +222,7 @@ def profile(username):
         pagination test
         """
         page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page')
-        per_page = 5
+        per_page = 6
         total = len(recipes_complete)
         pagination_users = get_users_profile(offset=page*per_page-per_page, per_page=per_page)
         pagination = Pagination(page=page, per_page=per_page, total=total)
@@ -276,8 +278,8 @@ def edit_recipe(recipe_id):
     if request.method == "POST":
         is_spicy = "on" if request.form.get("is_spicy") else "off"
         is_vegan = "on" if request.form.get("is_vegan") else "off"
-        ingredient_list = request.form.get("ingredient_list").splitlines()
-        recipe_steps = request.form.get("recipe_steps").splitlines()
+        ingredient_list = request.form.getlist("ingredient_list[]")
+        recipe_steps = request.form.getlist("recipe_steps[]")
         recipe_img = request.form.get("recipe_img") if request.form.get("recipe_img") else "https://i.imgur.com/3XizFU1.png"
         submit = {"$set": {
             "category": request.form.get("category_name"),
@@ -342,7 +344,7 @@ def view_recipe(recipe_id):
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     flash("Recipe Successfully Deleted")
-    return redirect(url_for("get_recipes"))
+    return redirect(url_for("profile", username=session["user"]))
 
 
 @app.route("/get_categories", methods=["GET", "POST"])

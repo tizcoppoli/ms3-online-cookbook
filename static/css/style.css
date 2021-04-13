@@ -249,8 +249,7 @@ nav .brand-logo {
 
 .book-image {
     float: right;
-    height: 200px;
-    margin: 40px 20px;
+    height: 400px;    
 }
 
 .book-description-section {
@@ -743,6 +742,10 @@ footer li:hover {
 
     .add-recipe-btn {
         margin-top: 15px;
+    }
+
+    .modal .modal-content, .modal-title {
+        width: 100%;
     }
 }
 
