@@ -84,9 +84,17 @@ The site's primary goal is to help the visitors making great ramen bowls and ins
 
 ### Wireframes
 
-- Desktop Wireframe - [View](assets/doc/desktop.pdf)
-- Tablet Wireframe - [View](assets/doc/tablet.pdf)
-- Mobile Wireframe - [View](assets/doc/mobile.pdf)
+- Home Page - Desktop Wireframe - [View](static/doc/home_desktop.png)
+- Home Page - Tablet Wireframe - [View](static/doc/home_tablet.png)
+- Home Page - Mobile Wireframe - [View](static/doc/home_mobile.png)
+
+- Recipe Page - Desktop Wireframe - [View](static/doc/recipe_desktop.png)
+- Recipe Page - Tablet Wireframe - [View](static/doc/recipe_tablet.png)
+- Recipe Page - Mobile Wireframe - [View](static/doc/recipe_mobile.png)
+
+- Profile Page - Desktop Wireframe - [View](static/doc/profile_desktop.png)
+- Profile Page - Tablet Wireframe - [View](static/doc/profile_tablet.png)
+- Profile Page - Mobile Wireframe - [View](static/doc/profile_mobile.png)
 
 ## Features
 
