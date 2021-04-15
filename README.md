@@ -184,33 +184,31 @@ The deployed site was tested with Lighthouse for performance evaluation and with
   - As a Contributor, I want to add likes and comments to the recipes.
     1. A logged user can add/remove a like to a recipe with the same button in the recipe page.
     2. A logged user can leave a comment on a recipe.
-    3. If the score is less than 30%, the user will get a bronze cup, more than 30% is a silver cup, and 100% is a gold cup.
 
   - As a Contributor, I want to upload my own recipes and share them with the community.
-    1. At the end of the game, the user can insert an email address in a form to automatically send an email stating his result.
-    2. The user can insert the proper email address to save his result or another to share with other people.
+    1. A logged user can upload a new recipe on the website and other users can like or comment it.
 
   - As a Contributor, I want to edit my recipes or delete them.
-    1. At the bottom of the screen, there are the community links to visit the social pages easily.
+    1. In the profile page there is the list of personal recipes, and the user can edit or delete them.
   
   - As a Contributor, I want to edit my preferences on my profile page, like email, user image.
-    1. The user can test his memory periodically and see if there are improvements over time.
+    1. In the profile page it is possible to edit the preferences.
   
   - As a Contributor, I want to find community links.
-    1. The user can test his memory periodically and see if there are improvements over time.
+    1. In the footer the user can find the the social links.
 
 - #### Customers Goals
 
   - As a Customer, I want to find the purchase link for the recipe book.
-    1. The user can test his memory periodically and see if there are improvements over time.
+    1. In the home page there is a section dedicated to the recipe book, and the purchase link.
 
   - As a Customer, I want to find the email address to contact the staff.
-    1. The game provides a variety of different pictures of real-world landmark.
-    2. The user can be inspired by the different places and choose one of those for the next trip.
+    1. In the footer the user can find the contact email address
+    2. The user can contact the staff about improvements on the website or the book.
 
   - As a Customer, I want to subscribe to the newsletter to see the offers and new products.
-    1. The user can share the website with friends to challenge from a distance and see who is better.
-    2. The user can play with friends also with just one computer in the same place. There's no need to be in different places.
+    1. The user can subscribe to the newsletter in the dedicated home page section.
+    2. The is no need of registration to subscribe to the newsletter.
 
 ### Further Testing
 
