@@ -12,7 +12,8 @@
                     </div>
                     {% for recipe in recipes_admin %}
                         {% if loop.index < 5 %}
-                            <div class="carousel-item" href="{{ url_for('view_recipe', recipe_id=recipe._id) }}" style="background-image: url({{ recipe.recipe_img }});">
+                            <div class="carousel-item" style="background-image: url({{ recipe.recipe_img }});">
+                                <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"></a>
                                 <div class="callout-overlay"></div>
                                 <h3 class="carousel-text-heading white-text">{{ recipe.recipe_name }}</h3>                                
                                 {% for category in categories %}

@@ -35,7 +35,7 @@ function autoplay() {
 }
 
 function changeLinkToButton() {
-    href = $(".carousel-item.active").attr("href");
+    href = $(".carousel-item.active a").attr("href");
     $("#carousel-button").attr("href", href)
 }
 
