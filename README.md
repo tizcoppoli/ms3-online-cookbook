@@ -144,19 +144,14 @@ The site's primary goal is to help the visitors making great ramen bowls and ins
 * [Github](https://github.com/)
 * [Gitpod](https://gitpod.io/)
 
-**Testing**
-* [JSHint](https://jshint.com/) (JS file passed validator)
-* [PEP8 online](http://pep8online.com/)
-* [W3C HTML Validator](https://validator.w3.org/) (all pages passed validator)
-* [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) (css file passed validator)
-
 ## Testing
 
 The W3C Markup Validator and W3C CSS Validator Services were used to validate every page of the project to ensure there were no syntax errors in the project.
 
-- [W3C Markup Validator](https://validator.w3.org/) - [Results](assets/doc/html-valid.png)
+- [W3C HTML Validator](https://validator.w3.org/) - [Results](static/doc/html_valid.png)
 - [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](static/doc/css_valid.png)
-- [Esprima JS Validator](https://esprima.org) - [Results](assets/doc/js-valid.png)
+- [Esprima JS Validator](https://esprima.org) - [Results](static/doc/js_valid.png)
+- [PEP8 online](http://pep8online.com/) - [Results](static/doc/python_valid.png)
 
 The deployed site was tested with Lighthouse for performance evaluation and with Responsinator for responsiveness.
 
