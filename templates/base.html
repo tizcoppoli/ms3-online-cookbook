@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-    {% block styles %}
-    {% endblock %}
+    <!-- {% block styles %}
+    {% endblock %} -->
     <title>Just Ramen</title>
 </head>
 <body>
@@ -85,7 +85,7 @@
 		</ul>
     </header>
 
-    <section>
+    <div>
         <!-- flash messages -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -96,7 +96,7 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-    </section>
+    </div>
 
     <main>
         {% block content %}

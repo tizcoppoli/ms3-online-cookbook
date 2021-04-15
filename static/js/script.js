@@ -36,6 +36,7 @@ function autoplay() {
 
 function changeLinkToButton() {
     href = $(".carousel-item.active a").attr("href");
+    console.log(href);
     $("#carousel-button").attr("href", href)
 }
 
