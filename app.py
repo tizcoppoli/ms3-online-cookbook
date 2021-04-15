@@ -242,37 +242,6 @@ def logout():
     return redirect(url_for("login"))
 
 
-"""
-this method is deprecated
-
-@app.route("/add_recipe", methods=["GET", "POST"])
-def add_recipe():
-    if request.method == "POST":
-        is_spicy = "on" if request.form.get("is_spicy") else "off"
-        is_vegan = "on" if request.form.get("is_vegan") else "off"
-        ingredient_list = request.form.get("ingredient_list").splitlines()
-        recipe_steps = request.form.get("recipe_steps").splitlines()
-        recipe = {
-            "category": request.form.get("category_name"),
-            "recipe_name": request.form.get("recipe_name"),
-            "is_spicy": is_spicy,
-            "is_vegan": is_vegan,
-            "created_by": session["user"],
-            "ingredient_list": ingredient_list,
-            "recipe_steps": recipe_steps,
-            "recipe_img": request.form.get("recipe_img"),
-            "preparation_time": request.form.get("preparation_time"),
-            "servings": request.form.get("servings"),
-            "difficulty": request.form.get("difficulty")
-        }
-        mongo.db.recipes.insert_one(recipe)
-        flash("Recipe Successfully Added")
-        return redirect(url_for("get_recipes"))
-
-    categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("add_recipe.html", categories=categories)
-"""
-
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
     if request.method == "POST":
@@ -335,7 +304,7 @@ def view_recipe(recipe_id):
     category = mongo.db.categories.find_one({"_id": ObjectId(recipe["category"])})
     author = mongo.db.users.find_one({"_id": ObjectId(recipe["created_by"])})
     categories = mongo.db.categories.find().sort("category_name", 1)
-    
+
     user = mongo.db.users.find_one({"username": session["user"]}) if session else "" 
     return render_template("view_recipe.html", recipe=recipe, categories=categories, recipes=recipes, category=category, user=user, author=author)
 
@@ -360,22 +329,6 @@ def get_categories():
 
     categories = list(mongo.db.categories.find().sort("category_name", 1))
     return render_template("categories.html", categories=categories)
-
-
-"""
-this method is deprecated
-@app.route("/add_category", methods=["GET", "POST"])
-def add_category():
-    if request.method == "POST":
-        category = {
-            "category_name": request.form.get("category_name")
-        }
-        mongo.db.categories.insert_one(category)
-        flash("New Category Added")
-        return redirect(url_for("get_categories"))
-
-    return render_template("add_category.html")
-"""
 
 
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])

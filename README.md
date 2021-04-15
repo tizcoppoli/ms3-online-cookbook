@@ -58,7 +58,7 @@ The site's primary goal is to help the visitors making great ramen bowls and ins
   There is a base template that is used for the navbar and the footer. Other templates are loaded into the main section of the base template for the home, recipe, user, login, register, edit pages. Each page have a different layout with common recurring elements. Check the wireframes for more details.
 
 #### 5. Surface
-  The website has a simple design with a few elemnts. The predominant color is orange and the font is handwritten. Check the design section for more details.
+  The website has a simple design with a few elemnts. The predominant color is orange and the font style is handwritten. Check the design section for more details.
 
 ### Design
 
@@ -96,12 +96,18 @@ The site's primary goal is to help the visitors making great ramen bowls and ins
 - Interactive form controls
 - Button hover animations
 - Modal used to add a new recipe and category
-- Send results via mail
+- Add likes and comments to the recipes
+- User Sign In/Sign Up
+- Edit user informations
+- Upload new recipes feature
+- Default images for users and recipes
+- Random suggestions in each recipe page
+- Search function
 
 ### Features Left to Implement
 
-- More sound effects
-- Difficulty selector
+- Users management
+- Filters
 
 ## Technologies Used
 
@@ -110,29 +116,35 @@ The site's primary goal is to help the visitors making great ramen bowls and ins
 - [HTML5](https://en.wikipedia.org/wiki/HTML5)
 - [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
 - [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+- [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
 
 ### Frameworks, Libraries & Programs Used
 
-1. [Bootstrap 4.1.3:](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
-    - Bootstrap was used to assist with the responsiveness and styling of the website.
-2. [Google Fonts:](https://fonts.google.com/)
-    - Google fonts were used throughout the project.
-3. [Font Awesome:](https://fontawesome.com/)
-    - Font Awesome was used on all pages throughout the website to add icons for aesthetic and UX purposes.
-4. [jQuery:](https://jquery.com/)
-    - jQuery was used to control the audio, the animations and throughout the game code.
-5. [Git](https://git-scm.com/)
-    - Git was used for version control.
-6. [GitHub:](https://github.com/)
-    - GitHub is used to store the projects code after being pushed from Git.
-7. [Paint.net:](https://www.getpaint.net/)
-    - Paint.net was used to edit the game graphics and background.
-8. [Balsamiq:](https://balsamiq.com/)
-    - Balsamiq was used to create the during the design process.
-9. [Visual Studio Code:](https://code.visualstudio.com/)
-    - Visual Studio Code was used to write code, commit to Git and Push to GitHub.
-10. [EmailJS:](https://www.emailjs.com/)
-    - EmailJS was used to send emails to players with their results.
+**Front-End**
+* [Materialize](https://materializecss.com/) 
+* [Font-Awesome](https://fontawesome.com/)
+* [Google Fonts](https://fonts.google.com/)
+* [jQuery](https://jquery.com/)
+* [Balsamiq](https://balsamiq.com/)
+* [Paint.net](https://www.getpaint.net/)
+
+**Back-end**
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+* [Jinja](https://jinja.palletsprojects.com/en/2.11.x/)
+* [MongoDB](https://www.mongodb.com/1)
+* [Werkzeug](https://werkzeug.palletsprojects.com/en/1.0.x/)
+
+**Deployment**
+* [Heroku](https://dashboard.heroku.com/)
+* [Git](https://git-scm.com/)
+* [Github](https://github.com/)
+* [Gitpod](https://gitpod.io/)
+
+**Testing**
+* [JSHint](https://jshint.com/) (JS file passed validator)
+* [PEP8 online](http://pep8online.com/)
+* [W3C HTML Validator](https://validator.w3.org/) (all pages passed validator)
+* [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) (css file passed validator)
 
 ## Testing
 
@@ -152,45 +164,51 @@ The deployed site was tested with Lighthouse for performance evaluation and with
 
 ### Testing User stories from User Experience (UX) Section
 
-- #### First Time Visitor Goals
+- #### Guest User Goals
 
-  - As a First Time Visitor, I want to learn how to play quickly.
-    1. Upon entering the site, users are asked to press the camera image in the title screen and read the instructions.
-    2. The game starts easily and become more challenging after the first level.
+  - As a Guest User, I want to find easily the recipes.
+    1. Upon entering the site, users can immediately wiew a few recipes in carousel, and click the callout button.
+    2. The home page provide a great variety of recipes divided by categories.
 
-  - As a First Time Visitor, I want to understand how long the game is.
-    1. In the instruction pane, it is clear that the game has six levels in total.
-    2. In the top part, there is an intuitive progress bar that indicates the current level.
-    3. In the mobile version, the progress bar is replaced with a paragraph stating the current level and the total number of levels.
+  - As a Guest User, I want to browse all recipes and use the search function.
+    1. In the home page there are multiple links to the recipes page.
+    2. In the navbar there is the link to visit the recipes page.
+    3. In the recipes page there is the search bar.
 
-  - As a First Time Visitor, I want to try to turn on the music.
-    1. In the lower part, there is the audio button to toggle music on/off.
-    2. The user can switch the music on/off anytime during the game or on the title screen.
+  - As a Guest User, I want to explore the recipe page, check the comments and how many likes the recipe has.
+    1. Each recipe has its own page.
+    2. In the recipe page there is the number of likes in the heading next to the recipe name. The comments are in a section below the recipe steps.
 
-- #### Returning Visitor Goals
+- #### Contributors Goals
 
-  - As a Returning Visitor, I want to improve my score.
-    1. When the user makes a mistake or beat level six the game is over and show the user his score from 0 to 100%.
-    2. The user can play again to make a better score.
+  - As a Contributor, I want to add likes and comments to the recipes.
+    1. A logged user can add/remove a like to a recipe with the same button in the recipe page.
+    2. A logged user can leave a comment on a recipe.
     3. If the score is less than 30%, the user will get a bronze cup, more than 30% is a silver cup, and 100% is a gold cup.
 
-  - As a Returning Visitor, I want to send my results via mail or send to friends to show them.
+  - As a Contributor, I want to upload my own recipes and share them with the community.
     1. At the end of the game, the user can insert an email address in a form to automatically send an email stating his result.
     2. The user can insert the proper email address to save his result or another to share with other people.
 
-  - As a Returning Visitor, I want to find community links.
+  - As a Contributor, I want to edit my recipes or delete them.
     1. At the bottom of the screen, there are the community links to visit the social pages easily.
-
-- #### Frequent User Goals
-
-  - As a Frequent User, I want to periodically test my memory.
+  
+  - As a Contributor, I want to edit my preferences on my profile page, like email, user image.
+    1. The user can test his memory periodically and see if there are improvements over time.
+  
+  - As a Contributor, I want to find community links.
     1. The user can test his memory periodically and see if there are improvements over time.
 
-  - As a Frequent User, I want to be inspired by the setting and choose a location for my next trip.
+- #### Customers Goals
+
+  - As a Customer, I want to find the purchase link for the recipe book.
+    1. The user can test his memory periodically and see if there are improvements over time.
+
+  - As a Customer, I want to find the email address to contact the staff.
     1. The game provides a variety of different pictures of real-world landmark.
     2. The user can be inspired by the different places and choose one of those for the next trip.
 
-  - As a Frequent User, I want to challenge friends to see who has a better visual memory.
+  - As a Customer, I want to subscribe to the newsletter to see the offers and new products.
     1. The user can share the website with friends to challenge from a distance and see who is better.
     2. The user can play with friends also with just one computer in the same place. There's no need to be in different places.
 
@@ -199,80 +217,129 @@ The deployed site was tested with Lighthouse for performance evaluation and with
 - The Website was tested on Google Chrome, Firefox and Microsoft Edge.
 - The website was viewed on a variety of devices such as Desktop, Laptop, iPhone7, iPhone 8 & iPhoneX, iPad.
 - A large amount of testing was done to ensure that all pages were linking correctly.
-- The emailJS integration has been tested.
 
 ### Solved Bugs
 
-- It wasn't possible to use a event handler with jquery to a appened element. Solved using on:
+- It wasn't possible to have multiple buttons on the carousel. Solved with javascript:
 
 ```
-$("body").on("click", "#start-button", function () {
-  newGame(1);
-});
-```
-
-- Can't align some elements in the middle, solved with CSS:
-
-```
-#element {
-    margin-right: auto;
-    margin-left: auto;
+function changeLinkToButton() {
+    href = $(".carousel-item.active").attr("href");
+    $("#carousel-button").attr("href", href)
 }
 ```
 
-## Deployment
-
-### GitHub Pages
-
-The project was deployed to GitHub Pages using the following steps...
-
-1. Log in to GitHub and locate the [GitHub Repository](https://github.com/tizianocoppoli/ms2-memory-game/)
-2. At the top of the Repository (not top of page), locate the "Settings" Button on the menu.
-3. Scroll down the Settings page until you locate the "GitHub Pages" Section.
-4. Under "Source", click the dropdown called "None" and select "Master Branch".
-5. The page will automatically refresh.
-6. Scroll back down through the page to locate the now published site [link](https://tizianocoppoli.github.io/ms2-memory-game/) in the "GitHub Pages" section.
-
-### Forking the GitHub Repository
-
-By forking the GitHub Repository we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original repository by using the following steps...
-
-1. Log in to GitHub and locate the [GitHub Repository](https://github.com/tizianocoppoli/ms2-memory-game/)
-2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
-3. You should now have a copy of the original repository in your GitHub account.
-
-### Making a Local Clone
-
-1. Log in to GitHub and locate the [GitHub Repository](https://github.com/tizianocoppoli/ms2-memory-game/)
-2. Under the repository name, click "Clone or download".
-3. To clone the repository using HTTPS, under "Clone with HTTPS", copy the link.
-4. Open Git Bash
-5. Change the current working directory to the location where you want the cloned directory to be made.
-6. Type `git clone`, and then paste the URL you copied in Step 3.
+- Use render_template send the same POST request ad each page refresh, solved with a redirect:
 
 ```
-$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+return redirect(url_for("get_categories"))
 ```
 
-7. Press Enter. Your local clone will be created.
+- Request.form.get() doesn't get an array. Solved using:
+```
+ingredient_list = request.form.getlist("ingredient_list[]")
 
 ```
-$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
-> Cloning into `CI-Clone`...
-> remote: Counting objects: 10, done.
-> remote: Compressing objects: 100% (8/8), done.
-> remove: Total 10 (delta 1), reused 10 (delta 1)
-> Unpacking objects: 100% (10/10), done.
+
+# Deployment
+
+***Requirements to deploy:***
+
+- An IDE: I used Gitpod but will use a IDE that is not online for my next project. I choose Gitpod as this is the recommended IDE at Code Institute.
+- Python3: In order to to run the application and use Flask.
+- PIP3: To install all application imports (such as Flask and OS).
+- A template folder: To link with the app routes.
+- A database: I choose MongoDB Atlas. 
+
+
+## Local Deployment
+
+* Open browser of choice.
+* Copy/Paste the address of [**Just Ramen repository**](https://github.com/tizianocoppoli/ms3-online-cookbook) in your search box.
+* When on the page, click on the "Code" button.
+* Copy the the |**HTTPS link**](https://github.com/tizianocoppoli/ms3-online-cookbook.git).
+* Open your IDE and in your terminal, create a virtual environement supporting python and flask and activate it.
+* Type "git clone" and paste the [**HTTPS Link**](https://github.com/tizianocoppoli/ms3-online-cookbook.git).
+* Create an environement file called "env.py" and add :
+    - MONGO_URI=mongodb+srv://...
+    - SECRET_KEY= [Your Secret key]
+* Add your env.py to .gitignore. to avoid it being uploaded.
+* In app.py, switch **debug=False** to **debug=True**
+* Upgrade pip locally with the command "pip install -U pip".
+* Install the modules used to run the application.
+* In parallel, create a MongoDB account and create a database called **"online_cookbook"**.
+* These are the following collections in the database:
+
+***categories***
+```
+_id:<ObjectId>
+category_name:<string>
+category_description:<string>
 ```
 
-Click [Here](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository#cloning-a-repository-to-github-desktop) to retrieve pictures for some of the buttons and more detailed explanations of the above process.
+***contacts***
+```
+_id:<ObjectId>
+email_address:<string>
+```
+
+***users***
+```
+_id:<ObjectId>
+username:<string>
+password:<string>
+user_img:<string>
+email:<string>
+
+```
+
+***recipes***
+```
+_id:<ObjectId>
+category:<string>
+recipe_name:<string>
+is_spicy:<string>
+is_vegan:<string>
+created_by:<string>
+ingredient_list:<array>
+recipe_steps:<array>
+recipe_img:<string>
+preparation_time:<string>
+servings:<string>
+difficulty:<string>
+likes:<integer>
+like_array:<array>
+comment_array:<array>
+```
+
+* You can now run your application locally by typing the command "python3 app.py" or "run app.py" in your terminal.
+
+## Deploying on Heroku<hr>
+
+- Create a requirements.txt file using the command **pip3 freeze --local > requirements.txt** in your CLI.
+- Create a Procfile (always with an uppercase P) through the command **echo web: python app.py > Procfile**. Commit and Push.
+- Create an account on [**Heroku**](https://www.heroku.com/home).
+- Create a new app with **unique name**.
+- Select your **nearest region**.
+- Create a **new python project** within the project.
+- Link that project through your **Github repository** in the **deployment** section.
+- Navigate to Haroku Settings and set up the following in **Config Vars**
+
+```
+_IP = 0.0.0.0
+MONGO_DBNAME = [Name of DB]
+MONGO_URI = mongodb+srv://:@<cluster_name>-qtxun.mongodb.net/<database_name>?retryWrites=true&w=majority
+PORT = 5000
+SECRET_KEY = [Your Secret key]
+
+```
+* Go back to the Deploy section, select the master branch and deploy the project. 
 
 ## Credits
 
 ### Code
 
-- [Bootstrap 4.1.3](https://getbootstrap.com/docs/4.0/getting-started/introduction/): Bootstrap Library used throughout the project mainly to make the site responsive using the Bootstrap Grid System.
-- Code for modal taken from [Getbootstrap](https://getbootstrap.com/docs/4.0/components/modal/)
+- [Materialize](https://materializecss.com/): CSS library used throughout the project mainly to make the site responsive using the grid system.
 
 ### Content
 
@@ -281,8 +348,7 @@ Click [Here](https://help.github.com/en/github/creating-cloning-and-archiving-re
 
 ### Media
 
-- Background Music: Folk Acoustic by [MaxKoMusic](https://maxkomusic.com/)
-- Pictures and background: [Pixabay](https://pixabay.com/)
+- Pictures: [Canva](https://canva.com/)
 - Editing is made by the developer.
 
 ### Acknowledgements

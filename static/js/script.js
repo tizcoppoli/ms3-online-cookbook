@@ -1,6 +1,3 @@
-    let ingredient_counter = 0;
-    let steps_counter = 0;
-
 $(document).ready(function () {    
 
     $(".sidenav").sidenav({ edge: "right" });
@@ -74,7 +71,7 @@ $("#add_recipe").on("click", function() {
     new_ingredient_input = 
     `<div class="input-field col s12">
         <div class="col s10 no-padding">
-            <input type="text" id="ingredient_list-${ingredient_counter}" name="ingredient_list[]" minlength="5"
+            <input type="text" name="ingredient_list[]" minlength="5"
                     maxlength="2000" class="validate" 
                     required placeholder="New Ingredient">            
         </div>
@@ -82,7 +79,7 @@ $("#add_recipe").on("click", function() {
             <button type="button" class="delete_ingredient_button btn"><i class="fas fa-trash"></i></button>
         </div>
     </div>`;
-    ingredient_counter += 1;
+    
     $("#ingredients_wrapper").append(new_ingredient_input);
     $(".delete_ingredient_button").on("click", function() {
        $(this).parent().parent().remove();
@@ -98,7 +95,7 @@ $("#add_recipe_step").on("click", function() {
     new_step_input = 
     `<div class="input-field col s12">
         <div class="col s10 no-padding">
-            <input type="text" id="ingredient_list-${steps_counter}" name="recipe_steps[]" minlength="5"
+            <input type="text" name="recipe_steps[]" minlength="5"
                     maxlength="2000" class="materialize-textarea validate" 
                     required placeholder="New Step">            
         </div>
@@ -106,7 +103,7 @@ $("#add_recipe_step").on("click", function() {
             <button type="button" class="delete_step_button btn"><i class="fas fa-trash"></i></button>
         </div>
     </div>`;
-    steps_counter += 1;
+    
     $("#steps_wrapper").append(new_step_input);
     $(".delete_step_button").on("click", function() {
        $(this).parent().parent().remove();
