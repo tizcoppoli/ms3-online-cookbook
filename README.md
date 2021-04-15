@@ -4,7 +4,7 @@
 
 This is the Just Ramen website. It is designed to be responsible and accessible on multiple devices, making it easy to navigate for users on every device.
 
-<h2 align="center"><img src="assets/doc/mockup.png"></h2>
+<h2 align="center"><img src="static/doc/mockup.png"></h2>
 
 ## User Experience (UX)
 
@@ -66,14 +66,12 @@ The site's primary goal is to help the visitors making great ramen bowls and ins
 
 - The palette has been generated with [Coolors](https://coolors.co/)
 
-<img src="assets/doc/palette.png">
+<img src="static/doc/palette.png">
 
-  - English Red: #a64253
-  - Deep Champagne: #f2d492
-  - Medium Slate Blue: #7f7eff
-  - Sky Blue Crayola: #76e5fc
-  - Atomic Tangerine: #f29559
   - Black: #000000
+  - Spanish Orange: #ef6c00
+  - Persian Green: #26a69a
+  - Cultured: #f6f5f3
   - White: #ffffff
 
 #### Typography
@@ -107,7 +105,7 @@ The site's primary goal is to help the visitors making great ramen bowls and ins
 ### Features Left to Implement
 
 - Users management
-- Filters
+- More filter to improve the search function
 
 ## Technologies Used
 
@@ -160,7 +158,7 @@ The deployed site was tested with Lighthouse for performance evaluation and with
 
   <img src="assets/doc/lighthouse.png">
 
-- [Responsinator](http://www.responsinator.com/) - [Results](http://www.responsinator.com/?url=https%3A%2F%2Ftizianocoppoli.github.io%2Fms2-memory-game%2F)
+- [Responsinator](http://www.responsinator.com/) - [Results](http://www.responsinator.com/?url=https%3A%2F%2Fms3-online-cookbook.herokuapp.com%2F)
 
 ### Testing User stories from User Experience (UX) Section
 
