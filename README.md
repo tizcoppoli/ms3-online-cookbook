@@ -1,6 +1,6 @@
 <h1 align="center">Just Ramen Website</h1>
 
-[View the live project here.](https://ms3-online-cookbook.herokuapp.com/)
+[View the live project here](https://ms3-online-cookbook.herokuapp.com/)
 
 This is the Just Ramen website. It is designed to be responsible and accessible on multiple devices, making it easy to navigate for users on every device.
 
@@ -84,15 +84,13 @@ The site's primary goal is to help the visitors making great ramen bowls and ins
 
 ### Wireframes
 
-- Home Page - Desktop Wireframe - [View](static/doc/home_desktop.png)
+- Home Page - Desktop Wireframe - [View](static/doc/home_desktop.pdf)
 - Home Page - Tablet Wireframe - [View](static/doc/home_tablet.png)
 - Home Page - Mobile Wireframe - [View](static/doc/home_mobile.png)
-
-- Recipe Page - Desktop Wireframe - [View](static/doc/recipe_desktop.png)
+- Recipe Page - Desktop Wireframe - [View](static/doc/recipe_desktop.pdf)
 - Recipe Page - Tablet Wireframe - [View](static/doc/recipe_tablet.png)
 - Recipe Page - Mobile Wireframe - [View](static/doc/recipe_mobile.png)
-
-- Profile Page - Desktop Wireframe - [View](static/doc/profile_desktop.png)
+- Profile Page - Desktop Wireframe - [View](static/doc/profile_desktop.pdf)
 - Profile Page - Tablet Wireframe - [View](static/doc/profile_tablet.png)
 - Profile Page - Mobile Wireframe - [View](static/doc/profile_mobile.png)
 
