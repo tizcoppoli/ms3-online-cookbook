@@ -138,7 +138,7 @@
                 <hr class="title-underline">
                 <ol>
                     {% for step in recipe.recipe_steps %}
-                        <li>{{ step }}</li><br>
+                        <li>{{ step }}</li>
                     {% endfor %}
                 </ol>  
             </div>
@@ -159,8 +159,8 @@
         <div class="row">
             {% for comment in recipe.comment_array %}
                 <div class="comment">
-                    <span id="comment-user">{{ comment[0] }}</span><span id="comment-date"> {{ comment[2] }}</span><br>                    
-                    <span id="comment-text">{{ comment[1] }}</span>                    
+                    <span class="comment-user">{{ comment[0] }}</span><span class="comment-date"> {{ comment[2] }}</span><br>                    
+                    <span>{{ comment[1] }}</span>                    
                 </div>
                 <br>
             {% endfor %}

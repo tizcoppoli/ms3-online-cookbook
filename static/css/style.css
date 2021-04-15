@@ -459,12 +459,12 @@ footer li:hover {
     margin: 5px;
 }
 
-#comment-user {
+.comment-user {
     font-size: 1.2rem;
     font-weight: bold;
 }
 
-#comment-date {
+.comment-date {
     padding-left: 5px;
     font-size: 0.8rem;
     letter-spacing: 2px;
