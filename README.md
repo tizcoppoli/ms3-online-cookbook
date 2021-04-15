@@ -154,8 +154,8 @@ The site's primary goal is to help the visitors making great ramen bowls and ins
 
 The W3C Markup Validator and W3C CSS Validator Services were used to validate every page of the project to ensure there were no syntax errors in the project.
 
-- [W3C Markup Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](assets/doc/html-valid.png)
-- [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](assets/doc/css-valid.png)
+- [W3C Markup Validator](https://validator.w3.org/) - [Results](assets/doc/html-valid.png)
+- [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](static/doc/css_valid.png)
 - [Esprima JS Validator](https://esprima.org) - [Results](assets/doc/js-valid.png)
 
 The deployed site was tested with Lighthouse for performance evaluation and with Responsinator for responsiveness.
