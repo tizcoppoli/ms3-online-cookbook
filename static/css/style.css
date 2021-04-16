@@ -224,7 +224,7 @@ nav .brand-logo {
 
 .carousel-text-paragraph {
     position: absolute;
-    top: 220px;
+    top: 130px;
     right: 10%;
     left: 10%;    
 }
@@ -401,13 +401,11 @@ footer li:hover {
 }
 
 .feature-icon {    
-    font-size: 2rem;
-    margin: 0 1rem;   
-    
+    font-size: 2rem;    
 }
 
 .like-box {
-    margin: 0 auto;
+    margin: 50px auto 0;
     padding-top: 70px;
 }
 
@@ -415,7 +413,7 @@ footer li:hover {
     font-weight: bold;
 }
 
-.tag-section {
+#tag-section {
     padding-left: 15px;
 }
 
@@ -666,7 +664,7 @@ footer li:hover {
     }
 
     .carousel-text-heading {
-        top: 100px;
+        top: 150px;
     }
 
     .callout {
@@ -712,14 +710,25 @@ footer li:hover {
 
     .features-title {
         margin: 5px;
+        margin-bottom: 15px;
     }
 
-    .like-box {
-        padding: 0;
+    #feature-table {
+        margin: 0;
+        margin-left: 20px;
     }
 
-    .tag-section {
+    .feature-panel {
+        height: 450px;
+    }
+
+    .like-box {        
+        margin-top: 10px;
+    }
+
+    #tag-section {
         margin-top: 5px;
+        margin-left: 20px;
         padding: 0;
     }
 

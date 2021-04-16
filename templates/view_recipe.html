@@ -41,16 +41,30 @@
                 <img class="recipe-img materialboxed" src="{{ recipe.recipe_img }}" alt="recipe_image">
             </div>
             <div class="col m4 s12">
-                <div class="col m12 s6">
-                    <h4 class="center-align features-title">Features:</h4>
-                    <ul>
-                        <li><i class="fas fa-clock feature-icon hide-on-med-and-down"></i><span class="profile-info">Prep Time: </span>{{ recipe.preparation_time }} min</li>
-                        <li><i class="fas fa-users feature-icon hide-on-med-and-down"></i><span class="profile-info">Serves: </span>{{ recipe.servings }}</li>
-                        <li><i class="fas fa-utensils feature-icon hide-on-med-and-down"></i><span class="profile-info">Difficulty: </span>{{ recipe.difficulty }}</li>
-                    </ul>
+                <div class="col s12 center-align">
+                    <h4 class="features-title">Features:</h4>
+                </div>
+                <div class="col s12">
+                    <table id="feature-table">
+                        <tr>
+                            <td><i class="fas fa-clock feature-icon hide-on-med-and-down"></i></td>
+                            <td><span class="profile-info">Prep Time: </span></td>
+                            <td>{{ recipe.preparation_time }} mins</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-users feature-icon hide-on-med-and-down"></i></td>
+                            <td><span class="profile-info">Serves: </span></td>
+                            <td>{{ recipe.servings }}</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-utensils feature-icon hide-on-med-and-down"></i></td>
+                            <td><span class="profile-info">Difficulty: </span></td>
+                            <td>{{ recipe.difficulty }}</td>
+                        </tr>
+                    </table>
                     <br>
                 </div>
-                <div class="col m12 s6 tag-section">
+                <div class="col s12" id="tag-section">
                     {% if recipe.is_vegan == "on" %}
                         <div class="chip">
                             Vegan
@@ -63,7 +77,7 @@
                     {% endif %}
                 </div>
                 <form method="POST" action="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
-                    <div class="like-box center-align">
+                    <div class="like-box center-align col s12">
                         {% if session.user %}
                             {% if user._id|string in recipe.like_array %}
                                 <button  class="waves-light btn btn-like-yes">
