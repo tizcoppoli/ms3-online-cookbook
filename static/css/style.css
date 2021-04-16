@@ -195,13 +195,13 @@ nav .brand-logo {
 .callout-up {
     margin-top: 0.75rem;
     margin-bottom: 0.75rem;
-    background-image: url(/static/images/callout-7.png);    
+    background-image: url(/static/images/callout_top.png);    
 }
 
 .callout-bottom {
     margin-top: 0.75rem;
     margin-bottom: 0.75rem;
-    background-image: url(/static/images/callout-5.png)
+    background-image: url(/static/images/callout_bottom.png)
 }
 
 .callout {
@@ -311,7 +311,7 @@ nav .brand-logo {
 }
 
 .category-card {    
-    background-image: url(/static/images/callout-2.png);
+    background-image: url(/static/images/category_background.png);
     background-size: cover;
 }
 
