@@ -160,7 +160,7 @@ The W3C Markup Validator and W3C CSS Validator Services were used to validate ev
 
 The deployed site was tested with Lighthouse for performance evaluation and with Responsinator for responsiveness.
 
-- [Lighthouse](https://developers.google.com/web/tools/lighthouse) - [Results](assets/doc/lighthouse.png)
+- [Lighthouse](https://developers.google.com/web/tools/lighthouse) - [Results](static/doc/lighthouse_report.png)
 
   <img src="assets/doc/lighthouse.png">
 
