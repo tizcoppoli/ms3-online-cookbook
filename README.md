@@ -41,6 +41,11 @@ The site's primary goal is to help the visitors making great ramen bowls and ins
     1. As a Customer, I want to find the purchase link for the recipe book.
     2. As a Customer, I want to find the email address to contact the staff.
     3. As a Customer, I want to subscribe to the newsletter to see the offers and new products.
+
+  - ### Admin Goals
+
+    1. As an Admin, I want to be able to edit or remove the recipes.
+    2. As an Admin, I want to create a new category, edit an existing one or delete it.
   
 
 ### UX - Five Planes Method
@@ -208,6 +213,15 @@ The deployed site was tested with Lighthouse for performance evaluation and with
   - As a Customer, I want to subscribe to the newsletter to see the offers and new products.
     1. The user can subscribe to the newsletter in the dedicated home page section.
     2. The is no need of registration to subscribe to the newsletter.
+
+- #### Admin Goals
+
+  - As an Admin, I want to be able to edit or delete the recipes.
+    1. The admin can edit or delete every recipe from the recipe page.
+    2. The admin like other users can edit or delete the recipes from the user page.
+
+  - As an Admin, I want to create a new category, edit an existing one or delete it.
+    1. The admin can create, edit or delete categories in the manage categories page.
 
 ### Further Testing
 
