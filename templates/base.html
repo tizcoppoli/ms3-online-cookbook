@@ -27,7 +27,7 @@
 
     <!-- HEADER -->
 	<header>
-		<nav class="nav-extended orange darken-3">
+		<nav class="nav-extended orange darken-4">
 			<div class="nav-wrapper main-navbar">
                 <div class="left">
                     <a href="{{ url_for('home') }}" class="brand-logo valign-wrapper left">
@@ -53,7 +53,7 @@
 			</div>
         </nav>
 		<ul class="sidenav" id="mobile-sidenav">
-            <li><h4 class="center-align orange-text text-darken-3">Just Ramen</h4></li>
+            <li><h4 class="center-align orange-text text-darken-4">Just Ramen</h4></li>
             <li><a href="{{ url_for('home') }}">Home</a></li>
             <li><a href="{{ url_for('get_recipes') }}">Recipes</a></li>
             {% if session.user %}
@@ -92,7 +92,7 @@
     <!-- /MAIN CONTENT -->
 
     <!-- FOOTER -->
-    <footer class="page-footer orange darken-3">
+    <footer class="page-footer orange darken-4">
         <div class="container">
             <div class="row">
                 <div class="col l4 offset-l2 s12">
@@ -104,10 +104,10 @@
                 <div class="col l4 offset-l2 s12">
                     <h5 class="white-text center-align">Follow us</h5>
                     <ul class="center-align">
-                        <li><a href="#!"><i class="fab fa-facebook"></i></a></li>
-                        <li><a href="#!"><i class="fab fa-linkedin-in"></i></a></li>
-                        <li><a href="#!"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#!"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="{{ url_for('home') }}" target="blank"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="{{ url_for('home') }}" target="blank"><i class="fab fa-linkedin-in"></i></a></li>
+                        <li><a href="{{ url_for('home') }}" target="blank"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="{{ url_for('home') }}" target="blank"><i class="fab fa-twitter"></i></a></li>
                     </ul>
                 </div>
             </div>
