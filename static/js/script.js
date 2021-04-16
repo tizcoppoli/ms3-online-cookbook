@@ -25,8 +25,6 @@ $(document).ready(function () {
     validateMaterializeSelect();
     setInterval(changeLinkToButton, 500);
 
-    
-
 });
 
 function autoplay() {
@@ -36,7 +34,6 @@ function autoplay() {
 
 function changeLinkToButton() {
     href = $(".carousel-item.active a").attr("href");
-    console.log(href);
     $("#carousel-button").attr("href", href)
 }
 

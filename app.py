@@ -21,20 +21,20 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
-def get_users(offset=0, per_page=10):
+def pagination_recipes(offset=0, per_page=10):
     recipes = list(mongo.db.recipes.find())
     recipes.reverse()
     return recipes[offset: offset + per_page]
 
 
-def get_users_profile(offset=0, per_page=10):
+def pagination_recipes_profile(offset=0, per_page=10):
     user = mongo.db.users.find_one({"username": session["user"]})
     recipes = list(mongo.db.recipes.find({"created_by": str(user["_id"])}))
     recipes.reverse()
     return recipes[offset: offset + per_page]
 
 
-def get_users_category(category, offset=0, per_page=10):
+def pagination_recipes_category(category, offset=0, per_page=10):
     recipes = list(mongo.db.recipes.find({"category": category}))
     return recipes[offset: offset + per_page]
 
@@ -54,11 +54,10 @@ def home():
         flash("Added to newsletter")
         return redirect(url_for("home"))
 
-    recipes = list(mongo.db.recipes.find())
     recipes_admin = list(mongo.db.recipes.find(
         {"created_by": "605b52c31a93cdb5624e75ba"}))
     categories = list(mongo.db.categories.find().sort("category_name", 1))
-    random.shuffle(recipes)
+    random.shuffle(recipes_admin)
     return render_template(
         "home.html",
         recipes=recipes_admin,
@@ -70,23 +69,17 @@ def home():
 def get_recipes():
     recipes = list(mongo.db.recipes.find())
     categories = list(mongo.db.categories.find().sort("category_name", 1))
-    """
-    pagination
-    """
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
     per_page = 6
     total = len(recipes)
-    pagination_users = get_users(
+    pag_recipes = pagination_recipes(
         offset=page*per_page-per_page, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total)
-    """
-    end pagination
-    """
     return render_template(
         "recipes.html",
         categories=categories,
-        recipes=pagination_users,
+        recipes=pag_recipes,
         page=page,
         per_page=per_page,
         pagination=pagination)
@@ -104,22 +97,16 @@ def search():
 def category(category):
     recipes = list(mongo.db.recipes.find({"category": category}))
     category_obj = mongo.db.categories.find_one({"_id": ObjectId(category)})
-    """
-    pagination test
-    """
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
     per_page = 6
     total = len(recipes)
-    pagination_users = get_users_category(
+    pag_recipes = pagination_recipes_category(
         category, offset=page*per_page-per_page, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total)
-    """
-    end pagination
-    """
     return render_template(
         "category.html",
-        recipes=pagination_users,
+        recipes=pag_recipes,
         category=category,
         category_obj=category_obj,
         page=page, per_page=per_page,
@@ -247,25 +234,19 @@ def profile(username):
             "category_name", 1)
         is_subscribed = mongo.db.contacts.find_one(
             {"email_address": user["email"]})
-        """
-        pagination test
-        """
         page, per_page, offset = get_page_args(
             page_parameter='page', per_page_parameter='per_page')
         per_page = 6
         total = len(recipes_complete)
-        pagination_users = get_users_profile(
+        pag_recipes = pagination_recipes_profile(
             offset=page*per_page-per_page, per_page=per_page)
         pagination = Pagination(page=page, per_page=per_page, total=total)
-        """
-        end pagination
-        """
         return render_template(
             "profile.html",
             user=user,
             username=username,
             categories=categories,
-            recipes=pagination_users,
+            recipes=pag_recipes,
             recipes_complete=recipes_complete,
             page=page,
             per_page=per_page,

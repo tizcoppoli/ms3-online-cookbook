@@ -1,7 +1,8 @@
-  
 {% extends "base.html" %}
+
 {% block content %}
 
+    <!-- CATEGORY PAGE TITLE -->
     <div class="container title-section">
         <div class="row">
             <nav class="nav-breadcrumb hide-on-small-only">
@@ -13,7 +14,6 @@
                     </div>
                 </div>
             </nav>
-
             <div class="col l6 m12 s12">
                 <h3 class="recipe-title">{{ category_obj.category_name }}</h3>
                 <hr class="title-underline">
@@ -26,7 +26,7 @@
                         <input type="text" name="query" id="query" minlength="3" class="validate search-field" required>
                         <label for="query">Search Recipes</label>
                     </div>
-                    <div class="col s12 m6">                        
+                    <div class="col s12 m6">
                         <button type="submit" class="btn text-shadow">
                             <i class="fas fa-search left"></i> Search
                         </button>
@@ -35,7 +35,9 @@
             </form>
         </div>        
     </div>
+    <!-- /CATEGORY PAGE TITLE -->
 
+    <!-- RECIPES -->
     {% if recipes|length > 0 %}
         <div class="container">
             <div class="row">
@@ -51,20 +53,18 @@
                                     <h5 class="recipe-name">
                                         {{ recipe.recipe_name }}
                                     </h5>
-                                    <!-- <p><em>by: {{ recipe.created_by }}</em></p> -->                                    
                                     <div class="chip">
-                                        <i class="fas fa-heart"> {{ recipe.likes}}</i>                
+                                        <i class="fas fa-heart"> {{ recipe.likes}}</i>
                                     </div>
                                      <div class="chip">
-                                        <i class="fas fa-comment"> {{ recipe.comment_array|length }}</i>                
+                                        <i class="fas fa-comment"> {{ recipe.comment_array|length }}</i>
                                     </div>
                                     <div class="chip">
-                                        {{ recipe.difficulty }}                
+                                        {{ recipe.difficulty }}
                                     </div>
-                                </div>                                
-                                
+                                </div>
                             </a>
-                        </div>                
+                        </div>
                     </div>
                 {% endfor %}
             </div>
@@ -75,5 +75,6 @@
     {% else %}
         <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
     {% endif %}
+    <!-- /RECIPES -->
 
 {% endblock %}

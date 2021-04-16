@@ -1,8 +1,8 @@
-  
 {% extends "base.html" %}
 
 {% block content %}
 
+    <!-- CALLOUT -->
     <div class="container-fluid callout-wrapper">
         <div class="row callout">
             <div class="col l8 m12 s12">
@@ -15,7 +15,7 @@
                             <div class="carousel-item" style="background-image: url({{ recipe.recipe_img }});">
                                 <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"></a>
                                 <div class="callout-overlay"></div>
-                                <h3 class="carousel-text-heading white-text">{{ recipe.recipe_name }}</h3>                                
+                                <h3 class="carousel-text-heading white-text">{{ recipe.recipe_name }}</h3>
                                 {% for category in categories %}
                                     {% if recipe.category == category._id|string %}
                                         <p class="carousel-text-paragraph white-text">{{ category.category_name }}</p>
@@ -36,18 +36,19 @@
                 <a href="{{ url_for('get_recipes') }}">
                     <div class="col s12 callout-bottom hoverable">
                         <div class="overlay"></div>
-                        <h4 class="white-text callout-text">Check Our Recipes</h4>                    
+                        <h4 class="white-text callout-text">Check Our Recipes</h4>
                     </div>
                 </a>
             </div>
         </div>
     </div>
+    <!-- /CALLOUT -->
 
-    <!-- register section -->
+    <!-- REGISTER -->
     <div class="container-fluid register-section">
         <div class="row">
             <div class="col m6 s12 book-cover-section hide-on-small-only">
-                <img class="ramen-home-image circle" src="/static/images/callout-1.png" alt="ramen-bowl">                                
+                <img class="ramen-home-image circle" src="/static/images/callout-1.png" alt="ramen-bowl">
             </div>
             <div class="col m6 s12 book-description-section">
                     <h4 class="book-heading">We Love Your Ideas! <br>Register to Upload your Recipe!</h4>
@@ -58,22 +59,23 @@
             </div>
         </div>
     </div>
+    <!-- /REGISTER -->
 
-    <!-- categories -->
+    <!-- SHOYU & SHIO CATEGORIES -->
     {% for category in categories %}
         {% if category._id|string == "6048b1f2595caef8e390a6ac" or category._id|string == "60491e3c4b1e42b5f3519954" %}
             <div class="container title-section">
-                <div class="row">            
+                <div class="row">
                     <div class="col s12">
                         <h3 class="recipe-title">{{ category.category_name }}</h3>
-                        <hr class="title-underline">                        
-                    </div>                    
+                        <hr class="title-underline">
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col m10 s12">
                         <span class="recipe-subtitle">{{ category.category_description}}</span>
                     </div>
-                    <div class="col m2 s12">                        
+                    <div class="col m2 s12">
                         <a class="btn btn-more" href="{{ url_for('category', category=category._id) }}">More</a>
                     </div>
                 </div>
@@ -97,19 +99,19 @@
                                                         {{ recipe.recipe_name }}
                                                     </h5>
                                                     <div class="chip">
-                                                        <i class="fas fa-heart"> {{ recipe.likes}}</i>                
+                                                        <i class="fas fa-heart"> {{ recipe.likes}}</i>
                                                     </div>
                                                      <div class="chip">
-                                                        <i class="fas fa-comment"> {{ recipe.comment_array|length }}</i>                
+                                                        <i class="fas fa-comment"> {{ recipe.comment_array|length }}</i>
                                                     </div>
                                                     <div class="chip">
-                                                        {{ recipe.difficulty }}                
+                                                        {{ recipe.difficulty }}
                                                     </div>
                                                 </div>
                                             </a>
-                                        </div>                
-                                    </div>                            
-                                    {% set cnt.cnt_index = cnt.cnt_index + 1|int %}                            
+                                        </div>
+                                    </div>
+                                    {% set cnt.cnt_index = cnt.cnt_index + 1|int %}
                                 {% endif %}
                             {% endif  %}
                         {% endfor %}
@@ -119,24 +121,24 @@
                                     <div class="overlay-category"></div>
                                     <h3 class="white-text category-text">Check more {{ category.category_name }} recipes</h3>
                                 </a>
-                            </div>                
+                            </div>
                         </div>
                     </div>
-                </div>        
+                </div>
             {% else %}
                 <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
             {% endif %}
         {% endif %}
     {% endfor %}
-    <!-- /categories -->
+    <!-- /SHOYU & SHIO CATEGORIES -->
 
-    <!-- book -->
+    <!-- BOOK -->
     <div class="container-fluid book-section">
         <div class="row">
             <div class="col m6 book-cover-section hide-on-small-only">
-                <img class="book-image" src="/static/images/mockup.png" alt="book">                                
+                <img class="book-image" src="/static/images/mockup.png" alt="book">
             </div>
-            <div class="col m6 s12 book-description-section white-text">                
+            <div class="col m6 s12 book-description-section white-text">
                     <h4 class="book-heading white-text">Love Our Recipes? <br>Checkout our Book!</h4>
                     <p>
                         Buy our best-selling cookbook full of easy and simple Japanese recipes! This cookbook has over 100 recipes and instructions for all types of ramen.
@@ -145,23 +147,23 @@
             </div>
         </div>
     </div>
-    <!-- /book -->
+    <!-- /BOOK -->
 
-    <!-- categories -->
+    <!-- MISO & NOODLE DISHES CATEGORIES -->
     {% for category in categories %}
         {% if category._id|string == "6048ad7b538afe6d28503533" or category._id|string == "6054cc76c375d858d90998d7" %}
             <div class="container title-section">
-                <div class="row">            
+                <div class="row">
                     <div class="col s12">
                         <h3 class="recipe-title">{{ category.category_name }}</h3>
-                        <hr class="title-underline">                        
-                    </div>                    
+                        <hr class="title-underline">
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col m10 s12">
                         <span class="recipe-subtitle">{{ category.category_description}}</span>
                     </div>
-                    <div class="col m2 s12">                        
+                    <div class="col m2 s12">
                         <a class="btn btn-more" href="{{ url_for('category', category=category._id) }}">More</a>
                     </div>
                 </div>
@@ -185,19 +187,19 @@
                                                         {{ recipe.recipe_name }}
                                                     </h5>
                                                     <div class="chip">
-                                                        <i class="fas fa-heart"> {{ recipe.likes}}</i>                
+                                                        <i class="fas fa-heart"> {{ recipe.likes}}</i>
                                                     </div>
                                                      <div class="chip">
-                                                        <i class="fas fa-comment"> {{ recipe.comment_array|length }}</i>                
+                                                        <i class="fas fa-comment"> {{ recipe.comment_array|length }}</i>
                                                     </div>
                                                     <div class="chip">
-                                                        {{ recipe.difficulty }}                
+                                                        {{ recipe.difficulty }}
                                                     </div>
                                                 </div>
                                             </a>
-                                        </div>                
-                                    </div>                            
-                                    {% set cnt.cnt_index = cnt.cnt_index + 1|int %}                            
+                                        </div>
+                                    </div>
+                                    {% set cnt.cnt_index = cnt.cnt_index + 1|int %}
                                 {% endif %}
                             {% endif  %}
                         {% endfor %}
@@ -207,29 +209,26 @@
                                     <div class="overlay-category"></div>
                                     <h3 class="white-text category-text">Check more {{ category.category_name }} recipes</h3>
                                 </a>
-                            </div>                
+                            </div>
                         </div>
                     </div>
-                </div>        
+                </div>
             {% else %}
                 <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
             {% endif %}
         {% endif %}
     {% endfor %}
-    <!-- /categories -->
+    <!-- /MISO & NOODLE DISHES CATEGORIES -->
 
-    <!-- newsletter -->
+    <!-- NESLETTER -->
     <div class="container-fluid book-section">
         <div class="row newsletter-signup-text">
-            
             <div class="col s12 white-text center-align">
-                    <h4 class="book-heading white-text">Newsletter Sign Up</h4>
-                    <p>Enter your email address to receive each month our latest news and special offers!</p>
-                    
+                <h4 class="book-heading white-text">Newsletter Sign Up</h4>
+                <p>Enter your email address to receive each month our latest news and special offers!</p>
             </div>
             <div class="input-field col s12">
-                
-                <form id="form-newsletter" method="POST">                    
+                <form id="form-newsletter" method="POST">
                     <input type="email" name="email-address" id="email-address" placeholder="email" required>
                     <label for="newsletter-button" class="valign-wrapper active">
                         <button id="newsletter-button" type="submit">
@@ -240,24 +239,24 @@
             </div>
         </div>
     </div>
-    <!-- /book -->
+    <!-- /NEWSLETTER -->
 
-    <!-- random recipes -->
+    <!-- RANDOM RECIPES -->
     <div class="container title-section">
-        <div class="row">            
+        <div class="row">
             <div class="col s12">
                 <h3 class="recipe-title">You May Like</h3>
-                <hr class="title-underline">                        
-            </div>                    
+                <hr class="title-underline">
+            </div>
         </div>
         <div class="row">
             <div class="col m10 s12">
                 <span class="recipe-subtitle">Browse our selection of recipes</span>
             </div>
-            <div class="col m2 s12">                
+            <div class="col m2 s12">
                 <a class="btn btn-more" href="{{ url_for('get_recipes') }}">More</a>
             </div>
-        </div>        
+        </div>
     </div>
     {% if recipes|length > 0 %}
         <div class="container">
@@ -276,15 +275,15 @@
                                             {{ recipe.recipe_name }}
                                         </h5>
                                         <div class="chip">
-                                            <i class="fas fa-heart"> {{ recipe.likes}}</i>                
+                                            <i class="fas fa-heart"> {{ recipe.likes}}</i>
                                         </div>
                                          <div class="chip">
-                                            <i class="fas fa-comment"> {{ recipe.comment_array|length }}</i>                
-                                        </div>                                                                        
-                                        <div class="chip">
-                                            {{ recipe.difficulty }}                
+                                            <i class="fas fa-comment"> {{ recipe.comment_array|length }}</i>
                                         </div>
-                                    </div>                                                               
+                                        <div class="chip">
+                                            {{ recipe.difficulty }}
+                                        </div>
+                                    </div>
                                 </a>
                             </div>
                         </div>
@@ -298,13 +297,13 @@
                             <div class="overlay-category"></div>
                             <h3 class="white-text category-text">Check more recipes</h3>
                         </a>
-                    </div>                
+                    </div>
                 </div>
             </div>
         </div>
     {% else %}
         <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
     {% endif %}
-    <!-- /random recipes -->
+    <!-- /RANDOM RECIPES -->
 
 {% endblock %}

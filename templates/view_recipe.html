@@ -1,35 +1,8 @@
 {% extends "base.html" %}
+
 {% block content %}
-    
-    <div id="modal-comment" class="modal">
-        <div class="modal-content">
-            <h4>Leave a comment!</h4>
-            <p>Click the button to confirm.</p>
-            <div class="container-fluid">
-                <form method="POST" action="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <textarea id="textarea-comment" class="materialize-textarea" name="textarea-comment" required></textarea>
-                            <label for="textarea-comment">Textarea</label>
-                        </div>
-                    </div>
-                    <button  class="waves-light btn">
-                        comment
-                    </button>
-                </form>
-            </div>
-        </div>        
-        <div class="modal-footer">
-            <!-- <a class="btn" href="{{ url_for('register') }}">Sign Up!</a> -->
-            <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a> -->
-        </div>
-    </div>
 
-    <div class="container">
-
-    </div>
-    
-
+    <!-- RECIPE TITLE -->
     <div class="container title-section">
         <div class="row">
             <nav class="nav-breadcrumb hide-on-small-only">
@@ -41,9 +14,9 @@
                         <a href="" class="breadcrumb">{{ recipe.recipe_name }}</a>
                     </div>
                 </div>
-            </nav>            
+            </nav>
             <div class="col s12">
-                <h3 class="recipe-title">{{ recipe.recipe_name }} - {{ recipe.likes }} <i class="far fa-heart"></i>                    
+                <h3 class="recipe-title">{{ recipe.recipe_name }} - {{ recipe.likes }} <i class="far fa-heart"></i>
                 </h3>
                 <hr class="title-underline">
                 <div class="col m8 s12">
@@ -57,9 +30,11 @@
                     {% endif %}
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
+    <!-- /RECIPE TITLE -->
 
+    <!-- FEATURES -->
     <div class="container">
         <div class="row card-panel feature-panel">
             <div class="col m8 s12 no-padding">
@@ -72,24 +47,24 @@
                         <li><i class="fas fa-clock feature-icon hide-on-med-and-down"></i><span class="profile-info">Prep Time: </span>{{ recipe.preparation_time }} min</li>
                         <li><i class="fas fa-users feature-icon hide-on-med-and-down"></i><span class="profile-info">Serves: </span>{{ recipe.servings }}</li>
                         <li><i class="fas fa-utensils feature-icon hide-on-med-and-down"></i><span class="profile-info">Difficulty: </span>{{ recipe.difficulty }}</li>
-                    </ul>                
+                    </ul>
                     <br>
                 </div>
                 <div class="col m12 s6 tag-section">
                     {% if recipe.is_vegan == "on" %}
                         <div class="chip">
-                            Vegan                
+                            Vegan
                         </div>
                     {% endif %}
                     {% if recipe.is_spicy == "on" %}
                         <div class="chip">
-                            Spicy                
+                            Spicy
                         </div>
                     {% endif %}
                 </div>
                 <form method="POST" action="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
-                    <div class="like-box center-align">                        
-                        {% if session.user %}                        
+                    <div class="like-box center-align">
+                        {% if session.user %}
                             {% if user._id|string in recipe.like_array %}
                                 <button  class="waves-light btn btn-like-yes">
                                     <i class="material-icons left">favorite</i>You like it!
@@ -100,7 +75,7 @@
                                 </button>
                             {% endif %}
                         {% else %}
-                            <a class="waves-light btn btn-like-no modal-trigger" href="#modal-like-button">
+                            <a class="waves-light btn btn-like-no modal-trigger" href="#modal-register">
                                 <i class="material-icons left">favorite</i>{{ recipe.likes }} Likes!
                             </a>
                         {% endif %}
@@ -109,19 +84,9 @@
             </div>
         </div>
     </div>
+    <!-- /FEATURES -->
 
-    
-    <!-- Modal Structure -->
-    <div id="modal-like-button" class="modal">
-        <div class="modal-content">
-            <h4>Register to leave a like!</h4>
-            <p>Please register now to leave a like and upload your unique recipes!</p>
-        </div>        
-        <div class="modal-footer">
-            <a class="btn" href="{{ url_for('register') }}">Sign Up!</a>            
-        </div>
-    </div>
-
+    <!-- INGREDIENTS -->
     <div class="container">
         <div class="row recipe-content">
             <div class="col m4 s12 card-panel ingredient-panel">
@@ -144,8 +109,9 @@
             </div>
         </div>
     </div>
+    <!-- /INGREDIENTS -->
 
-    <!-- comment section -->
+    <!-- COMMENTS -->
     <div class="container title-section">
         <div class="row">
             <div class="col s12">
@@ -153,47 +119,47 @@
                 <hr class="title-underline">
                 <span class="recipe-subtitle">Share your thoughts with the community</span>
             </div>
-        </div>        
+        </div>
     </div>
     <div class="container comment-section">
         <div class="row">
             {% for comment in recipe.comment_array %}
                 <div class="comment">
-                    <span class="comment-user">{{ comment[0] }}</span><span class="comment-date"> {{ comment[2] }}</span><br>                    
-                    <span>{{ comment[1] }}</span>                    
+                    <span class="comment-user">{{ comment[0] }}</span>
+                    <span class="comment-date"> {{ comment[2] }}</span><br>
+                    <span>{{ comment[1] }}</span>
                 </div>
                 <br>
             {% endfor %}
         </div>
-
         {% if session.user %}
             <a class="waves-light btn btn-like-no modal-trigger" href="#modal-comment">
                 comment
             </a>
         {% else %}
-            <a class="waves-light btn btn-like-no modal-trigger" href="#modal-like-button">
+            <a class="waves-light btn btn-like-no modal-trigger" href="#modal-register">
                 Comment
             </a>
         {% endif %}
     </div>
-    <!-- /comment section -->
+    <!-- /COMMENTS -->
     
-    <!-- random recipes -->
+    <!-- RANDOM RECIPES -->
     <div class="container title-section">
-        <div class="row">            
+        <div class="row">
             <div class="col s12">
                 <h3 class="recipe-title">You May Like</h3>
-                <hr class="title-underline">                        
-            </div>                    
+                <hr class="title-underline">
+            </div>
         </div>
         <div class="row">
             <div class="col m10 s12">
                 <span class="recipe-subtitle">Browse our selection of recipes</span>
             </div>
-            <div class="col m2 s12">                
+            <div class="col m2 s12">
                 <a class="btn btn-more" href="{{ url_for('get_recipes') }}">More</a>
             </div>
-        </div>        
+        </div>
     </div>
     {% if recipes|length > 0 %}
         <div class="container">
@@ -212,15 +178,15 @@
                                             {{ recipe.recipe_name }}
                                         </h5>
                                         <div class="chip">
-                                            <i class="fas fa-heart"> {{ recipe.likes}}</i>                
+                                            <i class="fas fa-heart"> {{ recipe.likes}}</i>
                                         </div>
                                          <div class="chip">
-                                            <i class="fas fa-comment"> {{ recipe.comment_array|length }}</i>                
-                                        </div>                                                                        
-                                        <div class="chip">
-                                            {{ recipe.difficulty }}                
+                                            <i class="fas fa-comment"> {{ recipe.comment_array|length }}</i>
                                         </div>
-                                    </div>                                                               
+                                        <div class="chip">
+                                            {{ recipe.difficulty }}
+                                        </div>
+                                    </div>
                                 </a>
                             </div>
                         </div>
@@ -234,13 +200,47 @@
                             <div class="overlay-category"></div>
                             <h3 class="white-text category-text">Check more recipes</h3>
                         </a>
-                    </div>                
+                    </div>
                 </div>
             </div>
         </div>
     {% else %}
         <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
     {% endif %}
-    <!-- /random recipes -->    
+    <!-- RANDOM RECIPES -->
+
+    <!-- ADD A COMMENT MODAL -->
+    <div id="modal-comment" class="modal">
+        <div class="modal-content">
+            <h4>Leave a comment!</h4>
+            <p>Click the button to confirm.</p>
+            <div class="container-fluid">
+                <form method="POST" action="{{ url_for('view_recipe', recipe_id=recipe._id) }}">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="textarea-comment" class="materialize-textarea" name="textarea-comment" required></textarea>
+                            <label for="textarea-comment">Textarea</label>
+                        </div>
+                    </div>
+                    <button  class="waves-light btn">
+                        comment
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /ADD A COMMENT MODAL -->
+
+    <!-- REGISTER MODAL -->
+    <div id="modal-register" class="modal">
+        <div class="modal-content">
+            <h4>Register today!</h4>
+            <p>Please register now to leave a like, comment and upload your unique recipes!</p>
+        </div>
+        <div class="modal-footer">
+            <a class="btn" href="{{ url_for('register') }}">Sign Up!</a>
+        </div>
+    </div>
+    <!-- /REGISTER MODAL -->
 
 {% endblock %}

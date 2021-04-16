@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+
 {% block content %}
 
+    <!-- EDIT CATEGORY CONTENT -->
     <div class="container">
         <div class="row card-panel edit-panel">
             <div class="col s12">
@@ -8,8 +10,7 @@
                     <h4>Edit Category</h4>
                     <p>Fill the fields and press confirm</p>
                 </div>
-            </div>
-        
+            </div>        
             <div class="col s12">
                 <div class="modal-content">
                     <form class="col s12" method="POST">
@@ -18,7 +19,7 @@
                             <div class="input-field col s12">
                                 <input id="category_name" name="category_name" minlength="4" maxlength="15"
                                     value="{{ category.category_name }}" type="text" class="validate" required>
-                                <label for="category_name">Category Name*</label>                        
+                                <label for="category_name">Category Name*</label>
                             </div>
                         </div>
                         <!-- category description -->
@@ -26,7 +27,7 @@
                                 <div class="input-field col s12">
                                     <input id="category_description" name="category_description" minlength="4" maxlength="200"
                                         value="{{ category.category_description }}" type="text" class="validate" required>
-                                    <label for="category_description">Category Description*</label>                        
+                                    <label for="category_description">Category Description*</label>
                                 </div>
                             </div>
                         <!-- submit button -->
@@ -41,6 +42,7 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
+    <!-- EDIT CATEGORY CONTENT -->
 
 {% endblock %}
