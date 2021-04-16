@@ -307,7 +307,7 @@ def view_recipe(recipe_id):
                 "comment_array": [session["user"], request.form.get(
                     "textarea-comment"), date]}}
             mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
-            flash("commento")
+            flash("comment added")
             return redirect(url_for("view_recipe", recipe_id=recipe_id))
         else:
             recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
